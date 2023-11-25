@@ -1,7 +1,7 @@
 # Makefile for cub3d
 
 # Variables
-NAME	:= cub3d
+NAME	:= cub3D
 LIBSA	:= ./libft/libft.a MLX42/build/libmlx42.a
 INCLUDES := -I libft -I MLX42 -I includes
 
