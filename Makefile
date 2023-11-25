@@ -1,4 +1,4 @@
-# Makefile for miniRT
+# Makefile for cub3d
 
 # Variables
 NAME	:= cub3d
@@ -13,7 +13,7 @@ MACOS := -lglfw -L"/opt/homebrew/Cellar/glfw/3.3.8/lib" -framework Cocoa -framew
 # Directories and Files
 OBJ_DIR := ./obj
 SRC_DIR := ./src
-HEADERS := libft/libft.h includes/minirt.h includes/struct.h includes/vectors.h
+HEADERS := libft/libft.h includes/cub3d.h includes/struct.h
 SRC :=	main.c			\
 		valid_input.c	\
 		parsing.c		\
@@ -30,7 +30,6 @@ SRC :=	main.c			\
 		utils/to.c			\
 		utils/fill_to_null.c\
 		lights/lights_nodes.c\
-		vec/vectors.c 	\
 		shapes/shapes_nodes.c \
 		mlx/start.c		\
 		mlx/hook.c			\
@@ -45,7 +44,7 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 	@echo $(Yellow) Building.. 🏠$(Color_Off)
-	@make -C MLX42/build 2> /dev/null 
+	@make -C MLX42/build
 	@$(MAKE) -C libft bonus
 	@$(CC) -o $(NAME) $^ $(LIBSA) $(CFLAGS) $(INCLUDES) $(MACOS)
 	@echo $(Green) Complete ✅ $(Color_Off)

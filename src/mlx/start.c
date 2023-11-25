@@ -8,7 +8,7 @@ int32_t ft_pixel(int32_t r, int32_t g, int32_t b, int32_t a)
 
 int start(t_param *param, t_window w)
 {
-	param->mlx = mlx_init(w.width, w.height, "minirt", true);
+	param->mlx = mlx_init(w.width, w.height, "cub3d", true);
 	if (!param->mlx)
 		return (ERROR);
 	param->img	= mlx_new_image(param->mlx, w.width, w.height);

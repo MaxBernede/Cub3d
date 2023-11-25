@@ -1,98 +1,69 @@
-NAME	:= libft.a
-HEADER	:= libft.h
-OBJ_DIR	:= ./obj
-CC		:= gcc
-CFLAGS	:=	-Wall -Wextra -Werror
-#LDFLAGS ?= 
-RM		:=	rm -f
+# **************************************************************************** #
+#                                                                              #
+#                                                         ::::::::             #
+#    Makefile                                           :+:    :+:             #
+#                                                      +:+                     #
+#    By: maxb <maxb@student.42.fr>                    +#+                      #
+#                                                    +#+                       #
+#    Created: 2022/10/07 10:45:43 by mbernede      #+#    #+#                  #
+#    Updated: 2023/11/25 20:09:19 by maxb          ########   odam.nl          #
+#                                                                              #
+# **************************************************************************** #
 
-SRC 	:=	ft_atoi.c 		\
-			ft_bzero.c 		\
-			ft_isalpha.c 	\
-			ft_isalnum.c 	\
-			ft_isascii.c 	\
-			ft_isdigit.c 	\
-			ft_isprint.c 	\
-			ft_isspace.c	\
-			ft_memchr.c 	\
-			ft_memcmp.c 	\
-			ft_memcpy.c 	\
-			ft_memmove.c 	\
-			ft_memset.c 	\
-			ft_strchr.c 	\
-			ft_strlcat.c 	\
-			ft_strlcpy.c 	\
-			ft_strlen.c 	\
-			ft_strncmp.c 	\
-			ft_strnstr.c 	\
-			ft_strrchr.c 	\
-			ft_tolower.c 	\
-			ft_toupper.c 	\
-			ft_calloc.c 	\
-			ft_strdup.c 	\
-			ft_substr.c 	\
-			ft_strjoin.c 	\
-			ft_strtrim.c 	\
-			ft_itoa.c 		\
-			ft_strmapi.c 	\
-			ft_striteri.c 	\
-			ft_putchar_fd.c \
-			ft_putstr_fd.c 	\
-			ft_putendl_fd.c \
-			ft_putnbr_fd.c 	\
-			ft_split.c 		\
-			ft_atoh.c		\
-			ft_atol.c		\
-			ft_atoi_overflow.c 				\
-			ft_2d_arrlen.c					\
-			ft_2dfree.c						\
-			ft_strjoin_free.c				\
-			ft_2d_add.c						\
-			ft_basetoa.c					\
-			ft_string_injection.c			\
-			\
-			ft_printf/src/put_basetoa.c		\
-			ft_printf/src/ft_printf.c		\
-			ft_printf/src/functions.c		\
-			ft_printf/src/hexfunctions.c	\
-			ft_printf/src/printf_utils.c	\
-			\
-			get_next_line/get_next_line.c		\
-			get_next_line/get_next_line_utils.c	\
+SRCS 	:= 		ft_atoi.c ft_bzero.c ft_calloc.c  ft_isalnum.c ft_isalpha.c \
+				ft_isascii.c ft_isdigit.c ft_isprint.c ft_itoa.c ft_memchr.c\
+				ft_memcmp.c ft_memcpy.c ft_memmove.c ft_memset.c ft_putchar_fd.c \
+				ft_putendl_fd.c ft_putnbr_fd.c ft_putstr_fd.c ft_split.c ft_strchr.c \
+				ft_strdup.c ft_striteri.c  ft_strjoin.c  ft_strlcat.c  ft_strlcpy.c \
+				ft_strlen.c ft_strmapi.c  ft_strncmp.c ft_strnstr.c  ft_strrchr.c  \
+				ft_strtrim.c  ft_substr.c ft_tolower.c ft_toupper.c \
+				get_next_line.c get_next_line_utils.c ft_itoahuge.c \
+				ft_printf.c ft_2dfree.c ft_2d_add.c ft_2d_arrlen.c \
+				ft_atoi_overflow.c ft_isspace.c\
 
-BON_SRC :=	ft_lstnew_bonus.c \
-			ft_lstadd_front_bonus.c \
-			ft_lstsize_bonus.c \
-			ft_lstlast_bonus.c \
-			ft_lstadd_back_bonus.c \
-			ft_lstdelone_bonus.c \
-			ft_lstclear_bonus.c \
-			ft_lstiter_bonus.c \
-			ft_lstmap_bonus.c
+BONUS	:=		ft_lstadd_back_bonus.c ft_lstadd_front_bonus.c ft_lstclear_bonus.c \
+				ft_lstdelone_bonus.c ft_lstiter_bonus.c ft_lstlast_bonus.c \
+				ft_lstmap_bonus.c ft_lstnew_bonus.c ft_lstsize_bonus.c
 
+RM 		:= 		rm -f
 
+NAME	:=		libft.a
 
-OBJ		:=	$(SRC:.c=.o)
-BON_OBJ :=  $(BON_SRC:_bonus.c=_bonus.o)
+CFLAGS	:=		-Wall -Werror -Wextra
 
+CC		:= 		cc
 
-all: $(NAME)
+OBJ_DIR	:=		./objs/
 
-bonus: $(OBJ) $(BON_OBJ)
-	@ar -rc $(NAME) $^
+SRC_DIR	:=		./srcs/
 
-%.o: %.c $(HEADER)
-	@$(CC) $(CFLAGS) -c $< -o $@ 
+OBJ 	:= 		$(addprefix ${OBJ_DIR},${SRCS:.c=.o})
+		
+AR 		:= 		ar	-rc
 
-$(NAME): $(OBJ)
-	@ar -rc $(NAME) $^
+BONUSOBJ:=		$(addprefix ${OBJ_DIR},${BONUS:.c=.o})
 
-clean:
-	@$(RM) $(OBJ) $(BON_OBJ)
+${NAME}:	${OBJ}
+	@${AR} ${NAME} ${OBJ}
+# @echo "libft.a made"
 
-fclean: 
-	@$(RM) $(NAME) $(OBJ) $(BON_OBJ)
+all : ${NAME}
 
-re: fclean all
+${OBJ_DIR}%.o:		${SRC_DIR}%.c
+	@${CC} ${CFLAGS} -o $@ -c $^
 
-.PHONY: clean all fclean re Bonus
+clean: 
+	@${RM} ${OBJ} ${BONUSOBJ}
+# @echo "libft cleaned"
+
+fclean: 	clean
+	@${RM} ${NAME}
+# @echo "libft.a cleaned"
+
+re: 	fclean all
+
+bonus: ${OBJ} ${BONUSOBJ}
+	@${AR} ${NAME} ${OBJ} ${BONUSOBJ}
+# @echo "libft.a made with bonus"
+
+.PHONY:		all clean fclean re bonus

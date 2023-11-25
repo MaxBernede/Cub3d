@@ -5,14 +5,14 @@
 #include <stdlib.h>
 #include <fcntl.h>
 #include "struct.h"
-#include "libft.h"
+#include "../libft/libft.h"
 #include "../MLX42/include/MLX42/MLX42.h"
 
 #define OK 0
 #define ERROR 1
 
 //Run errors
-#define ERR_ARG "Error: Not enough arguments to run\nShould be ./miniRT 'file.rt'\n"
+#define ERR_ARG "Error: Not enough arguments to run\nShould be ./cub3d 'file.rt'\n"
 #define ERR_FILE "Error: File given doesn't exist or no rights to access it\n"
 #define ERR_NORT "Error: File doesn't end with .rt, cannot be accepted\n"
 #define ERR_FILE_DATA "Error: File datas are not correct, exit\n"
