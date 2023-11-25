@@ -46,6 +46,11 @@ void free_shapes_list(t_shapes *head) {
     }
 }
 
+void print_shape(t_shapes *head)
+{
+    printf("Shape\n");
+}
+
 void print_shapes(t_shapes *head)
 {
 	while (head)

@@ -21,6 +21,9 @@
 #define ERR_MLC "Error: Malloc Failed\n"
 
 //Errors fills
+
+#define ERR_TEXTURES "Error\nTextures sides error\n"
+#define ERR_FLOOR_CEILING "Error\nFloor and ceiling error\n"
 #define ERR_FILL_SCALE "Error: Error data filling the scale\n"
 #define ERR_FILL_COLORS "Error: Error data filling the colors\n"
 #define ERR_FILL_POSITION "Error: Error data filling the position\n"
@@ -55,13 +58,6 @@ void my_hook(void* param);
 //!START
 int start(t_param *param, t_window w);
 
-//!LIGHTS
-t_lights *create_light_node();
-t_lights *insert_light_start(t_lights *head, t_lights *new_light);
-t_lights *insert_light_end(t_lights *head, t_lights *new_light);
-void free_light_list(t_lights *head);
-void print_lights(t_lights *head);
-
 //!SHAPES
 int add_shape(char **split, t_param *param);
 
@@ -75,7 +71,7 @@ void print_shapes(t_shapes *head);
 //prints.c
 void print_shape(t_shapes *s);
 void print_param(t_param *param);
-void print_light(t_lights *light);
+
 
 //clean.c
 void clean_everything(t_param *param);
@@ -103,9 +99,6 @@ int	to_decimal(char *s, double *f);
 
 int is_scale(char *s, double *f);
 int	is_colors(char *s, int *r, int *g, int *b);
-
-//fill_to_null.c
-void	init_null(t_param *param);
 
 void	ft_2d_print(char **str);
 int	cmp(char *s1, char *s2);

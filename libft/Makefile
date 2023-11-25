@@ -6,7 +6,7 @@
 #    By: maxb <maxb@student.42.fr>                    +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/10/07 10:45:43 by mbernede      #+#    #+#                  #
-#    Updated: 2023/11/25 20:09:19 by maxb          ########   odam.nl          #
+#    Updated: 2023/11/25 21:03:23 by maxb          ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ SRCS 	:= 		ft_atoi.c ft_bzero.c ft_calloc.c  ft_isalnum.c ft_isalpha.c \
 				ft_strtrim.c  ft_substr.c ft_tolower.c ft_toupper.c \
 				get_next_line.c get_next_line_utils.c ft_itoahuge.c \
 				ft_printf.c ft_2dfree.c ft_2d_add.c ft_2d_arrlen.c \
-				ft_atoi_overflow.c ft_isspace.c\
+				ft_atoi_overflow.c ft_isspace.c ft_2d_print.c ft_cmp.c\
 
 BONUS	:=		ft_lstadd_back_bonus.c ft_lstadd_front_bonus.c ft_lstclear_bonus.c \
 				ft_lstdelone_bonus.c ft_lstiter_bonus.c ft_lstlast_bonus.c \

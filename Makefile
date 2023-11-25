@@ -28,8 +28,6 @@ SRC :=	main.c			\
 		utils/is_numbers.c	\
 		utils/ft_atof.c		\
 		utils/to.c			\
-		utils/fill_to_null.c\
-		lights/lights_nodes.c\
 		shapes/shapes_nodes.c \
 		mlx/start.c		\
 		mlx/hook.c			\

@@ -1,5 +1,14 @@
 #include "cub3d.h"
 
+void	init_null(t_param *p)
+{
+	p->fd_ea = -1;
+	p->fd_no = -1;
+	p->fd_we = -1;
+	p->fd_so = -1;
+	p->shapes = NULL;
+}
+
 int main(int argc, char **argv)
 {
 	t_param	param;
