@@ -23,11 +23,11 @@ int side_textures(char **split, t_param *p)
 {
 	int fd;
 
-	if (ft_2d_arrlen(split) != 2 || cmp(split[0], "NO") || cmp(split[0], "SO")|| cmp(split[0], "EA")|| cmp(split[0], "WE"))
+	if (ft_2d_arrlen(split) != 2 || (cmp(split[0], "NO") && cmp(split[0], "SO") && cmp(split[0], "EA") && cmp(split[0], "WE")))
 		return (printf(ERR_TEXTURES), ERROR);
 	//!open file also check withs maps
 	fd = open_file(split[1]);
-	if (!fd)
+	if (fd < 1)
 		return (printf(ERR_OPEN_TEXTURES), ERROR);
 	close(fd);
 	if (!cmp(split[0], "NO") && fill_texture(p->north, split[1]))
