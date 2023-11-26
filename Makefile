@@ -17,17 +17,12 @@ HEADERS := libft/libft.h includes/cub3d.h includes/struct.h
 SRC :=	main.c			\
 		valid_input.c	\
 		parsing.c		\
-		camera.c		\
-		fill_params.c	\
-		fill_shapes.c	\
 		utils/clean.c	\
-		utils/utils.c	\
-		utils/is.c		\
-		utils/is_camera.c	\
-		utils/prints.c		\
-		utils/is_numbers.c	\
 		utils/ft_atof.c		\
+		utils/is_color.c	\
+		utils/prints.c		\
 		utils/to.c			\
+		utils/utils.c	\
 		shapes/shapes_nodes.c \
 		mlx/start.c		\
 		mlx/hook.c			\
