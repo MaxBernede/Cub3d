@@ -11,15 +11,33 @@ int floor_ceiling(char **split, t_param *p)
 	return (OK);
 }
 
-int side_textures(char **split, t_param *param)
+int fill_texture(mlx_texture_t *texture, char *s)
 {
+	texture = mlx_load_png(s);
+	if (!texture)
+		return (ERROR);
+	return (OK);
+}
+
+int side_textures(char **split, t_param *p)
+{
+	int fd;
+
 	if (ft_2d_arrlen(split) != 2 || cmp(split[0], "NO") || cmp(split[0], "SO")|| cmp(split[0], "EA")|| cmp(split[0], "WE"))
 		return (printf(ERR_TEXTURES), ERROR);
-	
-	if (type == 'r' && fill_window(split, param))
-		return (printf(ERR_WINDOW), ERROR);
-	else if (type != 'c' && type != 'a' && type != 'l' && type != 'r')
-		return (printf(ERR_ADD_PARAM), ERROR);
+	//!open file also check withs maps
+	fd = open_file(split[1]);
+	if (!fd)
+		return (printf(ERR_OPEN_TEXTURES), ERROR);
+	close(fd);
+	if (!cmp(split[0], "NO") && fill_texture(p->north, split[1]))
+		return (printf(ERR_NO), ERROR);
+	if (!cmp(split[0], "SO") && fill_texture(p->south, split[1]))
+		return (printf(ERR_SO), ERROR);
+	if (!cmp(split[0], "EA") && fill_texture(p->east, split[1]))
+		return (printf(ERR_EA), ERROR);
+	if (!cmp(split[0], "WE") && fill_texture(p->west, split[1]))
+		return (printf(ERR_WE), ERROR);
 	return (OK);
 }
 

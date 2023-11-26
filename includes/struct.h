@@ -58,10 +58,10 @@ typedef struct s_param
 	t_window	window;
 	t_color		floor;
 	t_color		ceiling;
-	int			fd_no;
-	int			fd_so;
-	int			fd_we;
-	int			fd_ea;
+	mlx_texture_t*	north;
+	mlx_texture_t*	south;
+	mlx_texture_t*	west;
+	mlx_texture_t*	east;
 	t_shapes	*shapes;
 }	t_param;
 

@@ -21,7 +21,7 @@
 #define ERR_MLC "Error: Malloc Failed\n"
 
 //Errors fills
-
+#define ERR_OPEN_TEXTURES "Error\nCannot open textures\n"
 #define ERR_TEXTURES "Error\nTextures sides error\n"
 #define ERR_FLOOR_CEILING "Error\nFloor and ceiling error\n"
 #define ERR_FILL_SCALE "Error: Error data filling the scale\n"
@@ -33,6 +33,12 @@
 #define ERR_ADD_PARAM "Error: the first character of add param isn't correct\n"
 #define ERR_ADD_SHAPE "Error: the type of shape from add shape isn't correct\n"
 
+
+//Sides Error
+#define ERR_NO "Error\nError North\n"
+#define ERR_SO "Error\nError South\n"
+#define ERR_EA "Error\nError East\n"
+#define ERR_WE "Error\nError West\n"
 
 //Shape Error
 #define ERR_PL "Error: Shape Plane fill\n"

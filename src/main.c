@@ -2,10 +2,10 @@
 
 void	init_null(t_param *p)
 {
-	p->fd_ea = -1;
-	p->fd_no = -1;
-	p->fd_we = -1;
-	p->fd_so = -1;
+	p->east = NULL;
+	p->north = NULL;
+	p->south = NULL;
+	p->west = NULL;
 	p->shapes = NULL;
 }
 
