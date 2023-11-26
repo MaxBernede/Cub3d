@@ -51,17 +51,29 @@ typedef struct s_map
 	int height;
 }	t_map;
 
+typedef struct s_node
+{
+	char			*line;
+	struct s_node	*next;
+}	t_node;
+
+
 typedef struct s_param
 {
-	mlx_t		*mlx;
-	mlx_image_t	*img;
-	t_window	window;
-	t_color		floor;
-	t_color		ceiling;
+	t_color			floor;
+	t_color			ceiling;
 	mlx_texture_t*	north;
 	mlx_texture_t*	south;
 	mlx_texture_t*	west;
 	mlx_texture_t*	east;
+	int				fd;
+	bool			end_map_parse;
+	t_node			*tmp_map;
+	t_map			map;
+
+	mlx_t		*mlx;
+	mlx_image_t	*img;
+	t_window	window;
 	t_shapes	*shapes;
 }	t_param;
 

@@ -7,6 +7,13 @@ void	init_null(t_param *p)
 	p->south = NULL;
 	p->west = NULL;
 	p->shapes = NULL;
+	p->end_map_parse = false;
+	p->map.length = -1;
+	p->map.height = 0;
+	p->map.map = NULL;
+	p->tmp_map = NULL;
+	p->window.height = 512;
+	p->window.width = 512;
 }
 
 int main(int argc, char **argv)

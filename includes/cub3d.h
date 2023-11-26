@@ -21,6 +21,7 @@
 #define ERR_MLC "Error: Malloc Failed\n"
 
 //Errors fills
+#define ERR_FILL_MAP "Error\nMap fill error\n"
 #define ERR_OPEN_TEXTURES "Error\nCannot open textures\n"
 #define ERR_TEXTURES "Error\nTextures sides error\n"
 #define ERR_FLOOR_CEILING "Error\nFloor and ceiling error\n"
@@ -113,6 +114,17 @@ int nb_or_comma(char *s);
 //valid_input.c
 bool	check_file(char *arg);
 int		open_file(char *arg);
+
+//map_parse
+char	**get_map(t_param *p);
+int		parse_map(char *line, t_param *param);
+
+//nodes
+void	print_list(t_node *head);
+void	ft_free_lst(t_node *head);
+void	ft_free_node(t_node *node);
+int		insert_node(t_node **head, char *line);
+int		ft_our_lst_size(t_node *lst);
 
 
 #endif

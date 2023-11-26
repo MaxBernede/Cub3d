@@ -31,6 +31,8 @@ SRC :=	main.c			\
 		shapes/shapes_nodes.c \
 		mlx/start.c		\
 		mlx/hook.c			\
+		map_parse.c			\
+		nodes.c				\
 
 OBJ := $(addprefix $(OBJ_DIR)/,$(SRC:.c=.o))
 SRC := $(addprefix $(SRC_DIR)/,$(SRC))
