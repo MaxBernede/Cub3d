@@ -1,6 +1,6 @@
 #include "cub3d.h"
 
-//ERROR == 1
+//fill the colors could be changed with structure to be more easy to read
 int	is_colors(char *s, int *r, int *g, int *b)
 {
 	char **split;

@@ -12,6 +12,7 @@ void	init_null(t_param *p)
 	p->map.length = -1;
 	p->map.height = 0;
 	p->map.map = NULL;
+	p->map.flood = NULL;
 	p->tmp_map = NULL;
 	p->window.height = 512;
 	p->window.width = 512;

@@ -46,9 +46,10 @@ typedef struct s_shapes
 
 typedef struct s_map
 {
-	char **map;
-	int length;
-	int height;
+	char	**flood;
+	char	**map;
+	int		length;
+	int		height;
 }	t_map;
 
 typedef struct s_node

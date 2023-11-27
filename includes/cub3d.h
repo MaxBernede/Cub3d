@@ -12,6 +12,8 @@
 #define ERROR 1
 
 //Run errors
+#define ERR_START_POS "Position not found\n"
+#define ERR_CHARACTER "Character found 0 or more than 1 time in the file\n"
 #define ERR_ARG "Error: Not enough arguments to run\nShould be ./cub3d 'file.cub'\n"
 #define ERR_FILE "Error: File given doesn't exist or no rights to access it\n"
 #define ERR_NORT "Error: File doesn't end with .rt, cannot be accepted\n"
@@ -33,6 +35,9 @@
 #define ERR_EA "Error\nError East\n"
 #define ERR_WE "Error\nError West\n"
 
+//check_map
+int check_map(t_param *param);
+
 //check_line.c
 int	get_str_without_nl(char *line, char **sub);
 
@@ -50,6 +55,7 @@ t_shapes *insert_shape_start(t_shapes *head, t_shapes *new_light);
 t_shapes *insert_shape_end(t_shapes *head, t_shapes *new_light);
 void free_shapes_list(t_shapes *head);
 void print_shapes(t_shapes *head);
+void print_flood(t_map map);
 
 //!UTILS
 //clean.c

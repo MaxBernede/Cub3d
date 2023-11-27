@@ -1,5 +1,6 @@
 #include "cub3d.h"
 
+//makes the number a double
 double ft_atof(char *nptr)
 {
     double result = 0.0;

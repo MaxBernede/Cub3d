@@ -6,7 +6,7 @@
 /*   By: maxb <maxb@student.42.fr>                    +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/26 12:27:02 by maxb          #+#    #+#                 */
-/*   Updated: 2023/11/27 17:15:47 by maxb          ########   odam.nl         */
+/*   Updated: 2023/11/27 20:09:24 by maxb          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,16 @@ char *read_new_line(char *sub, t_param *p)
 
 	free(sub);
 	line = get_next_line(p->fd);
-	sub = ft_substr(line, 0, ft_strlen(line)-1);
-	if (!sub || !sub[0])
-		return (free(line), NULL);
+	if (!line)
+		return (NULL);
+	if (line[ft_strlen(line) - 1] == '\n')
+		sub = ft_substr(line, 0, ft_strlen(line)-1);
+	else
+		sub = ft_substr(line, 0, ft_strlen(line));
+	if (!sub)
+		return (NULL);
+	if (!sub[0])
+		return (free(sub), free(line), NULL);
 	free(line);
 	return sub;
 }
@@ -41,6 +48,10 @@ int fill_map(char *sub, t_param *p)
 	p->map.map = get_map(p);
 	if (!p->map.map)
 		return (ERROR);
+	// prepare the floodfill map
+	p->map.flood = get_map(p);
+	if (!p->map.flood)
+		return (ERROR);
 	ft_free_lst(p->tmp_map);
 	p->tmp_map = NULL;
 	ft_2d_print(p->map.map);
@@ -56,7 +67,6 @@ int parse_map(char *line, t_param *param)
 
 	if (get_str_without_nl(line, &sub))
 		return (OK);
-	printf("sub is %s\n", sub);
 	split = ft_split(sub, ' ');
 	if (!split)
 		return (free(line), free(sub), ERROR);
@@ -65,7 +75,7 @@ int parse_map(char *line, t_param *param)
 	ft_2dfree(split);
 	//Check below means the map have been filled, so we can check the validity of the map
 	if (param->map.map)
-		return (OK);
+		return (check_map(param));
 	return (OK);
 }
 
