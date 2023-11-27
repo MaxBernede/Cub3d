@@ -17,6 +17,7 @@ HEADERS := libft/libft.h includes/cub3d.h includes/struct.h
 SRC :=	main.c			\
 		valid_input.c	\
 		parsing.c		\
+		utils/check_line.c 	\
 		utils/clean.c	\
 		utils/ft_atof.c		\
 		utils/is_color.c	\

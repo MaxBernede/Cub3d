@@ -18,8 +18,8 @@ int start(t_param *param, t_window w)
 	{
         for (int x = 0; x < w.width; ++x)
 		{
-            int r = x;
-            int g = y;
+            int r = x / 2;
+            int g = y / 2;
             int b = 0;
 			mlx_put_pixel(param->img, x, y, ft_pixel(r, g, b, 255)); 
         }

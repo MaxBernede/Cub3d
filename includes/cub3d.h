@@ -33,6 +33,8 @@
 #define ERR_EA "Error\nError East\n"
 #define ERR_WE "Error\nError West\n"
 
+//check_line.c
+int	get_str_without_nl(char *line, char **sub);
 
 //parsing.c
 int	fill_datas(char *arg, t_param *param);

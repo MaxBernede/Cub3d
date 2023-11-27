@@ -19,13 +19,13 @@ int fill_texture(mlx_texture_t *texture, char *s)
 	return (OK);
 }
 
+//Check the textures exists and can be opened them assigned them to the structure
 int side_textures(char **split, t_param *p)
 {
 	int fd;
 
 	if (ft_2d_arrlen(split) != 2 || (cmp(split[0], "NO") && cmp(split[0], "SO") && cmp(split[0], "EA") && cmp(split[0], "WE")))
 		return (printf(ERR_TEXTURES), ERROR);
-	//!open file also check withs maps
 	fd = open_file(split[1]);
 	if (fd < 1)
 		return (printf(ERR_OPEN_TEXTURES), ERROR);
@@ -47,11 +47,7 @@ int check_line(char *line, t_param *param)
 	char **split;
 	char *sub;
 
-	if (!line || !cmp(line, "\n"))
-		return (OK);
-	//remove the '\n'
-	sub = ft_substr(line, 0, ft_strlen(line)-1);
-	if (!sub || !sub[0])
+	if (get_str_without_nl(line, &sub))
 		return (OK);
 	split = ft_split(sub, ' ');
 	if (!split)

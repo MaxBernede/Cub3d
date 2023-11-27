@@ -6,7 +6,7 @@
 /*   By: maxb <maxb@student.42.fr>                    +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/26 12:27:02 by maxb          #+#    #+#                 */
-/*   Updated: 2023/11/26 13:31:47 by maxb          ########   odam.nl         */
+/*   Updated: 2023/11/27 17:15:47 by maxb          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ int fill_map(char *sub, t_param *p)
 	ft_2d_print(p->map.map);
 	p->map.height = ft_2d_arrlen(p->map.map);
 	p->end_map_parse = true;
-	//!	check here the validation of the map
 	return (OK);
 }
 
@@ -55,21 +54,22 @@ int parse_map(char *line, t_param *param)
 	char **split;
 	char *sub;
 
-	if (!line || !cmp(line, "\n"))
+	if (get_str_without_nl(line, &sub))
 		return (OK);
-	//remove the '\n'
-	sub = ft_substr(line, 0, ft_strlen(line)-1);
-	if (!sub || !sub[0])
-		return (OK);
+	printf("sub is %s\n", sub);
 	split = ft_split(sub, ' ');
 	if (!split)
 		return (free(line), free(sub), ERROR);
 	if (ft_2d_arrlen(split) == 1 && fill_map(sub, param))
 			return (ft_2dfree(split), ERROR);
 	ft_2dfree(split);
+	//Check below means the map have been filled, so we can check the validity of the map
+	if (param->map.map)
+		return (OK);
 	return (OK);
 }
 
+//The map is transformed from a linked list to a char **
 char	**get_map(t_param *p)
 {
 	t_node	*current;

@@ -1,5 +1,6 @@
 #include "cub3d.h"
 
+//this is made to free more easily in case of a parsing error
 void	init_null(t_param *p)
 {
 	p->east = NULL;
@@ -32,7 +33,3 @@ int main(int argc, char **argv)
 	clean_everything(&param);
 	return (0);
 }
-
-#define WIDTH 512
-#define HEIGHT 512
-static mlx_image_t* image;

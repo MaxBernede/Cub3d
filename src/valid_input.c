@@ -1,6 +1,6 @@
 #include "cub3d.h"
 
-//!all checked and necessary
+//check if exist and we can open it
 int open_file(char *arg)
 {
 	char *filepath;
@@ -9,16 +9,10 @@ int open_file(char *arg)
 	fd = open(arg, O_RDONLY);
 	if (fd > 0)
 		return (fd);
-	filepath = ft_strjoin("./maps/", arg);
-	fd = open(filepath, O_RDONLY);
-	if (fd > 0)
-	{
-		free(filepath);
-		return (fd);
-	}
 	return (0);
 }
 
+//used to check if file end with .cub
 bool endswith(char *str, char *suffix) {
 	int str_len ;
 	int suffix_len ;
