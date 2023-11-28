@@ -14,8 +14,8 @@ void	init_null(t_param *p)
 	p->map.map = NULL;
 	p->map.flood = NULL;
 	p->tmp_map = NULL;
-	p->window.height = 512;
-	p->window.width = 512;
+	p->window.height = 1024;
+	p->window.width = 1024;
 }
 
 int	main(int argc, char **argv)
