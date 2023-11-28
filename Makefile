@@ -25,7 +25,6 @@ SRC :=	main.c			\
 		utils/prints.c		\
 		utils/to.c			\
 		utils/utils.c	\
-		shapes/shapes_nodes.c \
 		mlx/start.c		\
 		mlx/hook.c			\
 		map_parse.c			\

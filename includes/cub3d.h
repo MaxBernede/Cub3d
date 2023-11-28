@@ -13,10 +13,10 @@
 
 // Run errors
 # define ERR_START_POS "Position not found\n"
-# define ERR_CHARACTER "Character found 0 or more than 1 time in the file\n"
+# define ERR_CHARACTER "Character not found or more than 1 time in the file\n"
 # define ERR_ARG "Error: Not enough arguments\nShould be ./cub3d 'file.cub'\n"
 # define ERR_FILE "Error: File given doesn't exist or no rights to access it\n"
-# define ERR_NORT "Error: File doesn't end with .rt, cannot be accepted\n"
+# define ERR_NOCUB "Error: File doesn't end with .cub, cannot be accepted\n"
 # define ERR_FILE_DATA "Error: File datas are not correct, exit\n"
 
 // Errors globals
@@ -26,7 +26,7 @@
 # define ERR_FILL_COLORS "Error\n Error fill colors\n"
 # define ERR_FILL_MAP "Error\nMap fill error\n"
 # define ERR_OPEN_TEXTURES "Error\nCannot open textures\n"
-# define ERR_TEXTURES "Error\nTextures sides error\n"
+# define ERR_TEXTURES "Error\nTextures values error\n"
 # define ERR_FLOOR_CEILING "Error\nFloor and ceiling error\n"
 
 // Sides Error

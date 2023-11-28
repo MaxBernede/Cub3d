@@ -30,6 +30,6 @@ bool	check_file(char *arg)
 	if (!open_file(arg))
 		return (printf(ERR_FILE), ERROR);
 	if (!endswith(arg, ".cub"))
-		return (printf(ERR_NORT), ERROR);
+		return (printf(ERR_NOCUB), ERROR);
 	return (OK);
 }

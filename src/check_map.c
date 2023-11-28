@@ -6,7 +6,7 @@
 /*   By: maxb <maxb@student.42.fr>                    +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/27 17:52:04 by maxb          #+#    #+#                 */
-/*   Updated: 2023/11/27 20:36:00 by maxb          ########   odam.nl         */
+/*   Updated: 2023/11/28 02:13:28 by maxb          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,8 @@ int	flood_fill(t_map map, int x, int y)
 	if (map.flood[y][x] == '1' || map.flood[y][x] == '9')
 		return (OK);
 	map.flood[y][x] = '9';
-	print_flood(map);
+	//this print will show the map with the colored squares
+	//print_flood(map);
 	r += flood_fill(map, x, y - 1);
 	r += flood_fill(map, x, y + 1);
 	r += flood_fill(map, x + 1, y);
