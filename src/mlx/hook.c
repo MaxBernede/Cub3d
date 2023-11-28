@@ -1,9 +1,9 @@
 #include "cub3d.h"
 
-void my_hook(void* param)
+void	my_hook(void *param)
 {
-	t_param *p;
-	
+	t_param	*p;
+
 	p = param;
 	if (mlx_is_key_down(p->mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(p->mlx);

@@ -12,7 +12,7 @@
 
 #include "cub3d.h"
 
-int get_char_start(t_map map, int *y, int *x)
+int	get_char_start(t_map map, int *y, int *x)
 {
 	*y = 0;
 	while (*y < map.height)
@@ -29,14 +29,16 @@ int get_char_start(t_map map, int *y, int *x)
 	return (ERROR);
 }
 
-int flood_fill(t_map map, int x, int y)
+int	flood_fill(t_map map, int x, int y)
 {
-	int r;
+	int	r;
 
 	r = 0;
-    if (x < 0 || x >= map.length || y < 0 || y >= map.height || map.flood[y][x] == ' ') {
-        return (ERROR);
-    }
+	if (x < 0 || x >= map.length || y < 0 || y >= map.height
+		|| map.flood[y][x] == ' ')
+	{
+		return (ERROR);
+	}
 	if (map.flood[y][x] == '1' || map.flood[y][x] == '9')
 		return (OK);
 	map.flood[y][x] = '9';
@@ -48,12 +50,12 @@ int flood_fill(t_map map, int x, int y)
 	return (r);
 }
 
-//check if the char is != than 1 time
-int check_char(t_map map)
+// check if the char is != than 1 time
+int	check_char(t_map map)
 {
-	int found;
-	int x;
-	int y;
+	int	found;
+	int	x;
+	int	y;
 
 	found = 0;
 	y = 0;
@@ -73,10 +75,10 @@ int check_char(t_map map)
 	return (OK);
 }
 
-int check_map(t_param *param)
+int	check_map(t_param *param)
 {
-	int x;
-	int y;
+	int	x;
+	int	y;
 
 	if (check_char(param->map))
 		return (printf(ERR_CHARACTER), ERROR);

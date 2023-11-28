@@ -1,9 +1,9 @@
 #include "cub3d.h"
 
-//fill the colors could be changed with structure to be more easy to read
+// fill the colors could be changed with structure to be more easy to read
 int	is_colors(char *s, int *r, int *g, int *b)
 {
-	char **split;
+	char	**split;
 
 	if (ft_strlen(s) > 11 || nb_or_comma(s))
 		return (ERROR);
@@ -17,5 +17,5 @@ int	is_colors(char *s, int *r, int *g, int *b)
 	*b = ft_atoi(split[2]);
 	if (*r > 255 || *g > 255 || *b > 255)
 		return (ft_2dfree(split), ERROR);
-	return (ft_2dfree(split),OK);
+	return (ft_2dfree(split), OK);
 }

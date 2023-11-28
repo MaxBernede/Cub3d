@@ -1,6 +1,6 @@
 #include "cub3d.h"
 
-//this is made to free more easily in case of a parsing error
+// this is made to free more easily in case of a parsing error
 void	init_null(t_param *p)
 {
 	p->east = NULL;
@@ -18,7 +18,7 @@ void	init_null(t_param *p)
 	p->window.width = 512;
 }
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
 	t_param	param;
 

@@ -6,22 +6,22 @@
 /*   By: maxb <maxb@student.42.fr>                    +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/26 12:27:02 by maxb          #+#    #+#                 */
-/*   Updated: 2023/11/27 20:09:24 by maxb          ########   odam.nl         */
+/*   Updated: 2023/11/28 02:04:19 by maxb          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-char *read_new_line(char *sub, t_param *p)
+char	*read_new_line(char *sub, t_param *p)
 {
-	char *line;
+	char	*line;
 
 	free(sub);
 	line = get_next_line(p->fd);
 	if (!line)
 		return (NULL);
 	if (line[ft_strlen(line) - 1] == '\n')
-		sub = ft_substr(line, 0, ft_strlen(line)-1);
+		sub = ft_substr(line, 0, ft_strlen(line) - 1);
 	else
 		sub = ft_substr(line, 0, ft_strlen(line));
 	if (!sub)
@@ -29,12 +29,12 @@ char *read_new_line(char *sub, t_param *p)
 	if (!sub[0])
 		return (free(sub), free(line), NULL);
 	free(line);
-	return sub;
+	return (sub);
 }
 
-int fill_map(char *sub, t_param *p)
+int	fill_map(char *sub, t_param *p)
 {
-	t_map *map;
+	t_map	*map;
 
 	map = &p->map;
 	if (sub && map->length < 0)
@@ -60,10 +60,10 @@ int fill_map(char *sub, t_param *p)
 	return (OK);
 }
 
-int parse_map(char *line, t_param *param)
+int	parse_map(char *line, t_param *param)
 {
-	char **split;
-	char *sub;
+	char	**split;
+	char	*sub;
 
 	if (get_str_without_nl(line, &sub))
 		return (OK);
@@ -71,24 +71,24 @@ int parse_map(char *line, t_param *param)
 	if (!split)
 		return (free(line), free(sub), ERROR);
 	if (ft_2d_arrlen(split) == 1 && fill_map(sub, param))
-			return (ft_2dfree(split), ERROR);
+		return (ft_2dfree(split), ERROR);
 	ft_2dfree(split);
-	//Check below means the map have been filled, so we can check the validity of the map
+	// Check below means the map have been filled,so we can check the validity of the map
 	if (param->map.map)
 		return (check_map(param));
 	return (OK);
 }
 
-//The map is transformed from a linked list to a char **
+// The map is transformed from a linked list to a char **
 char	**get_map(t_param *p)
 {
-	t_node	*current;
-	char	**map;
-	int		i;
+	t_node *current;
+	char **map;
+	int i;
 
 	current = p->tmp_map;
 	i = 0;
-	map = (char **) malloc((ft_our_lst_size(current) + 1) * sizeof(char *));
+	map = (char **)malloc((ft_our_lst_size(current) + 1) * sizeof(char *));
 	if (!map)
 		return (printf(ERR_MLC), NULL);
 	while (current)

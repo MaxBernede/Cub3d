@@ -1,0 +1,2 @@
+find . -type f -name "*.c" -exec sh -c 'python3 -m c_formatter_42 < "{}" > tmp.c && cat tmp.c > "{}"' \;
+to auto fix norminette

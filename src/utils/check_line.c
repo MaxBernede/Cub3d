@@ -16,7 +16,7 @@ int	get_str_without_nl(char *line, char **sub)
 {
 	if (!line || !cmp(line, "\n"))
 		return (ERROR);
-	*sub = ft_substr(line, 0, ft_strlen(line)-1);
+	*sub = ft_substr(line, 0, ft_strlen(line) - 1);
 	if (!*sub)
 		return (ERROR);
 	if (!*sub[0])

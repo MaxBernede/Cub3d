@@ -1,11 +1,9 @@
 #include "cub3d.h"
 
-
 #define ANSI_RED "\x1b[31m"
 #define ANSI_GREEN "\x1b[32m"
 #define ANSI_WHITE "\x1b[37m"
 #define ANSI_RESET "\x1b[0m"
-
 
 void	print_pos(t_vec3 vec)
 {
@@ -17,7 +15,7 @@ void	print_color(t_color color)
 	printf("colors:(%d,%d,%d) ", color.r, color.g, color.b);
 }
 
-void print_flood(t_map map)
+void	print_flood(t_map map)
 {
 	int y;
 	int x;

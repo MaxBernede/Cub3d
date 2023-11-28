@@ -1,10 +1,10 @@
 #include "cub3d.h"
 
-//check if exist and we can open it
-int open_file(char *arg)
+// check if exist and we can open it
+int	open_file(char *arg)
 {
-	char *filepath;
-	int fd;
+	char	*filepath;
+	int		fd;
 
 	fd = open(arg, O_RDONLY);
 	if (fd > 0)
@@ -12,20 +12,20 @@ int open_file(char *arg)
 	return (0);
 }
 
-//used to check if file end with .cub
-bool endswith(char *str, char *suffix) {
-	int str_len ;
-	int suffix_len ;
+// used to check if file end with .cub
+bool	endswith(char *str, char *suffix)
+{
+	int	str_len;
+	int	suffix_len;
 
 	str_len = ft_strlen(str);
 	suffix_len = ft_strlen(suffix);
-
 	if (str_len < suffix_len)
-		return false;
+		return (false);
 	return (ft_strncmp(str + (str_len - suffix_len), suffix, suffix_len) == 0);
 }
 
-bool check_file(char *arg)
+bool	check_file(char *arg)
 {
 	if (!open_file(arg))
 		return (printf(ERR_FILE), ERROR);
