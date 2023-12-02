@@ -35,6 +35,15 @@
 # define ERR_EA "Error\nError East\n"
 # define ERR_WE "Error\nError West\n"
 
+// Minimap Colors
+# define WALL_COL 0xFFFFFFFF
+# define FLOOR_COL 0x000000FF
+# define PLAYER_COL 0xFF0000FF
+
+// draw_minimap
+void	draw_minimap(t_player player, t_map map);
+int		get_char_start(t_map map, int *y, int *x);
+
 // check_map
 int			check_map(t_param *param);
 

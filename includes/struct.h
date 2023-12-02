@@ -44,12 +44,22 @@ typedef struct s_shapes
 	struct s_shapes	*next;
 }					t_shapes;
 
+typedef struct s_player
+{
+	t_vec3	pos;
+	int		fov;
+	float	angle;
+}			t_player;
+
 typedef struct s_map
 {
 	char			**flood;
 	char			**map;
 	int				length;
 	int				height;
+	int				tile_size;
+
+	mlx_image_t		*minimap;
 }					t_map;
 
 typedef struct s_node
@@ -70,6 +80,7 @@ typedef struct s_param
 	bool			end_map_parse;
 	t_node			*tmp_map;
 	t_map			map;
+	t_player		player;
 
 	mlx_t			*mlx;
 	mlx_image_t		*img;

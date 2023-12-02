@@ -9,6 +9,7 @@ INCLUDES := -I libft -I MLX42 -I includes
 CC := gcc
 CFLAGS := -g -fsanitize=address# -Wall -Wextra -Werror
 MACOS := -lglfw -L"/opt/homebrew/Cellar/glfw/3.3.8/lib" -framework Cocoa -framework OpenGL -framework IOKit
+LINUX := -ldl -lglfw -pthread -lm
 
 # Directories and Files
 OBJ_DIR := ./obj
@@ -18,6 +19,7 @@ SRC :=	main.c			\
 		valid_input.c	\
 		parsing.c		\
 		check_map.c		\
+		minimap.c		\
 		utils/check_line.c 	\
 		utils/clean.c	\
 		utils/ft_atof.c		\
