@@ -14,10 +14,10 @@ int	floor_ceiling(char **split, t_param *p)
 	return (OK);
 }
 
-int	fill_texture(mlx_texture_t *texture, char *s)
+int	fill_texture(mlx_texture_t **texture, char *s)
 {
-	texture = mlx_load_png(s);
-	if (!texture)
+	*texture = mlx_load_png(s);
+	if (!(*texture))
 		return (ERROR);
 	return (OK);
 }
@@ -34,13 +34,13 @@ int	side_textures(char **split, t_param *p)
 	if (fd < 1)
 		return (printf(ERR_OPEN_TEXTURES), ERROR);
 	close(fd);
-	if (!cmp(split[0], "NO") && fill_texture(p->north, split[1]))
+	if (!cmp(split[0], "NO") && fill_texture(&(p->north), split[1]))
 		return (printf(ERR_NO), ERROR);
-	if (!cmp(split[0], "SO") && fill_texture(p->south, split[1]))
+	if (!cmp(split[0], "SO") && fill_texture(&(p->south), split[1]))
 		return (printf(ERR_SO), ERROR);
-	if (!cmp(split[0], "EA") && fill_texture(p->east, split[1]))
+	if (!cmp(split[0], "EA") && fill_texture(&(p->east), split[1]))
 		return (printf(ERR_EA), ERROR);
-	if (!cmp(split[0], "WE") && fill_texture(p->west, split[1]))
+	if (!cmp(split[0], "WE") && fill_texture(&(p->west), split[1]))
 		return (printf(ERR_WE), ERROR);
 	return (OK);
 }
@@ -76,6 +76,8 @@ int	fill_datas(char *arg, t_param *p)
 	if (p->fd <= 0)
 		return (ERROR);
 	line = get_next_line(p->fd);
+	if (!line)
+		return (printf(ERR_EMPTY_MAP), ERROR);
 	while (line)
 	{
 		//! line not free anymore here for parse map and should be free
@@ -88,5 +90,7 @@ int	fill_datas(char *arg, t_param *p)
 		line = get_next_line(p->fd);
 	}
 	close(p->fd);
+	if (!p->map.map)
+		return (printf(ERR_NO_MAP), ERROR);
 	return (OK);
 }

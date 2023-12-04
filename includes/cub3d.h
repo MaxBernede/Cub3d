@@ -18,6 +18,8 @@
 # define ERR_FILE "Error: File given doesn't exist or no rights to access it\n"
 # define ERR_NOCUB "Error: File doesn't end with .cub, cannot be accepted\n"
 # define ERR_FILE_DATA "Error: File datas are not correct, exit\n"
+# define ERR_EMPTY_MAP "Error\nMap is empty\n"
+# define ERR_NO_MAP "Error\nNo map in the file\n"
 
 // Errors globals
 # define ERR_MLC "Error: Malloc Failed\n"

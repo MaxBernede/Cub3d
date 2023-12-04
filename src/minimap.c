@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   minimap.c                                          :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: bjacobs <bjacobs@student.codam.nl>         +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/29 22:02:49 by bjacobs           #+#    #+#             */
-/*   Updated: 2023/12/02 23:33:17 by bjacobs          ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   minimap.c                                          :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: maxb <maxb@student.42.fr>                    +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2023/11/29 22:02:49 by bjacobs       #+#    #+#                 */
+/*   Updated: 2023/12/04 12:37:31 by maxb          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,6 @@ void	draw_minimap(t_player player, t_map map)
 		}
 		p.y++;
 	}
-	printf("x: %f y: %f\n", player.pos.x, player.pos.y);
+	//printf("x: %f y: %f\n", player.pos.x, player.pos.y);
 	put_square(4, player.pos, map.minimap, PLAYER_COL);
 }

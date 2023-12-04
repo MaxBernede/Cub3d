@@ -6,11 +6,22 @@
 /*   By: maxb <maxb@student.42.fr>                    +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/26 12:27:02 by maxb          #+#    #+#                 */
-/*   Updated: 2023/11/28 02:04:19 by maxb          ########   odam.nl         */
+/*   Updated: 2023/12/04 14:10:09 by maxb          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+int full_textures(t_param *p)
+{
+	if (!p->south || !p->north || !p->east || !p->west)
+		return (ERROR);
+	if (p->floor.r < 0 || p->floor.g < 0 || p->floor.b < 0)
+		return (ERROR);
+	if (p->ceiling.r < 0 || p->ceiling.g < 0 || p->ceiling.b < 0)
+		return (ERROR);
+	return (OK);
+}
 
 char	*read_new_line(char *sub, t_param *p)
 {
@@ -54,13 +65,13 @@ int	fill_map(char *sub, t_param *p)
 		return (ERROR);
 	ft_free_lst(p->tmp_map);
 	p->tmp_map = NULL;
-	ft_2d_print(p->map.map);
+	//ft_2d_print(p->map.map);
 	p->map.height = ft_2d_arrlen(p->map.map);
 	p->end_map_parse = true;
 	return (OK);
 }
 
-int	parse_map(char *line, t_param *param)
+int	parse_map(char *line, t_param *p)
 {
 	char	**split;
 	char	*sub;
@@ -70,12 +81,14 @@ int	parse_map(char *line, t_param *param)
 	split = ft_split(sub, ' ');
 	if (!split)
 		return (free(line), free(sub), ERROR);
-	if (ft_2d_arrlen(split) == 1 && fill_map(sub, param))
+	//below line means : if arrlen == 1 means it will start parsing the map, but before i check
+	//if there is textures for all the walls otherwise no need to parse
+	if (ft_2d_arrlen(split) == 1 && (full_textures(p) || fill_map(sub, p)))
 		return (ft_2dfree(split), ERROR);
 	ft_2dfree(split);
 	// Check below means the map have been filled,so we can check the validity of the map
-	if (param->map.map)
-		return (check_map(param));
+	if (p->map.map)
+		return (check_map(p));
 	return (OK);
 }
 

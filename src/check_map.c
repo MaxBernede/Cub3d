@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   check_map.c                                        :+:      :+:    :+:   */
+/*   check_map.c                                        :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: maxb <maxb@student.42.fr>                    +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/27 17:52:04 by maxb          #+#    #+#                 */
-/*   Updated: 2023/12/02 21:58:11 by bjacobs          ###   ########.fr       */
+/*   Updated: 2023/12/04 14:03:57 by maxb          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	flood_fill(t_map map, int x, int y)
 		return (OK);
 	map.flood[y][x] = '9';
 	//this print will show the map with the colored squares
-	print_flood(map);
+	//print_flood(map);
 	r += flood_fill(map, x, y - 1);
 	r += flood_fill(map, x, y + 1);
 	r += flood_fill(map, x + 1, y);
@@ -85,7 +85,7 @@ int	check_map(t_param *param)
 		return (printf(ERR_CHARACTER), ERROR);
 	if (get_char_start(param->map, &y, &x))
 		return (printf(ERR_START_POS), ERROR);
-	printf("\n%dx %dy\n", x, y);
+	//printf("\n%dx %dy\n", x, y);
 	if (flood_fill(param->map, x, y))
 		return (ERROR);
 	return (OK);
