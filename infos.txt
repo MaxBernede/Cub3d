@@ -2,3 +2,6 @@ find . -type f -name "*.c" -exec sh -c 'python3 -m c_formatter_42 < "{}" > tmp.c
 to auto fix norminette
 
 https://lodev.org/cgtutor/raycasting.html
+
+last thing to work on for the parsing : the not squared maps + adapting the size of the map
+based on the validity of this one

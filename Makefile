@@ -27,9 +27,13 @@ SRC :=	main.c			\
 		utils/prints.c		\
 		utils/to.c			\
 		utils/utils.c	\
+		utils/concat_2d.c \
+		fill_datas.c	\
 		mlx/start.c		\
 		mlx/hook.c			\
 		map_parse.c			\
+		gets.c				\
+		flood_fill.c		\
 		nodes.c				\
 
 OBJ := $(addprefix $(OBJ_DIR)/,$(SRC:.c=.o))

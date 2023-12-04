@@ -6,7 +6,7 @@
 /*   By: maxb <maxb@student.42.fr>                    +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/26 12:27:02 by maxb          #+#    #+#                 */
-/*   Updated: 2023/12/04 14:10:09 by maxb          ########   odam.nl         */
+/*   Updated: 2023/12/04 17:54:01 by maxb          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int	fill_map(char *sub, t_param *p)
 		return (ERROR);
 	ft_free_lst(p->tmp_map);
 	p->tmp_map = NULL;
-	//ft_2d_print(p->map.map);
+	// ft_2d_print(p->map.map);
 	p->map.height = ft_2d_arrlen(p->map.map);
 	p->end_map_parse = true;
 	return (OK);
@@ -90,26 +90,4 @@ int	parse_map(char *line, t_param *p)
 	if (p->map.map)
 		return (check_map(p));
 	return (OK);
-}
-
-// The map is transformed from a linked list to a char **
-char	**get_map(t_param *p)
-{
-	t_node *current;
-	char **map;
-	int i;
-
-	current = p->tmp_map;
-	i = 0;
-	map = (char **)malloc((ft_our_lst_size(current) + 1) * sizeof(char *));
-	if (!map)
-		return (printf(ERR_MLC), NULL);
-	while (current)
-	{
-		map[i] = ft_strdup(current->line);
-		current = current->next;
-		++i;
-	}
-	map[i] = NULL;
-	return (map);
 }

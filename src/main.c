@@ -33,7 +33,7 @@ int	main(int argc, char **argv)
 	init_null(&param);
 	if (check_file(argv[1]))
 		return (1);
-	if (fill_datas(argv[1], &param))
+	if (parse_file(argv[1], &param))
 		return (1);
 	if (start(&param, param.window))
 		return (0);
