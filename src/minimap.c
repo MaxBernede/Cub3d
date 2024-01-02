@@ -6,21 +6,13 @@
 /*   By: bjacobs <bjacobs@student.codam.nl>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 22:02:49 by bjacobs           #+#    #+#             */
-/*   Updated: 2023/12/02 23:33:17 by bjacobs          ###   ########.fr       */
+/*   Updated: 2023/12/25 20:58:46 by bjacobs          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-t_vec3	vec3_multiply(t_vec3 v3, double multiplier)
-{
-	v3.x *= multiplier;
-	v3.y *= multiplier;
-	v3.z *= multiplier;
-	return (v3);
-}
-
-void	put_square(int size, t_vec3 p, mlx_image_t *img, uint32_t color)
+void	put_square(int size, t_vec2 p, mlx_image_t *img, uint32_t color)
 {
 	int	i;
 	int	j;
@@ -41,22 +33,22 @@ void	put_square(int size, t_vec3 p, mlx_image_t *img, uint32_t color)
 
 void	draw_minimap(t_player player, t_map map)
 {
-	t_vec3	p;
+	t_vec2	p;
 
 	p.y = 0;
+	put_square((TILE_SIZE) * map.height, v2_new(0, 0), map.minimap, 0x808080FF);
 	while (p.y < map.height)
 	{
 		p.x = 0;
 		while (p.x < map.length)
 		{
 			if (map.map[(int)p.y][(int)p.x]  == '1')
-				put_square(map.tile_size, vec3_multiply(p, map.tile_size), map.minimap, WALL_COL);
-			if (ft_strchr("0NWSE", map.map[(int)p.y][(int)p.x]))
-				put_square(map.tile_size, vec3_multiply(p, map.tile_size), map.minimap, FLOOR_COL);
+				put_square(TILE_SIZE, v2_mult(p, TILE_SIZE), map.minimap, WALL_COL);
+			else if (ft_strchr("0NWSE", map.map[(int)p.y][(int)p.x]))
+				put_square(TILE_SIZE, v2_mult(p, TILE_SIZE), map.minimap, FLOOR_COL);
 			p.x++;
 		}
 		p.y++;
 	}
-	printf("x: %f y: %f\n", player.pos.x, player.pos.y);
 	put_square(4, player.pos, map.minimap, PLAYER_COL);
 }

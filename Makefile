@@ -15,19 +15,22 @@ LINUX := -ldl -lglfw -pthread -lm
 OBJ_DIR := ./obj
 SRC_DIR := ./src
 HEADERS := libft/libft.h includes/cub3d.h includes/struct.h
-SRC :=	main.c			\
-		valid_input.c	\
-		parsing.c		\
-		check_map.c		\
-		minimap.c		\
+SRC :=	main.c				\
+		valid_input.c		\
+		parsing.c			\
+		check_map.c			\
+		minimap.c			\
+		draw_line.c			\
+		DDA.c				\
+		v2_operations.c		\
 		utils/check_line.c 	\
-		utils/clean.c	\
+		utils/clean.c		\
 		utils/ft_atof.c		\
 		utils/is_color.c	\
 		utils/prints.c		\
 		utils/to.c			\
-		utils/utils.c	\
-		mlx/start.c		\
+		utils/utils.c		\
+		mlx/start.c			\
 		mlx/hook.c			\
 		map_parse.c			\
 		nodes.c				\
@@ -42,7 +45,7 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 	@echo $(Yellow) Building.. 🏠$(Color_Off)
-	@make -C MLX42/build
+	@make -C MLX42/build/
 	@$(MAKE) -C libft bonus
 	@$(CC) -o $(NAME) $^ $(LIBSA) $(CFLAGS) $(INCLUDES) $(MACOS)
 	@echo $(Green) Complete ✅ $(Color_Off)

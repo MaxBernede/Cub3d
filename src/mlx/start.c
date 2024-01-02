@@ -7,16 +7,15 @@ int32_t	ft_pixel(int32_t r, int32_t g, int32_t b, int32_t a)
 	return (r << 24 | g << 16 | b << 8 | a);
 }
 
-#define PI 3.1415926535
-#define HALF_PI PI * 0.5
 void	init_player(t_map map, t_player *player)
 {
 	char	direction;
-	int	x;
-	int	y;
+	int		x;
+	int		y;
 
 	get_char_start(map, &y, &x);
-	direction = map.map[x][y];
+	direction = map.map[y][x];
+	printf("%d, %d, %c\n", x, y, direction);
 	if (direction == 'N')
 		player->angle = HALF_PI;
 	else if (direction == 'W')
@@ -25,13 +24,14 @@ void	init_player(t_map map, t_player *player)
 		player->angle = PI + HALF_PI;
 	else
 		player->angle = 0;
-	player->pos.x = x * map.tile_size + map.tile_size * 0.5 - 2;
-	player->pos.y = y * map.tile_size + map.tile_size * 0.5 - 2;
+	player->pos.x = x * TILE_SIZE + TILE_SIZE * 0.5;
+	player->pos.y = y * TILE_SIZE + TILE_SIZE * 0.5;
+	player->delta.x = cos(player->angle) * WALKSPEED;
+	player->delta.y = sin(player->angle) * WALKSPEED;
 }
 
 int	start(t_param *param, t_window w)
 {
-	param->map.tile_size = (1024 / param->map.height + param->map.length / 1024) * .2;
 	param->mlx = mlx_init(w.width, w.height, "cub3d", true);
 	if (!param->mlx)
 		return (ERROR);
@@ -40,6 +40,7 @@ int	start(t_param *param, t_window w)
 	if (!param->map.minimap)
 		return (mlx_close_window(param->mlx), ERROR);
 	draw_minimap(param->player, param->map);
+	DDA(param->player, param->map);
 	param->img = mlx_new_image(param->mlx, w.width, w.height);
 	if (!param->img)
 		return (mlx_close_window(param->mlx), ERROR);

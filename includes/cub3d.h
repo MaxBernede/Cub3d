@@ -7,6 +7,7 @@
 # include <fcntl.h>
 # include <stdio.h>
 # include <stdlib.h>
+# include <math.h>
 
 # define OK 0
 # define ERROR 1
@@ -38,11 +39,36 @@
 // Minimap Colors
 # define WALL_COL 0xFFFFFFFF
 # define FLOOR_COL 0x000000FF
-# define PLAYER_COL 0xFF0000FF
+# define PLAYER_COL 0x00FF00FF
 
-// draw_minimap
-void	draw_minimap(t_player player, t_map map);
-int		get_char_start(t_map map, int *y, int *x);
+// Screen stuff
+# define WIDTH 1024
+# define HEIGHT 1024
+# define TILE_SIZE 16
+
+# define WALKSPEED .25
+# define TURNSPEED .025
+
+# define PI 3.1415926535f
+# define HALF_PI PI / 2
+# define TWO_PI PI * 2
+# define THIRD_PI 3 * PI / 2
+# define ONE_DEGREE 0.0174532925f
+# define FOV 66
+
+// v2_operations.c
+t_vec2		v2_new(double x, double y);
+t_vec2		v2_mult(t_vec2 v2, double multiplier);
+t_vec2		v2_add(t_vec2 v2, t_vec2 add);
+t_vec2		v2_sub(t_vec2 v2, t_vec2 sub);
+
+// for drawing the minimap
+void		draw_minimap(t_player player, t_map map);
+int			get_char_start(t_map map, int *y, int *x);
+void		draw_line(mlx_image_t *img, t_vec2 p1, t_vec2 p2, uint32_t color);
+
+// DDA.c
+void		DDA(t_player player, t_map map);
 
 // check_map
 int			check_map(t_param *param);
