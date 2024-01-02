@@ -19,6 +19,8 @@
 # define ERR_FILE "Error: File given doesn't exist or no rights to access it\n"
 # define ERR_NOCUB "Error: File doesn't end with .cub, cannot be accepted\n"
 # define ERR_FILE_DATA "Error: File datas are not correct, exit\n"
+# define ERR_EMPTY_MAP "Error\nMap is empty\n"
+# define ERR_NO_MAP "Error\nNo map in\n"
 
 // Errors globals
 # define ERR_MLC "Error: Malloc Failed\n"
@@ -29,6 +31,7 @@
 # define ERR_OPEN_TEXTURES "Error\nCannot open textures\n"
 # define ERR_TEXTURES "Error\nTextures values error\n"
 # define ERR_FLOOR_CEILING "Error\nFloor and ceiling error\n"
+# define ERR_TYPE "Error\nParsing type data incorrect\n"
 
 // Sides Error
 # define ERR_NO "Error\nError North\n"
@@ -41,20 +44,47 @@
 # define FLOOR_COL 0x000000FF
 # define PLAYER_COL 0x00FF00FF
 
-// Screen stuff
+// Screen dimentions
 # define WIDTH 1024
 # define HEIGHT 1024
+
+// map/world tile size
 # define TILE_SIZE 16
 
+// Player variables
 # define WALKSPEED .25
 # define TURNSPEED .025
+# define FOV 66
 
+// Math for raycasting
 # define PI 3.1415926535f
 # define HALF_PI PI / 2
 # define TWO_PI PI * 2
 # define THIRD_PI 3 * PI / 2
 # define ONE_DEGREE 0.0174532925f
-# define FOV 66
+
+//Type of datas
+# define FLOOR 2
+# define CEILING 3
+# define NORTH 4
+# define SOUTH 5
+# define EAST 6
+# define WEST 7
+
+//fill_datas.c
+int		fill_texture(mlx_texture_t **texture, char *s);
+int		floor_ceiling(int type, char *arg, t_param *p);
+
+//parsing.c
+int		parse_file(char *arg, t_param *p);
+
+//gets.c
+char	**get_map(t_param *p);
+int		get_type(char *line);
+int		get_char_start(t_map map, int *y, int *x);
+
+//flood_fill.c
+int		flood_fill(t_map map, int x, int y);
 
 // v2_operations.c
 t_vec2		v2_new(double x, double y);
@@ -75,9 +105,7 @@ int			check_map(t_param *param);
 
 // check_line.c
 int			get_str_without_nl(char *line, char **sub);
-
-// parsing.c
-int			fill_datas(char *arg, t_param *param);
+char 		*get_str_no_space(char *line);
 
 //! MLX
 void		my_hook(void *param);
@@ -85,11 +113,8 @@ void		my_hook(void *param);
 //! START
 int			start(t_param *param, t_window w);
 
-t_shapes	*create_shape_node(void);
-t_shapes	*insert_shape_start(t_shapes *head, t_shapes *new_light);
-t_shapes	*insert_shape_end(t_shapes *head, t_shapes *new_light);
-void		free_shapes_list(t_shapes *head);
-void		print_shapes(t_shapes *head);
+char* concatenateStrings(char** strings, int numStrings);
+
 void		print_flood(t_map map);
 
 //! UTILS

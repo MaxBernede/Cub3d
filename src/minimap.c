@@ -6,7 +6,7 @@
 /*   By: bjacobs <bjacobs@student.codam.nl>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 22:02:49 by bjacobs           #+#    #+#             */
-/*   Updated: 2023/12/25 20:58:46 by bjacobs          ###   ########.fr       */
+/*   Updated: 2024/01/02 21:02:05 by bjacobs          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,5 +50,6 @@ void	draw_minimap(t_player player, t_map map)
 		}
 		p.y++;
 	}
+	//printf("x: %f y: %f\n", player.pos.x, player.pos.y);
 	put_square(4, player.pos, map.minimap, PLAYER_COL);
 }
