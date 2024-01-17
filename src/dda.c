@@ -1,19 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   DDA.c                                              :+:      :+:    :+:   */
+/*   dda.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bjacobs <bjacobs@student.codam.nl>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 01:45:30 by bjacobs           #+#    #+#             */
-/*   Updated: 2024/01/01 23:11:31 by bjacobs          ###   ########.fr       */
+/*   Updated: 2024/01/18 00:27:15 by bjacobs          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 #include <math.h>
-#include <stdio.h>
-#include <stdlib.h>
 
 int	init_xray(t_ray *ray, t_vec2 origin, float angle)
 {
@@ -80,29 +78,23 @@ void	cast_ray(t_ray *ray, t_map map)
 	//printf("length: %f\n", ray->length);
 }
 
-void	DDA(t_player player, t_map map)
+void	init_dda(t_dda *data, float player_angle)
 {
-	t_dda	data;
-
-	data.angle = player.angle - (ONE_DEGREE * FOV) / 2;
-	if (data.angle < 0)
-		data.angle += TWO_PI;
-	data.rays = 0;
-	while (data.rays < FOV)
-	{
-		if (!init_xray(&data.xray, player.pos, data.angle))
-			cast_ray(&data.xray, map);
-		if (!init_yray(&data.yray, player.pos, data.angle))
-			cast_ray(&data.yray, map);
-		if (data.xray.length < data.yray.length)
-			data.hit = data.xray.hit;
-		else
-			data.hit = data.yray.hit;
-		data.angle += ONE_DEGREE;
-		if (data.angle > TWO_PI)
-			data.angle -= TWO_PI;
-		//printf("close hit: x %f,  y %f\n", hit.x, hit.y);
-		draw_line(map.minimap, data.hit, player.pos, 0xFFFF00FF);
-		data.rays++;
-	}
+	data->angle = player_angle - (ONE_DEGREE * FOV) / 2;
+	if (data->angle < 0)
+		data->angle += TWO_PI;
+	data->rays = 0;
 }
+
+void	dda(t_dda *data, t_vec2 player_pos, t_map map)
+{
+		if (!init_xray(&data->xray, player_pos, data->angle))
+			cast_ray(&data->xray, map);
+		if (!init_yray(&data->yray, player_pos, data->angle))
+			cast_ray(&data->yray, map);
+		if (data->xray.length < data->yray.length)
+			data->hit_ray = data->xray;
+		else
+			data->hit_ray = data->yray;
+}
+

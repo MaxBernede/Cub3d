@@ -46,7 +46,10 @@
 
 // Screen dimentions
 # define WIDTH 1024
-# define HEIGHT 1024
+# define HEIGHT 512
+# define MIDDLE_SCREEN HEIGHT / 2
+# define LINE_WITDH WIDTH / FOV
+
 
 // map/world tile size
 # define TILE_SIZE 16
@@ -98,7 +101,11 @@ int			get_char_start(t_map map, int *y, int *x);
 void		draw_line(mlx_image_t *img, t_vec2 p1, t_vec2 p2, uint32_t color);
 
 // DDA.c
-void		DDA(t_player player, t_map map);
+void		init_dda(t_dda *data, float player_angle);
+void		dda(t_dda *data, t_vec2 player_pos, t_map map);
+
+// renderer.c
+void		renderer(t_player player, t_map map, mlx_image_t *reality);
 
 // check_map
 int			check_map(t_param *param);

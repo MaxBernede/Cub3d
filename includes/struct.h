@@ -35,7 +35,7 @@ typedef struct s_dda_data
 {
 	t_ray	xray;
 	t_ray	yray;
-	t_vec2	hit;
+	t_ray	hit_ray;
 	float	angle;
 	int		rays;
 }			t_dda;

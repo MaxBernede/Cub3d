@@ -35,16 +35,16 @@ int	start(t_param *param, t_window w)
 	param->mlx = mlx_init(w.width, w.height, "cub3d", true);
 	if (!param->mlx)
 		return (ERROR);
-	init_player(param->map, &param->player);
 	param->map.minimap = mlx_new_image(param->mlx, w.width, w.height);
 	if (!param->map.minimap)
 		return (mlx_close_window(param->mlx), ERROR);
-	draw_minimap(param->player, param->map);
-	DDA(param->player, param->map);
 	param->img = mlx_new_image(param->mlx, w.width, w.height);
 	if (!param->img)
 		return (mlx_close_window(param->mlx), ERROR);
-	for (int y = 0; y < w.height; ++y)
+	init_player(param->map, &param->player);
+	draw_minimap(param->player, param->map);
+	renderer(param->player, param->map, param->img);
+	/*for (int y = 0; y < w.height; ++y)
 	{
 		for (int x = 0; x < w.width; ++x)
 		{
@@ -53,7 +53,7 @@ int	start(t_param *param, t_window w)
 			int b = 0;
 			mlx_put_pixel(param->img, x, y, ft_pixel(r, g, b, 255));
 		}
-	}
+	} */
 	if (mlx_image_to_window(param->mlx, param->img, 0, 0) == -1
 		|| mlx_image_to_window(param->mlx, param->map.minimap, 0, 0) == -1)
 	{
