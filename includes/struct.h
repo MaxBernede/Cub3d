@@ -101,7 +101,8 @@ typedef struct s_param
 	t_player		player;
 
 	mlx_t			*mlx;
-	mlx_image_t		*img;
+	mlx_image_t		*wall_img;
+	mlx_image_t		*background;
 	t_window		window;
 	t_shapes		*shapes;
 }					t_param;

@@ -47,9 +47,12 @@
 // Screen dimentions
 # define WIDTH 1024
 # define HEIGHT 512
-# define MIDDLE_SCREEN HEIGHT / 2
-# define LINE_WITDH WIDTH / FOV
 
+// Rendering Variables
+# define HALF_HEIGHT HEIGHT / 2
+# define SHARPNESS 2
+# define RAY_AMOUNT FOV * SHARPNESS
+# define LINE_WITDH WIDTH / (RAY_AMOUNT)
 
 // map/world tile size
 # define TILE_SIZE 16
@@ -57,7 +60,7 @@
 // Player variables
 # define WALKSPEED .25
 # define TURNSPEED .025
-# define FOV 66
+# define FOV 64
 
 // Math for raycasting
 # define PI 3.1415926535f
@@ -65,6 +68,7 @@
 # define TWO_PI PI * 2
 # define THIRD_PI 3 * PI / 2
 # define ONE_DEGREE 0.0174532925f
+# define DEGREE_STEP ONE_DEGREE / SHARPNESS
 
 //Type of datas
 # define FLOOR 2

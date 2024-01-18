@@ -66,7 +66,6 @@ void	my_hook(void *param)
 		if (mlx_is_key_down(p->mlx, MLX_KEY_D))
 			change_player_angle(&p->player, 1);
 		//printf("player x: %f, player y: %f player angle: %f\n", p->player.pos.x, p->player.pos.y, p->player.angle);
-		draw_minimap(p->player, p->map);
-		renderer(p->player, p->map, p->img);
+		renderer(p->player, p->map, p->wall_img);
 	}
 }

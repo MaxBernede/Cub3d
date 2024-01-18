@@ -30,6 +30,34 @@ void	init_player(t_map map, t_player *player)
 	player->delta.y = sin(player->angle) * WALKSPEED;
 }
 
+void	draw_background(mlx_image_t *background, uint32_t floor_color, uint32_t roof_color)
+{
+	int	x;
+	int	y;
+
+	x = 0;
+	while (x < WIDTH / 2)
+	{
+		y = 0;
+		while (y < HALF_HEIGHT)
+		{
+			mlx_put_pixel(background, x, y, floor_color);
+			y++;
+		}
+		x++;
+	}
+	while (x < WIDTH)
+	{
+		y = HALF_HEIGHT + 1;
+		while (y < HEIGHT)
+		{
+			mlx_put_pixel(background, x, y, roof_color);
+			y++;
+		}
+		x++;
+	}
+}
+
 int	start(t_param *param, t_window w)
 {
 	param->mlx = mlx_init(w.width, w.height, "cub3d", true);
@@ -38,12 +66,15 @@ int	start(t_param *param, t_window w)
 	param->map.minimap = mlx_new_image(param->mlx, w.width, w.height);
 	if (!param->map.minimap)
 		return (mlx_close_window(param->mlx), ERROR);
-	param->img = mlx_new_image(param->mlx, w.width, w.height);
-	if (!param->img)
+	param->wall_img = mlx_new_image(param->mlx, w.width, w.height);
+	if (!param->wall_img)
+		return (mlx_close_window(param->mlx), ERROR);
+	param->background = mlx_new_image(param->mlx, w.width, w.height);
+	if (!param->background)
 		return (mlx_close_window(param->mlx), ERROR);
 	init_player(param->map, &param->player);
-	draw_minimap(param->player, param->map);
-	renderer(param->player, param->map, param->img);
+	draw_background(param->background, ft_pixel(param->floor.r, param->floor.g, param->floor.b, 255), ft_pixel(param->ceiling.r, param->ceiling.g, param->ceiling.b, 255));
+	renderer(param->player, param->map, param->wall_img);
 	/*for (int y = 0; y < w.height; ++y)
 	{
 		for (int x = 0; x < w.width; ++x)
@@ -51,11 +82,12 @@ int	start(t_param *param, t_window w)
 			int r = x / 2;
 			int g = y / 2;
 			int b = 0;
-			mlx_put_pixel(param->img, x, y, ft_pixel(r, g, b, 255));
+			mlx_put_pixel(param->wall_img, x, y, ft_pixel(r, g, b, 255));
 		}
 	} */
-	if (mlx_image_to_window(param->mlx, param->img, 0, 0) == -1
-		|| mlx_image_to_window(param->mlx, param->map.minimap, 0, 0) == -1)
+	if (mlx_image_to_window(param->mlx, param->wall_img, 0, 0) == -1
+		|| mlx_image_to_window(param->mlx, param->map.minimap, 0, 0) == -1
+		|| mlx_image_to_window(param->mlx, param->background, 0, 0) == -1)
 	{
 		mlx_close_window(param->mlx);
 		puts(mlx_strerror(mlx_errno));

@@ -1,12 +1,12 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         ::::::::             #
-#    Makefile                                           :+:    :+:             #
+#    Makefile                                           :+:      :+:    :+:    #
 #                                                      +:+                     #
 #    By: maxb <maxb@student.42.fr>                    +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/10/07 10:45:43 by mbernede      #+#    #+#                  #
-#    Updated: 2023/11/25 21:03:23 by maxb          ########   odam.nl          #
+#    Updated: 2024/01/18 17:28:31 by bjacobs          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,7 @@ RM 		:= 		rm -f
 
 NAME	:=		libft.a
 
-CFLAGS	:=		-Wall -Werror -Wextra
+CFLAGS	:=		-Wall -Werror -Wextra -fPIE
 
 CC		:= 		cc
 
