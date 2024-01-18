@@ -36,22 +36,23 @@ void	draw_background(mlx_image_t *background, uint32_t floor_color, uint32_t roo
 	int	y;
 
 	x = 0;
-	while (x < WIDTH / 2)
+	while (x < WIDTH)
 	{
 		y = 0;
 		while (y < HALF_HEIGHT)
 		{
-			mlx_put_pixel(background, x, y, floor_color);
+			mlx_put_pixel(background, x, y, roof_color);
 			y++;
 		}
 		x++;
 	}
+	x = 0;
 	while (x < WIDTH)
 	{
-		y = HALF_HEIGHT + 1;
+		y = HALF_HEIGHT;
 		while (y < HEIGHT)
 		{
-			mlx_put_pixel(background, x, y, roof_color);
+			mlx_put_pixel(background, x, y, floor_color);
 			y++;
 		}
 		x++;
@@ -63,14 +64,14 @@ int	start(t_param *param, t_window w)
 	param->mlx = mlx_init(w.width, w.height, "cub3d", true);
 	if (!param->mlx)
 		return (ERROR);
-	param->map.minimap = mlx_new_image(param->mlx, w.width, w.height);
-	if (!param->map.minimap)
+	param->background = mlx_new_image(param->mlx, w.width, w.height);
+	if (!param->background)
 		return (mlx_close_window(param->mlx), ERROR);
 	param->wall_img = mlx_new_image(param->mlx, w.width, w.height);
 	if (!param->wall_img)
 		return (mlx_close_window(param->mlx), ERROR);
-	param->background = mlx_new_image(param->mlx, w.width, w.height);
-	if (!param->background)
+	param->map.minimap = mlx_new_image(param->mlx, w.width, w.height);
+	if (!param->map.minimap)
 		return (mlx_close_window(param->mlx), ERROR);
 	init_player(param->map, &param->player);
 	draw_background(param->background, ft_pixel(param->floor.r, param->floor.g, param->floor.b, 255), ft_pixel(param->ceiling.r, param->ceiling.g, param->ceiling.b, 255));
@@ -85,9 +86,9 @@ int	start(t_param *param, t_window w)
 			mlx_put_pixel(param->wall_img, x, y, ft_pixel(r, g, b, 255));
 		}
 	} */
-	if (mlx_image_to_window(param->mlx, param->wall_img, 0, 0) == -1
-		|| mlx_image_to_window(param->mlx, param->map.minimap, 0, 0) == -1
-		|| mlx_image_to_window(param->mlx, param->background, 0, 0) == -1)
+	if (mlx_image_to_window(param->mlx, param->background, 0, 0) == -1
+		|| mlx_image_to_window(param->mlx, param->wall_img, 0, 0) == -1
+		|| mlx_image_to_window(param->mlx, param->map.minimap, 0, 0) == -1)
 	{
 		mlx_close_window(param->mlx);
 		puts(mlx_strerror(mlx_errno));
