@@ -42,6 +42,7 @@
 // Minimap Colors
 # define WALL_COL 0xFFFFFFFF
 # define FLOOR_COL 0x000000FF
+# define NO_FLOOR_COL 0x808080FF
 # define PLAYER_COL 0x00FF00FF
 
 // Screen dimentions
@@ -52,17 +53,16 @@
 # define HALF_HEIGHT HEIGHT / 2
 # define SHARPNESS 2
 # define RAY_AMOUNT FOV * SHARPNESS
-# define LINE_WITDH WIDTH / (RAY_AMOUNT)
 
 // map/world tile size
 # define TILE_SIZE 16
 
 // Player variables
-# define WALKSPEED .25
-# define TURNSPEED .025
+# define WALKSPEED 15
+# define TURNSPEED 1.5
 # define FOV 64
 
-// Math for raycasting
+// Math for raycasting & rendering
 # define PI 3.1415926535f
 # define HALF_PI PI / 2
 # define TWO_PI PI * 2
@@ -79,19 +79,19 @@
 # define WEST 7
 
 //fill_datas.c
-int		fill_texture(mlx_texture_t **texture, char *s);
-int		floor_ceiling(int type, char *arg, t_param *p);
+int			fill_texture(mlx_texture_t **texture, char *s);
+int			floor_ceiling(int type, char *arg, t_param *p);
 
 //parsing.c
-int		parse_file(char *arg, t_param *p);
+int			parse_file(char *arg, t_param *p);
 
 //gets.c
-char	**get_map(t_param *p);
-int		get_type(char *line);
-int		get_char_start(t_map map, int *y, int *x);
+char		**get_map(t_param *p);
+int			get_type(char *line);
+int			get_char_start(t_map map, int *y, int *x);
 
 //flood_fill.c
-int		flood_fill(t_map map, int x, int y);
+int			flood_fill(t_map map, int x, int y);
 
 // v2_operations.c
 t_vec2		v2_new(double x, double y);
@@ -100,7 +100,6 @@ t_vec2		v2_add(t_vec2 v2, t_vec2 add);
 t_vec2		v2_sub(t_vec2 v2, t_vec2 sub);
 
 // for drawing the minimap
-void		draw_minimap(t_player player, t_map map);
 int			get_char_start(t_map map, int *y, int *x);
 void		draw_line(mlx_image_t *img, t_vec2 p1, t_vec2 p2, uint32_t color);
 
@@ -124,7 +123,7 @@ void		my_hook(void *param);
 //! START
 int			start(t_param *param, t_window w);
 
-char* concatenateStrings(char** strings, int numStrings);
+char*		concatenateStrings(char** strings, int numStrings);
 
 void		print_flood(t_map map);
 

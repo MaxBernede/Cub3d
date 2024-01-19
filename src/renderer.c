@@ -16,27 +16,72 @@ void	clear_img(mlx_image_t *img)
 	}
 }
 
+void	draw_square(int size, t_vec2 p, mlx_image_t *img, uint32_t color)
+{
+	int	x;
+	int	y;
+
+	x = 0;
+	while (x < size)
+	{
+		y = 0;
+		while (y < size)
+		{
+			if (p.x + y < 1023 && p.x + y >= 0 && p.y + x < 1023 && p.y + x >= 0)
+				mlx_put_pixel(img, p.x + y, p.y + x, color);
+			y++;
+		}
+		x++;
+	}
+}
+
 void	draw_wall(mlx_image_t *img, float ray_length, int xoffset, uint32_t color)
 {
-	int	i;
-	int	j;
+	int	x;
+	int	y;
 	int	line_height;
+	int	line_width;
 
-	i = 0;
-	line_height = HEIGHT / ray_length * 4;
+	x = 0;
+	line_height = (HEIGHT * 7) / ray_length;
 	if (line_height > HEIGHT)
 		line_height = HEIGHT;
-	printf("Line Width: %d\n", LINE_WITDH * RAY_AMOUNT);
-	while (i < LINE_WITDH)
+	line_width = WIDTH / (RAY_AMOUNT);
+	if (!line_width)
+		line_width = 1;
+	while (x < line_width)
 	{
-		j = 0;
-		while (j < line_height)
+		y = 0;
+		while (y < line_height)
 		{
-			mlx_put_pixel(img, LINE_WITDH * xoffset + i, j + HALF_HEIGHT - line_height / 2, color);
-			j++;
+			mlx_put_pixel(img, line_width * xoffset + x, y + HALF_HEIGHT - line_height / 2, color);
+			y++;
 		}
-		i++;
+		x++;
 	}
+}
+
+void	draw_minimap(t_player player, t_map map)
+{
+	t_vec2	p;
+
+	p.y = 0;
+	while (p.y < map.height)
+	{
+		p.x = 0;
+		while (p.x < map.length)
+		{
+			if (map.map[(int)p.y][(int)p.x]  == '1')
+				draw_square(TILE_SIZE, v2_mult(p, TILE_SIZE), map.minimap, WALL_COL);
+			else if (ft_strchr("0NWSE", map.map[(int)p.y][(int)p.x]))
+				draw_square(TILE_SIZE, v2_mult(p, TILE_SIZE), map.minimap, FLOOR_COL);
+			else
+				draw_square(TILE_SIZE, v2_mult(p, TILE_SIZE), map.minimap, NO_FLOOR_COL);
+			p.x++;
+		}
+		p.y++;
+	}
+	//printf("x: %f y: %f\n", player.pos.x, player.pos.y);
 }
 
 void	renderer(t_player player, t_map map, mlx_image_t *reality)
@@ -60,4 +105,5 @@ void	renderer(t_player player, t_map map, mlx_image_t *reality)
 		draw_line(map.minimap, data.hit_ray.hit, player.pos, 0xFFFF00FF);
 		data.rays++;
 	}
+	draw_square(4, v2_sub(player.pos, v2_new(2, 2)), map.minimap, PLAYER_COL);
 }

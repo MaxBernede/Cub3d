@@ -23,7 +23,6 @@ SRC :=	main.c				\
 		valid_input.c		\
 		parsing.c			\
 		check_map.c			\
-		minimap.c			\
 		renderer.c			\
 		draw_line.c			\
 		dda.c				\

@@ -13,7 +13,7 @@ bool	movement_key_down(mlx_t *mlx)
 	return (false);
 }
 
-void	move_player(t_player *player, char **map, int direction)
+void	move_player(t_player *player, char **map, int direction, double dt)
 {
 	t_vec2	offset;
 	int		mapo;
@@ -30,16 +30,16 @@ void	move_player(t_player *player, char **map, int direction)
 	map_index = player->pos.y / TILE_SIZE;
 	mapo = (player->pos.x + offset.x * -direction) / TILE_SIZE;
 	if (ft_strchr("0NSEW", map[map_index][mapo]))
-		player->pos.x += player->delta.x * direction;
+		player->pos.x += player->delta.x * direction * dt;
 	map_index = player->pos.x / TILE_SIZE;
 	mapo = (player->pos.y + offset.y * -direction) / TILE_SIZE;
 	if (ft_strchr("0NSEW", map[mapo][map_index]))
-		player->pos.y += player->delta.y * direction;
+		player->pos.y += player->delta.y * direction * dt;
 }
 
-void	change_player_angle(t_player *player, int direction)
+void	change_player_angle(t_player *player, int direction, double dt)
 {
-	player->angle += TURNSPEED * direction;
+	player->angle += TURNSPEED * direction * dt;
 	if (player->angle < 0)
 		player->angle += TWO_PI;
 	else if (player->angle > TWO_PI)
@@ -58,13 +58,13 @@ void	my_hook(void *param)
 	else if (movement_key_down(p->mlx))
 	{
 		if (mlx_is_key_down(p->mlx, MLX_KEY_W))
-			move_player(&p->player, p->map.map, -1);
+			move_player(&p->player, p->map.map, -1, p->mlx->delta_time);
 		if (mlx_is_key_down(p->mlx, MLX_KEY_S))
-			move_player(&p->player, p->map.map, 1);
+			move_player(&p->player, p->map.map, 1, p->mlx->delta_time);
 		if (mlx_is_key_down(p->mlx, MLX_KEY_A))
-			change_player_angle(&p->player, -1);
+			change_player_angle(&p->player, -1, p->mlx->delta_time);
 		if (mlx_is_key_down(p->mlx, MLX_KEY_D))
-			change_player_angle(&p->player, 1);
+			change_player_angle(&p->player, 1, p->mlx->delta_time);
 		//printf("player x: %f, player y: %f player angle: %f\n", p->player.pos.x, p->player.pos.y, p->player.angle);
 		renderer(p->player, p->map, p->wall_img);
 	}
