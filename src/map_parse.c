@@ -6,7 +6,7 @@
 /*   By: maxb <maxb@student.42.fr>                    +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/26 12:27:02 by maxb          #+#    #+#                 */
-/*   Updated: 2023/12/04 17:54:01 by maxb          ########   odam.nl         */
+/*   Updated: 2024/01/23 16:46:10 by maxb          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,9 +81,10 @@ int	parse_map(char *line, t_param *p)
 	split = ft_split(sub, ' ');
 	if (!split)
 		return (free(line), free(sub), ERROR);
-	//below line means : if arrlen == 1 means it will start parsing the map, but before i check
-	//if there is textures for all the walls otherwise no need to parse
-	if (ft_2d_arrlen(split) == 1 && (full_textures(p) || fill_map(sub, p)))
+	//this will exit when catching a parameter like NO,SO,EA,WE,F,C
+	if (get_type_no_space(split[0]) != ERROR)
+		return (ft_2dfree(split), OK);
+	if (full_textures(p) || fill_map(sub, p))
 		return (ft_2dfree(split), ERROR);
 	ft_2dfree(split);
 	// Check below means the map have been filled,so we can check the validity of the map

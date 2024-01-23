@@ -88,6 +88,7 @@ int			parse_file(char *arg, t_param *p);
 //gets.c
 char		**get_map(t_param *p);
 int			get_type(char *line);
+int			get_type_no_space(char *line);
 int			get_char_start(t_map map, int *y, int *x);
 
 //flood_fill.c

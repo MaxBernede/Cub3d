@@ -39,6 +39,23 @@ int get_type(char *line)
 	return (ERROR);
 }
 
+int get_type_no_space(char *line)
+{
+	if (!ft_strncmp("F", line, 2))
+		return (FLOOR);
+	if (!ft_strncmp("C", line, 2))
+		return (CEILING);
+	if (!ft_strncmp("NO", line, 3))
+		return (NORTH);
+	if (!ft_strncmp("SO", line, 3))
+		return (SOUTH);
+	if (!ft_strncmp("EA", line, 3))
+		return (EAST);
+	if (!ft_strncmp("WE", line, 3))
+		return (WEST);
+	return (ERROR);
+}
+
 int	get_char_start(t_map map, int *y, int *x)
 {
 	*y = 0;
