@@ -41,17 +41,26 @@ int get_type(char *line)
 
 int get_type_no_space(char *line)
 {
-	if (!ft_strncmp("F", line, 2))
+	int i;
+
+	if (!line)
+		return (ERROR);
+	i = ft_strlen(line);
+	if (i < 1)
+		return (ERROR);
+	if (!ft_strncmp("F", line, 1))
 		return (FLOOR);
-	if (!ft_strncmp("C", line, 2))
+	if (!ft_strncmp("C", line, 1))
 		return (CEILING);
-	if (!ft_strncmp("NO", line, 3))
+	if (i < 2)
+		return (ERROR);
+	if (!ft_strncmp("NO", line, 2))
 		return (NORTH);
-	if (!ft_strncmp("SO", line, 3))
+	if (!ft_strncmp("SO", line, 2))
 		return (SOUTH);
-	if (!ft_strncmp("EA", line, 3))
+	if (!ft_strncmp("EA", line, 2))
 		return (EAST);
-	if (!ft_strncmp("WE", line, 3))
+	if (!ft_strncmp("WE", line, 2))
 		return (WEST);
 	return (ERROR);
 }

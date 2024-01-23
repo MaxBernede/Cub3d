@@ -26,20 +26,25 @@ int	check_line(char *line, t_param *param)
 {
 	char	*sub;
 	int		type;
+	char	**split;
 
 	if (get_str_without_nl(line, &sub))
 		return (OK);
-	type = get_type(sub);
+	split = ft_split(sub, ' ');
+	if (!split)
+		return (printf(ERR_MLC), ERROR);
+	type = get_type_no_space(split[0]);
 	if (type == ERROR)
-		return (printf(ERR_TYPE), ERROR);
+		return (ft_2dfree(split), printf(ERR_TYPE), ERROR);
 	sub = get_str_no_space(sub);
 	if (!sub)
-		return (printf(ERR_MLC), ERROR);
+		return (ft_2dfree(split), printf(ERR_MLC), ERROR);
 	if ((type == FLOOR || type == CEILING) && floor_ceiling(type, sub, param))
-		return (free(sub), ERROR);
+		return (ft_2dfree(split), free(sub), ERROR);
 	else if (type >= NORTH && side_textures(type, sub, param))
-		return (free(sub), ERROR);
+		return (ft_2dfree(split), free(sub), ERROR);
 	free(sub);
+	ft_2dfree(split);
 	return (OK);
 }
 
@@ -58,7 +63,7 @@ int	parse_file(char *arg, t_param *p)
 		return (printf(ERR_EMPTY_MAP), ERROR);
 	while (line)
 	{
-		if (parse_map(line, p))
+		if (!p->end_map_parse && parse_map(line, p))
 			return (printf(ERR_FILL_MAP), close(p->fd), ERROR);
 		if (!p->end_map_parse && check_line(line, p))
 			return (free(line), printf(ERR_FILE_DATA), close(p->fd), ERROR);

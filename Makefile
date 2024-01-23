@@ -35,6 +35,7 @@ SRC :=	main.c				\
 		utils/to.c			\
 		utils/utils.c		\
 		utils/concat_2d.c	\
+		utils/normalize.c	\
 		fill_datas.c		\
 		mlx/start.c			\
 		mlx/hook.c			\

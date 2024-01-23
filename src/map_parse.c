@@ -6,11 +6,43 @@
 /*   By: maxb <maxb@student.42.fr>                    +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/26 12:27:02 by maxb          #+#    #+#                 */
-/*   Updated: 2024/01/23 16:46:10 by maxb          ########   odam.nl         */
+/*   Updated: 2024/01/23 19:33:40 by maxb          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+int last_position(char *str)
+{
+    char *set = "10NEWS";
+    int lastPos = -1;
+
+	//printf("str: %s\n", str);
+    for (int i = 0; str[i] != '\0'; ++i)
+	{
+        if (ft_strchr(set, str[i]))
+            lastPos = i + 1;
+    }
+	//printf("lastPos: %d\n", lastPos);
+    return lastPos;
+}
+
+int check_map_length( t_param *p)
+{
+	int length;
+	t_node *tmp;
+
+	length = 0;
+	tmp = p->tmp_map;
+	while (tmp)
+	{
+		length = last_position(tmp->line);
+		if (length > p->map.length)
+			p->map.length = length;
+		tmp = tmp->next;
+	}
+	return (p->map.length);
+}
 
 int full_textures(t_param *p)
 {
@@ -48,14 +80,24 @@ int	fill_map(char *sub, t_param *p)
 	t_map	*map;
 
 	map = &p->map;
-	if (sub && map->length < 0)
-		map->length = ft_strlen(sub);
+	// if (sub && map->length < 0)
+	// 	map->length = ft_strlen(sub);
+	// while (sub)
+	// {
+	// 	if (ft_strlen(sub) != map->length || insert_node(&p->tmp_map, sub))
+	// 		return (ft_free_lst(p->tmp_map), free(sub), ERROR);
+	// 	sub = read_new_line(sub, p);
+	// }
+	//!NEW
 	while (sub)
 	{
-		if (ft_strlen(sub) != map->length || insert_node(&p->tmp_map, sub))
+		if (insert_node(&p->tmp_map, sub))
 			return (ft_free_lst(p->tmp_map), free(sub), ERROR);
 		sub = read_new_line(sub, p);
 	}
+	map->length = check_map_length(p);
+	normalize_map(p);
+	//!END
 	p->map.map = get_map(p);
 	if (!p->map.map)
 		return (ERROR);

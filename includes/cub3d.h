@@ -135,6 +135,9 @@ void		clean_everything(t_param *param);
 // ft_atof.c
 double		ft_atof(char *nptr);
 
+//normalize.c
+void		normalize_map(t_param *p);
+
 // to.c
 int			to_decimal(char *s, double *f);
 
