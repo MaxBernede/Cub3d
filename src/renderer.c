@@ -76,7 +76,10 @@ void	draw_minimap(t_player player, t_map map)
 			else if (ft_strchr("0NWSE", map.map[(int)p.y][(int)p.x]))
 				draw_square(TILE_SIZE, v2_mult(p, TILE_SIZE), map.minimap, FLOOR_COL);
 			else
-				draw_square(TILE_SIZE, v2_mult(p, TILE_SIZE), map.minimap, NO_FLOOR_COL);
+			{
+				;
+				//draw_square(TILE_SIZE, v2_mult(p, TILE_SIZE), map.minimap, NO_FLOOR_COL);
+			}
 			p.x++;
 		}
 		p.y++;

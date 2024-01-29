@@ -68,6 +68,7 @@ int	start(t_param *param, t_window w)
 	if (!param->background)
 		return (mlx_close_window(param->mlx), ERROR);
 	param->wall_img = mlx_new_image(param->mlx, w.width, w.height);
+	//! should we free background aswell in case of error ?
 	if (!param->wall_img)
 		return (mlx_close_window(param->mlx), ERROR);
 	param->map.minimap = mlx_new_image(param->mlx, w.width, w.height);
