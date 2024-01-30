@@ -40,8 +40,7 @@
 # define ERR_WE "Error\nError West\n"
 
 // Minimap Colors
-# define WALL_COL 0xFFFFFFFF
-# define FLOOR_COL 0x000000FF
+# define WALL_COL 0xFFFFFF5A
 # define NO_FLOOR_COL 0x808080FF
 # define PLAYER_COL 0x00FF00FF
 
@@ -59,7 +58,7 @@
 
 // Rendering Variables
 # define HALF_HEIGHT HEIGHT / 2
-# define SHARPNESS 2
+# define SHARPNESS 8
 # define RAY_AMOUNT FOV * SHARPNESS
 
 // Math for raycasting & rendering

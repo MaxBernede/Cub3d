@@ -78,7 +78,10 @@ void	draw_minimap(t_player player, t_map map)
 			else if (ft_strchr("0NWSE", map.map[(int)p.y][(int)p.x]))
 				draw_square(TILE_SIZE, v2_mult(p, TILE_SIZE), map.minimap, map.floor_color);
 			else
-				draw_square(TILE_SIZE, v2_mult(p, TILE_SIZE), map.minimap, NO_FLOOR_COL);
+			{
+				;
+				//draw_square(TILE_SIZE, v2_mult(p, TILE_SIZE), map.minimap, NO_FLOOR_COL);
+			}
 			p.x++;
 		}
 		p.y++;
@@ -107,5 +110,5 @@ void	renderer(t_player player, t_map map, mlx_image_t *reality)
 		draw_line(map.minimap, data.hit_ray.hit, player.pos, 0xFFFF00FF);
 		data.rays++;
 	}
-	draw_square(4, v2_sub(player.pos, v2_new(2, 2)), map.minimap, player.color);
+	draw_square(4, v2_sub(player.pos, v2_new(2, 2)), map.minimap, PLAYER_COL);
 }

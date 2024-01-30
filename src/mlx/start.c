@@ -26,7 +26,6 @@ void	init_player(t_map map, t_player *player, t_color floor)
 	player->pos.y = y * TILE_SIZE + TILE_SIZE * 0.5;
 	player->delta.x = cos(player->angle) * WALKSPEED;
 	player->delta.y = sin(player->angle) * WALKSPEED;
-	player->color = ft_pixel(255 - floor.r, 255 - floor.g, 255 - floor.b, 255);
 }
 
 void	draw_background(mlx_image_t *background, uint32_t floor_color, uint32_t roof_color)
@@ -59,12 +58,13 @@ int	start(t_param *param, t_window w)
 	if (!param->background)
 		return (mlx_close_window(param->mlx), ERROR);
 	param->wall_img = mlx_new_image(param->mlx, w.width, w.height);
+	//! should we free background aswell in case of error ?
 	if (!param->wall_img)
 		return (mlx_close_window(param->mlx), ERROR);
 	param->map.minimap = mlx_new_image(param->mlx, w.width, w.height);
 	if (!param->map.minimap)
 		return (mlx_close_window(param->mlx), ERROR);
-	param->map.floor_color = ft_pixel(param->floor.r, param->floor.g, param->floor.b, 255);
+	param->map.floor_color = ft_pixel(param->floor.r, param->floor.g, param->floor.b, 90);
 	init_player(param->map, &param->player, param->floor);
 	draw_background(param->background, ft_pixel(param->floor.r, param->floor.g, param->floor.b, 255), ft_pixel(param->ceiling.r, param->ceiling.g, param->ceiling.b, 255));
 	renderer(param->player, param->map, param->wall_img);
