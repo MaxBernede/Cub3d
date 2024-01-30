@@ -49,18 +49,18 @@
 # define WIDTH 1024
 # define HEIGHT 512
 
-// Rendering Variables
-# define HALF_HEIGHT HEIGHT / 2
-# define SHARPNESS 2
-# define RAY_AMOUNT FOV * SHARPNESS
-
 // map/world tile size
-# define TILE_SIZE 16
+# define TILE_SIZE 8
 
 // Player variables
 # define WALKSPEED 15
 # define TURNSPEED 1.5
 # define FOV 64
+
+// Rendering Variables
+# define HALF_HEIGHT HEIGHT / 2
+# define SHARPNESS 2
+# define RAY_AMOUNT FOV * SHARPNESS
 
 // Math for raycasting & rendering
 # define PI 3.1415926535f

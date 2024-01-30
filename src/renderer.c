@@ -4,10 +4,12 @@ void	clear_img(mlx_image_t *img)
 {
 	uint32_t	i;
 	uint32_t	j;
+	uint32_t	pixels;
 
 	i = 0;
 	j = 3;
-	while (i < img->width * img->height)
+	pixels = img->width * img->height;
+	while (i < pixels)
 	{
 		if (img->pixels[j])
 			img->pixels[j] = 0;
@@ -74,7 +76,7 @@ void	draw_minimap(t_player player, t_map map)
 			if (map.map[(int)p.y][(int)p.x]  == '1')
 				draw_square(TILE_SIZE, v2_mult(p, TILE_SIZE), map.minimap, WALL_COL);
 			else if (ft_strchr("0NWSE", map.map[(int)p.y][(int)p.x]))
-				draw_square(TILE_SIZE, v2_mult(p, TILE_SIZE), map.minimap, FLOOR_COL);
+				draw_square(TILE_SIZE, v2_mult(p, TILE_SIZE), map.minimap, map.floor_color);
 			else
 				draw_square(TILE_SIZE, v2_mult(p, TILE_SIZE), map.minimap, NO_FLOOR_COL);
 			p.x++;
@@ -105,5 +107,5 @@ void	renderer(t_player player, t_map map, mlx_image_t *reality)
 		draw_line(map.minimap, data.hit_ray.hit, player.pos, 0xFFFF00FF);
 		data.rays++;
 	}
-	draw_square(4, v2_sub(player.pos, v2_new(2, 2)), map.minimap, PLAYER_COL);
+	draw_square(4, v2_sub(player.pos, v2_new(2, 2)), map.minimap, player.color);
 }

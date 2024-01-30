@@ -6,7 +6,7 @@
 /*   By: bjacobs <bjacobs@student.codam.nl>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 01:45:30 by bjacobs           #+#    #+#             */
-/*   Updated: 2024/01/18 17:50:38 by bjacobs          ###   ########.fr       */
+/*   Updated: 2024/01/26 19:59:16 by bjacobs          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,12 @@ int	init_xray(t_ray *ray, t_vec2 origin, float angle)
 	ray->origin = origin;
 	if (angle < PI) // looking up
 	{
-		ray->hit.y = (((int)ray->origin.y >> 4) << 4) - 0.0001;
+		ray->hit.y = (((int)ray->origin.y >> 3) << 3) - 0.0001;
 		ray->ray_step.y = -TILE_SIZE;
 	}
 	else // otherwise looking down
 	{
-		ray->hit.y = (((int)ray->origin.y >> 4) << 4) + TILE_SIZE;
+		ray->hit.y = (((int)ray->origin.y >> 3) << 3) + TILE_SIZE;
 		ray->ray_step.y = TILE_SIZE;
 	}
 	ray->hit.x = (ray->hit.y - ray->origin.y) * atan + ray->origin.x;
@@ -46,12 +46,12 @@ int	init_yray(t_ray *ray, t_vec2 origin, float angle)
 	ray->origin = origin;
 	if (angle < HALF_PI  ||  angle > THIRD_PI) // looking left
 	{
-		ray->hit.x = (((int)ray->origin.x >> 4) << 4) - 0.0001;
+		ray->hit.x = (((int)ray->origin.x >> 3) << 3) - 0.0001;
 		ray->ray_step.x = -TILE_SIZE;
 	}
 	else // otherwise looking right
 	{
-		ray->hit.x = (((int)ray->origin.x >> 4) << 4) + TILE_SIZE;
+		ray->hit.x = (((int)ray->origin.x >> 3) << 3) + TILE_SIZE;
 		ray->ray_step.x = TILE_SIZE;
 	}
 	ray->hit.y = (ray->hit.x - ray->origin.x) * atan + ray->origin.y;
@@ -64,14 +64,14 @@ void	cast_ray(t_ray *ray, t_map map)
 	int	mapx;
 	int	mapy;
 
-	mapx = (int)ray->hit.x >> 4;
-	mapy = (int)ray->hit.y >> 4;
+	mapx = (int)ray->hit.x >> 3;
+	mapy = (int)ray->hit.y >> 3;
 	while (mapy < map.height && mapx < map.length && mapy >= 0 && mapx >= 0 && map.map[mapy][mapx] != '1')
 	{
 		ray->hit.y += ray->ray_step.y;
 		ray->hit.x += ray->ray_step.x;
-		mapx = (int)ray->hit.x >> 4;
-		mapy = (int)ray->hit.y >> 4;
+		mapx = (int)ray->hit.x >> 3;
+		mapy = (int)ray->hit.y >> 3;
 	}
 	ray->length = sqrt((ray->origin.x - ray->hit.x) * (ray->origin.x - ray->hit.x)
 					+ (ray->origin.y - ray->hit.y) * (ray->origin.y - ray->hit.y));

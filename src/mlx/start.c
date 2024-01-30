@@ -1,13 +1,11 @@
 #include "../../includes/cub3d.h"
-#include <stdint.h>
-#include <stdio.h>
 
 int32_t	ft_pixel(int32_t r, int32_t g, int32_t b, int32_t a)
 {
 	return (r << 24 | g << 16 | b << 8 | a);
 }
 
-void	init_player(t_map map, t_player *player)
+void	init_player(t_map map, t_player *player, t_color floor)
 {
 	char	direction;
 	int		x;
@@ -15,7 +13,7 @@ void	init_player(t_map map, t_player *player)
 
 	get_char_start(map, &y, &x);
 	direction = map.map[y][x];
-	printf("%d, %d, %c\n", x, y, direction);
+	printf("player x: %d, player y: %d, direction: %c\n", x, y, direction);
 	if (direction == 'N')
 		player->angle = HALF_PI;
 	else if (direction == 'W')
@@ -28,6 +26,7 @@ void	init_player(t_map map, t_player *player)
 	player->pos.y = y * TILE_SIZE + TILE_SIZE * 0.5;
 	player->delta.x = cos(player->angle) * WALKSPEED;
 	player->delta.y = sin(player->angle) * WALKSPEED;
+	player->color = ft_pixel(255 - floor.r, 255 - floor.g, 255 - floor.b, 255);
 }
 
 void	draw_background(mlx_image_t *background, uint32_t floor_color, uint32_t roof_color)
@@ -39,20 +38,12 @@ void	draw_background(mlx_image_t *background, uint32_t floor_color, uint32_t roo
 	while (x < WIDTH)
 	{
 		y = 0;
-		while (y < HALF_HEIGHT)
-		{
-			mlx_put_pixel(background, x, y, roof_color);
-			y++;
-		}
-		x++;
-	}
-	x = 0;
-	while (x < WIDTH)
-	{
-		y = HALF_HEIGHT;
 		while (y < HEIGHT)
 		{
-			mlx_put_pixel(background, x, y, floor_color);
+			if (y < HALF_HEIGHT)
+				mlx_put_pixel(background, x, y, roof_color);
+			else
+				mlx_put_pixel(background, x, y, floor_color);
 			y++;
 		}
 		x++;
@@ -73,7 +64,8 @@ int	start(t_param *param, t_window w)
 	param->map.minimap = mlx_new_image(param->mlx, w.width, w.height);
 	if (!param->map.minimap)
 		return (mlx_close_window(param->mlx), ERROR);
-	init_player(param->map, &param->player);
+	param->map.floor_color = ft_pixel(param->floor.r, param->floor.g, param->floor.b, 255);
+	init_player(param->map, &param->player, param->floor);
 	draw_background(param->background, ft_pixel(param->floor.r, param->floor.g, param->floor.b, 255), ft_pixel(param->ceiling.r, param->ceiling.g, param->ceiling.b, 255));
 	renderer(param->player, param->map, param->wall_img);
 	/*for (int y = 0; y < w.height; ++y)

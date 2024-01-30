@@ -64,10 +64,11 @@ typedef struct s_shapes
 
 typedef struct s_player
 {
-	t_vec2	pos;
-	t_vec2	delta;
-	int		fov;
-	float	angle;
+	t_vec2		pos;
+	t_vec2		delta;
+	int			fov;
+	uint32_t	color;
+	float		angle;
 }			t_player;
 
 typedef struct s_map
@@ -77,6 +78,7 @@ typedef struct s_map
 	int				length;
 	int				height;
 
+	uint32_t		floor_color;
 	mlx_image_t		*minimap;
 }					t_map;
 

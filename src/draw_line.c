@@ -6,13 +6,11 @@
 /*   By: bjacobs <bjacobs@student.codam.nl>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 18:07:29 by bjacobs           #+#    #+#             */
-/*   Updated: 2023/12/25 22:02:04 by bjacobs          ###   ########.fr       */
+/*   Updated: 2024/01/30 23:03:51 by bjacobs          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
-#include <stdio.h>
-#include <math.h>
 
 static void	put_pixel(mlx_image_t *img, t_vec2 p1, uint32_t color)
 {
@@ -23,8 +21,8 @@ static void	put_pixel(mlx_image_t *img, t_vec2 p1, uint32_t color)
 
 static void	init_data(int *delta, int *step, t_vec2 p1, t_vec2 p2)
 {
-	delta[0] = abs(p2.x - p1.x);
-	delta[1] = abs(p2.y - p1.y);
+	delta[0] = abs((int)p2.x - (int)p1.x);
+	delta[1] = abs((int)p2.y - (int)p1.y);
 	if (p1.x < p2.x)
 		step[0] = 1;
 	else
@@ -52,7 +50,7 @@ void	draw_line(mlx_image_t *img, t_vec2 p1, t_vec2 p2, uint32_t color)
 	init_data(delta, step, p1, p2);
 	err[0] = delta[0] - delta[1];
 	put_pixel(img, p1, color);
-	while ((int)p1.x != (int)p2.x && (int)p1.y != (int)p2.y && !out_of_bounds(p1, p2))
+	while (((int)p1.x != (int)p2.x || (int)p1.y != (int)p2.y) && !out_of_bounds(p1, p2))
 	{
 		err[1] = 2 * err[0];
 		if (err[1] >= -delta[1])
