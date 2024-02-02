@@ -44,6 +44,12 @@
 # define NO_FLOOR_COL 0x808080FF
 # define PLAYER_COL 0x00FF00FF
 
+//Wall color test
+# define SILVER 0xC0C0C0FF
+# define BLUE 0x00FFFFFF
+# define GREEN 0x008000FF
+# define PURPLE 0x800080FF
+
 // Screen dimentions
 # define WIDTH 1024
 # define HEIGHT 512

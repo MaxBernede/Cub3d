@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   dda.c                                              :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: bjacobs <bjacobs@student.codam.nl>         +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/16 01:45:30 by bjacobs           #+#    #+#             */
-/*   Updated: 2024/01/26 19:59:16 by bjacobs          ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   dda.c                                              :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: maxb <maxb@student.42.fr>                    +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2023/12/16 01:45:30 by bjacobs       #+#    #+#                 */
+/*   Updated: 2024/02/02 18:02:43 by maxb          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,10 @@ int	init_xray(t_ray *ray, t_vec2 origin, float angle)
 	}
 	ray->hit.x = (ray->hit.y - ray->origin.y) * atan + ray->origin.x;
 	ray->ray_step.x = ray->ray_step.y * atan;
+	if (ray->ray_step.y == TILE_SIZE)
+		ray->side = S_SOUTH;
+	else
+		ray->side = S_NORTH;
 	return (EXIT_SUCCESS);
 }
 
@@ -48,11 +52,13 @@ int	init_yray(t_ray *ray, t_vec2 origin, float angle)
 	{
 		ray->hit.x = (((int)ray->origin.x >> 3) << 3) - 0.0001;
 		ray->ray_step.x = -TILE_SIZE;
+		ray->side = S_WEST;
 	}
 	else // otherwise looking right
 	{
 		ray->hit.x = (((int)ray->origin.x >> 3) << 3) + TILE_SIZE;
 		ray->ray_step.x = TILE_SIZE;
+		ray->side = S_EAST;
 	}
 	ray->hit.y = (ray->hit.x - ray->origin.x) * atan + ray->origin.y;
 	ray->ray_step.y = ray->ray_step.x * atan;

@@ -103,10 +103,14 @@ void	renderer(t_player player, t_map map, mlx_image_t *reality)
 		if (data.angle > TWO_PI)
 			data.angle -= TWO_PI;
 		//printf("close hit: x %f,  y %f\n", data.hit_ray.x, daya.hit_ray.y);
-		if (data.xray.length < data.yray.length)
-			draw_wall(reality, data.hit_ray.length * cos(player.angle - data.angle), data.rays, 0xAF0000FF);
+		if (data.hit_ray.side == S_NORTH)
+			draw_wall(reality, data.hit_ray.length * cos(player.angle - data.angle), data.rays, BLUE);
+		else if (data.hit_ray.side == S_SOUTH)
+			draw_wall(reality, data.hit_ray.length * cos(player.angle - data.angle), data.rays, SILVER);
+		else if (data.hit_ray.side == S_EAST)
+			draw_wall(reality, data.hit_ray.length * cos(player.angle - data.angle), data.rays, GREEN);
 		else
-			draw_wall(reality, data.hit_ray.length * cos(player.angle - data.angle), data.rays, 0x9F0000FF);
+			draw_wall(reality, data.hit_ray.length * cos(player.angle - data.angle), data.rays, PURPLE);
 		draw_line(map.minimap, data.hit_ray.hit, player.pos, 0xFFFF00FF);
 		data.rays++;
 	}

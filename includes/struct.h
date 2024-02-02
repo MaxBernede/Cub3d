@@ -3,6 +3,14 @@
 
 # include "../MLX42/include/MLX42/MLX42.h"
 
+typedef enum s_sides
+{
+    S_NORTH,
+    S_SOUTH,
+    S_EAST,
+    S_WEST,
+} t_sides;
+
 typedef struct s_color
 {
 	int				r;
@@ -29,6 +37,7 @@ typedef struct s_ray_data
 	t_vec2	ray_step;
 	t_vec2	origin;
 	float	length;
+	enum s_sides	side;
 }	t_ray;
 
 typedef struct s_dda_data
