@@ -16,11 +16,11 @@ uint32_t get_color_wall(mlx_texture_t* texture, float percentageX, float percent
 	else
     	posY = (uint32_t)(percentageY / 100.0 * texture->width);
     pixelIndex = (posY * texture->width + posX) * texture->bytes_per_pixel;
-	u_int32_t rouge = texture->pixels[pixelIndex];
-	u_int32_t vert = texture->pixels[pixelIndex + 1];
-	u_int32_t bleu = texture->pixels[pixelIndex + 2];
+	u_int32_t r = texture->pixels[pixelIndex];
+	u_int32_t g = texture->pixels[pixelIndex + 1];
+	u_int32_t b = texture->pixels[pixelIndex + 2];
 
-	uint32_t couleurHex = (rouge << 24) | (vert << 16) | (bleu << 8) | 255;
+	uint32_t color = (r << 24) | (g << 16) | (b << 8) | 255;
 
-	return couleurHex;
+	return color;
 }

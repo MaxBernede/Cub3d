@@ -112,7 +112,7 @@ void	renderer(t_param *param, t_player player, t_map map, mlx_image_t *reality)
 		data.angle += DEGREE_STEP;
 		if (data.angle > TWO_PI)
 			data.angle -= TWO_PI;
-		printf("ray hit x: %f, y: %f\n", pourcentage_of(data.hit_ray.hit.x), pourcentage_of(data.hit_ray.hit.y));
+		//printf("ray hit x: %f, y: %f\n", pourcentage_of(data.hit_ray.hit.x), pourcentage_of(data.hit_ray.hit.y));
 		if (data.hit_ray.side == S_NORTH)
 			draw_wall(reality, data.hit_ray.length * cos(player.angle - data.angle), data.rays, &(data.hit_ray), param->north);
 		else if (data.hit_ray.side == S_SOUTH)

@@ -6,7 +6,7 @@
 /*   By: maxb <maxb@student.42.fr>                    +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/16 01:45:30 by bjacobs       #+#    #+#                 */
-/*   Updated: 2024/02/04 16:44:35 by maxb          ########   odam.nl         */
+/*   Updated: 2024/02/04 19:46:18 by maxb          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,10 @@
 #include <math.h>
 
 float float_modulo(float dividend, float divisor) {
-    if (divisor == 0) {
-        return NAN;
+    if (divisor == 0)
+	{
+        printf("Error: Division by zero\n");
+		return 0;
     }
     return fmod(dividend, divisor);
 }
