@@ -52,7 +52,7 @@
 # define TILE_SIZE 8
 
 // Player variables
-# define WALKSPEED 15
+# define WALKSPEED 12
 # define TURNSPEED 1.5
 # define FOV 64
 

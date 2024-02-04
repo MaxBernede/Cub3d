@@ -61,7 +61,7 @@ int	start(t_param *param, t_window w)
 	//! should we free background aswell in case of error ?
 	if (!param->wall_img)
 		return (mlx_close_window(param->mlx), ERROR);
-	param->map.minimap = mlx_new_image(param->mlx, w.width, w.height);
+	param->map.minimap = mlx_new_image(param->mlx, param->map.length * TILE_SIZE, param->map.height * TILE_SIZE);
 	if (!param->map.minimap)
 		return (mlx_close_window(param->mlx), ERROR);
 	param->map.floor_color = ft_pixel(param->floor.r, param->floor.g, param->floor.b, 90);

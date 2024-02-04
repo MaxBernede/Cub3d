@@ -45,7 +45,7 @@ void	draw_wall(mlx_image_t *img, float ray_length, int xoffset, uint32_t color)
 	int	line_width;
 
 	x = 0;
-	line_height = (HEIGHT * 7) / ray_length;
+	line_height = (HEIGHT * 5) / ray_length;
 	if (line_height > HEIGHT)
 		line_height = HEIGHT;
 	line_width = WIDTH / (RAY_AMOUNT);
