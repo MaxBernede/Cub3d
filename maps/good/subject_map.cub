@@ -1,7 +1,7 @@
-NO textures/wood.png
-SO textures/wood.png
-WE textures/wood.png
-EA textures/wood.png
+NO textures/tpm.png
+SO textures/gold1.png
+WE textures/grass.png
+EA textures/water.png
 
 F 220,100,0
 C 225,30,0

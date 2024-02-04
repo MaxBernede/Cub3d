@@ -1,17 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   dda.c                                              :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: bjacobs <bjacobs@student.codam.nl>         +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/16 01:45:30 by bjacobs           #+#    #+#             */
-/*   Updated: 2024/01/26 19:59:16 by bjacobs          ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   dda.c                                              :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: maxb <maxb@student.42.fr>                    +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2023/12/16 01:45:30 by bjacobs       #+#    #+#                 */
+/*   Updated: 2024/02/04 19:46:18 by maxb          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 #include <math.h>
+
+float float_modulo(float dividend, float divisor) {
+    if (divisor == 0)
+	{
+        printf("Error: Division by zero\n");
+		return 0;
+    }
+    return fmod(dividend, divisor);
+}
+
+float pourcentage_of(float coordinate)
+{
+	float value;
+
+	value = float_modulo(coordinate, TILE_SIZE);
+	return (value * 100) / TILE_SIZE;
+}
+
+void print_all_ray(t_ray *ray)
+{
+	printf("ray origin x: %f, y: %f\n", ray->origin.x, ray->origin.y);
+	printf("ray hit x: %f, y: %f\n", ray->hit.x, ray->hit.y);
+	printf("ray hit x: %f, y: %f\n", pourcentage_of(ray->hit.x), pourcentage_of(ray->hit.y));
+	printf("ray ray_step x: %f, y: %f\n", ray->ray_step.x, ray->ray_step.y);
+	printf("ray length: %f\n", ray->length);
+	printf("ray side: %d\n", ray->side);
+}
 
 int	init_xray(t_ray *ray, t_vec2 origin, float angle)
 {
@@ -33,6 +60,13 @@ int	init_xray(t_ray *ray, t_vec2 origin, float angle)
 	}
 	ray->hit.x = (ray->hit.y - ray->origin.y) * atan + ray->origin.x;
 	ray->ray_step.x = ray->ray_step.y * atan;
+	if (ray->ray_step.y == TILE_SIZE)
+		ray->side = S_SOUTH;
+	else
+		ray->side = S_NORTH;
+	// printf("Xray hit x: %f, hit y: %f\n", pourcentage_of(ray->hit.x), pourcentage_of(ray->hit.y));
+	//print_all_ray(ray);
+	
 	return (EXIT_SUCCESS);
 }
 
@@ -48,14 +82,17 @@ int	init_yray(t_ray *ray, t_vec2 origin, float angle)
 	{
 		ray->hit.x = (((int)ray->origin.x >> 3) << 3) - 0.0001;
 		ray->ray_step.x = -TILE_SIZE;
+		ray->side = S_WEST;
 	}
 	else // otherwise looking right
 	{
 		ray->hit.x = (((int)ray->origin.x >> 3) << 3) + TILE_SIZE;
 		ray->ray_step.x = TILE_SIZE;
+		ray->side = S_EAST;
 	}
 	ray->hit.y = (ray->hit.x - ray->origin.x) * atan + ray->origin.y;
 	ray->ray_step.y = ray->ray_step.x * atan;
+	//print_all_ray(ray);
 	return (EXIT_SUCCESS);
 }
 
