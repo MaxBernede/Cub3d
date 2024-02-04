@@ -6,12 +6,37 @@
 /*   By: maxb <maxb@student.42.fr>                    +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/16 01:45:30 by bjacobs       #+#    #+#                 */
-/*   Updated: 2024/02/02 18:02:43 by maxb          ########   odam.nl         */
+/*   Updated: 2024/02/04 16:44:35 by maxb          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 #include <math.h>
+
+float float_modulo(float dividend, float divisor) {
+    if (divisor == 0) {
+        return NAN;
+    }
+    return fmod(dividend, divisor);
+}
+
+float pourcentage_of(float coordinate)
+{
+	float value;
+
+	value = float_modulo(coordinate, TILE_SIZE);
+	return (value * 100) / TILE_SIZE;
+}
+
+void print_all_ray(t_ray *ray)
+{
+	printf("ray origin x: %f, y: %f\n", ray->origin.x, ray->origin.y);
+	printf("ray hit x: %f, y: %f\n", ray->hit.x, ray->hit.y);
+	printf("ray hit x: %f, y: %f\n", pourcentage_of(ray->hit.x), pourcentage_of(ray->hit.y));
+	printf("ray ray_step x: %f, y: %f\n", ray->ray_step.x, ray->ray_step.y);
+	printf("ray length: %f\n", ray->length);
+	printf("ray side: %d\n", ray->side);
+}
 
 int	init_xray(t_ray *ray, t_vec2 origin, float angle)
 {
@@ -37,6 +62,9 @@ int	init_xray(t_ray *ray, t_vec2 origin, float angle)
 		ray->side = S_SOUTH;
 	else
 		ray->side = S_NORTH;
+	// printf("Xray hit x: %f, hit y: %f\n", pourcentage_of(ray->hit.x), pourcentage_of(ray->hit.y));
+	//print_all_ray(ray);
+	
 	return (EXIT_SUCCESS);
 }
 
@@ -62,6 +90,7 @@ int	init_yray(t_ray *ray, t_vec2 origin, float angle)
 	}
 	ray->hit.y = (ray->hit.x - ray->origin.x) * atan + ray->origin.y;
 	ray->ray_step.y = ray->ray_step.x * atan;
+	//print_all_ray(ray);
 	return (EXIT_SUCCESS);
 }
 

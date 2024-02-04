@@ -67,7 +67,7 @@ int	start(t_param *param, t_window w)
 	param->map.floor_color = ft_pixel(param->floor.r, param->floor.g, param->floor.b, 90);
 	init_player(param->map, &param->player, param->floor);
 	draw_background(param->background, ft_pixel(param->floor.r, param->floor.g, param->floor.b, 255), ft_pixel(param->ceiling.r, param->ceiling.g, param->ceiling.b, 255));
-	renderer(param->player, param->map, param->wall_img);
+	renderer(param, param->player, param->map, param->wall_img);
 	/*for (int y = 0; y < w.height; ++y)
 	{
 		for (int x = 0; x < w.width; ++x)

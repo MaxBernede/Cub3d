@@ -114,7 +114,7 @@ void		init_dda(t_dda *data, float player_angle);
 void		dda(t_dda *data, t_vec2 player_pos, t_map map);
 
 // renderer.c
-void		renderer(t_player player, t_map map, mlx_image_t *reality);
+void		renderer(t_param *param ,t_player player, t_map map, mlx_image_t *reality);
 
 // check_map
 int			check_map(t_param *param);
@@ -133,9 +133,14 @@ char*		concatenateStrings(char** strings, int numStrings);
 
 void		print_flood(t_map map);
 
+//!Color_wall
+uint32_t get_color_wall(mlx_texture_t* texture, float percentageX, float percentageY);
+
 //! UTILS
 // clean.c
 void		clean_everything(t_param *param);
+
+float pourcentage_of(float coordinate);
 
 // ft_atof.c
 double		ft_atof(char *nptr);
