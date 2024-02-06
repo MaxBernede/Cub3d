@@ -37,7 +37,7 @@ void	draw_square(int size, t_vec2 p, mlx_image_t *img, uint32_t color)
 	}
 }
 
-void	draw_wall(mlx_image_t *img, float ray_length, int xoffset, t_ray *ray, mlx_texture_t *texture)
+void	draw_wall(mlx_image_t *img, float ray_length, t_dda dda, mlx_texture_t *texture)
 {
 	int	x;
 	int	y;
@@ -51,20 +51,20 @@ void	draw_wall(mlx_image_t *img, float ray_length, int xoffset, t_ray *ray, mlx_
 	line_width = WIDTH / (RAY_AMOUNT);
 	if (!line_width)
 		line_width = 1;
-	if (ray->side == S_NORTH || ray->side == S_SOUTH)
-		porcentageX = pourcentage_of(ray->hit.x);
+	if (dda.hit_ray.side == S_NORTH || dda.hit_ray.side == S_SOUTH)
+		porcentageX = pourcentage_of(dda.hit_ray.hit.x);
 	else
-		porcentageX = pourcentage_of(ray->hit.y);
+		porcentageX = pourcentage_of(dda.hit_ray.hit.y);
 	while (x < line_width)
 	{
 		y = 0;
 		while (y < line_height)
 		{
 			porcentageY = (float)y / (float)line_height * 100;
-			int xmap = line_width * xoffset + x;
+			int xmap = line_width * dda.rays + x;
 			int ymap = y + HALF_HEIGHT - line_height / 2;
 			if (xmap < WIDTH && xmap >= 0 && ymap < HEIGHT && ymap >= 0)
-				mlx_put_pixel(img, line_width * xoffset + x, y + HALF_HEIGHT - line_height / 2, get_color_wall(texture, porcentageX, porcentageY));
+				mlx_put_pixel(img, line_width * dda.rays + x, y + HALF_HEIGHT - line_height / 2, get_color_wall(texture, porcentageX, porcentageY));
 			y++;
 		}
 		x++;
@@ -106,14 +106,7 @@ void	renderer(t_param *param, t_player player, t_map map, mlx_image_t *reality)
 		if (data.angle > TWO_PI)
 			data.angle -= TWO_PI;
 		//printf("ray hit x: %f, y: %f\n", pourcentage_of(data.hit_ray.hit.x), pourcentage_of(data.hit_ray.hit.y));
-		if (data.hit_ray.side == S_NORTH)
-			draw_wall(reality, data.hit_ray.length * cos(player.angle - data.angle), data.rays, &(data.hit_ray), param->north);
-		else if (data.hit_ray.side == S_SOUTH)
-			draw_wall(reality, data.hit_ray.length * cos(player.angle - data.angle), data.rays, &(data.hit_ray), param->south);
-		else if (data.hit_ray.side == S_EAST)
-			draw_wall(reality, data.hit_ray.length * cos(player.angle - data.angle), data.rays, &(data.hit_ray), param->east);
-		else
-			draw_wall(reality, data.hit_ray.length * cos(player.angle - data.angle), data.rays, &(data.hit_ray), param->west);
+		draw_wall(reality, data.hit_ray.length * cos(player.angle - data.angle), data, param->textures[data.hit_ray.side]);
 		draw_line(map.minimap, data.hit_ray.hit, player.pos, 0xFFFF00FF);
 		data.rays++;
 	}

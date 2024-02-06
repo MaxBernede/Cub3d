@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   map_parse.c                                        :+:    :+:            */
+/*   map_parse.c                                        :+:      :+:    :+:   */
 /*                                                     +:+                    */
 /*   By: maxb <maxb@student.42.fr>                    +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/26 12:27:02 by maxb          #+#    #+#                 */
-/*   Updated: 2024/01/23 19:33:40 by maxb          ########   odam.nl         */
+/*   Updated: 2024/02/06 02:36:53 by bjacobs          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int check_map_length( t_param *p)
 
 int full_textures(t_param *p)
 {
-	if (!p->south || !p->north || !p->east || !p->west)
+	if (!p->textures[S_SOUTH] || !p->textures[S_NORTH] || !p->textures[S_EAST] || !p->textures[S_WEST])
 		return (ERROR);
 	if (p->floor.r < 0 || p->floor.g < 0 || p->floor.b < 0)
 		return (ERROR);

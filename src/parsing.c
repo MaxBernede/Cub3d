@@ -9,13 +9,13 @@ int	side_textures(int type, char *arg, t_param *p)
 	if (fd < 1)
 		return (printf(ERR_OPEN_TEXTURES), ERROR);
 	close(fd);
-	if (type == NORTH && fill_texture(&(p->north), arg))
+	if (type == NORTH && fill_texture(&(p->textures[S_NORTH]), arg))
 		return (printf(ERR_NO), ERROR);
-	if (type == SOUTH && fill_texture(&(p->south), arg))
+	if (type == SOUTH && fill_texture(&(p->textures[S_SOUTH]), arg))
 		return (printf(ERR_SO), ERROR);
-	if (type == EAST && fill_texture(&(p->east), arg))
+	if (type == EAST && fill_texture(&(p->textures[S_EAST]), arg))
 		return (printf(ERR_EA), ERROR);
-	if (type == WEST && fill_texture(&(p->west), arg))
+	if (type == WEST && fill_texture(&(p->textures[S_WEST]), arg))
 		return (printf(ERR_WE), ERROR);
 	return (OK);
 }

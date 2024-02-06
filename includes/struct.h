@@ -101,10 +101,7 @@ typedef struct s_param
 {
 	t_color			floor;
 	t_color			ceiling;
-	mlx_texture_t	*north;
-	mlx_texture_t	*south;
-	mlx_texture_t	*west;
-	mlx_texture_t	*east;
+	mlx_texture_t	*textures[4];
 	int				fd;
 	bool			end_map_parse;
 	t_node			*tmp_map;

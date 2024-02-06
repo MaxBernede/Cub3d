@@ -3,16 +3,17 @@
 // this is made to free more easily in case of a parsing error
 void	init_null(t_param *p)
 {
+	int	i;
+
+	i = 0;
+	while (i < 4)
+		p->textures[i++] = NULL;
 	p->ceiling.r = -1;
 	p->ceiling.g = -1;
 	p->ceiling.b = -1;
 	p->floor.r = -1;
 	p->floor.g = -1;
 	p->floor.b = -1;
-	p->east = NULL;
-	p->north = NULL;
-	p->south = NULL;
-	p->west = NULL;
 	p->shapes = NULL;
 	p->end_map_parse = false;
 	p->map.length = -1;
