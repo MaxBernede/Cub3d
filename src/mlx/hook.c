@@ -15,26 +15,30 @@ bool	movement_key_down(mlx_t *mlx)
 
 void	move_player(t_player *player, char **map, int direction, double dt)
 {
+	t_vec2	new_pos;
 	t_vec2	offset;
 	int		mapo;
-	int		map_index;
 
+	if (dt > .25)
+		dt = .25;
 	if (player->delta.x < 0)
-		offset.x = 2;
+		offset.x = -1;
 	else
-		offset.x = -2;
+		offset.x = 1;
 	if (player->delta.y < 0)
-		offset.y = 2;
+		offset.y = -1;
 	else
-		offset.y = -2;
-	map_index = player->pos.y / TILE_SIZE;
-	mapo = (player->pos.x + offset.x * -direction) / TILE_SIZE;
-	if (ft_strchr("0NSEW", map[map_index][mapo]))
-		player->pos.x += player->delta.x * direction * dt;
-	map_index = player->pos.x / TILE_SIZE;
-	mapo = (player->pos.y + offset.y * -direction) / TILE_SIZE;
-	if (ft_strchr("0NSEW", map[mapo][map_index]))
-		player->pos.y += player->delta.y * direction * dt;
+		offset.y = 1;
+	new_pos.x = player->pos.x + player->delta.x * direction * dt;
+	new_pos.y = player->pos.y + player->delta.y * direction * dt;
+	mapo = (new_pos.x + offset.x * direction) / TILE_SIZE;
+	if (ft_strchr("0NSEW", map[(int)((player->pos.y + 1) / TILE_SIZE)][mapo])
+			&& ft_strchr("0NSEW", map[(int)((player->pos.y - 1) / TILE_SIZE)][mapo]))
+		player->pos.x = new_pos.x;
+	mapo = (new_pos.y + offset.y * direction) / TILE_SIZE;
+	if (ft_strchr("0NSEW", map[mapo][(int)((player->pos.x + 1) / TILE_SIZE)])
+			&& ft_strchr("0NSEW", map[mapo][(int)((player->pos.x - 1) / TILE_SIZE)]))
+		player->pos.y = new_pos.y;
 }
 
 void	change_player_angle(t_player *player, int direction, double dt)

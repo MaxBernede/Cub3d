@@ -27,7 +27,7 @@ SRC :=	main.c				\
 		color_wall.c		\
 		draw_line.c			\
 		dda.c				\
-		v2_operations.c		\
+		utils/v2_operations.c		\
 		utils/check_line.c 	\
 		utils/clean.c		\
 		utils/ft_atof.c		\

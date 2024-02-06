@@ -47,19 +47,17 @@ void	draw_wall(mlx_image_t *img, float ray_length, int xoffset, t_ray *ray, mlx_
 	float porcentageY;
 
 	x = 0;
-	line_height = (HEIGHT * 5) / ray_length;
-	//if (line_height > HEIGHT)
-	//	line_height = HEIGHT;
+	line_height = (HEIGHT * 6) / ray_length;
 	line_width = WIDTH / (RAY_AMOUNT);
 	if (!line_width)
 		line_width = 1;
+	if (ray->side == S_NORTH || ray->side == S_SOUTH)
+		porcentageX = pourcentage_of(ray->hit.x);
+	else
+		porcentageX = pourcentage_of(ray->hit.y);
 	while (x < line_width)
 	{
 		y = 0;
-		if (ray->side == S_NORTH || ray->side == S_SOUTH)
-			porcentageX = pourcentage_of(ray->hit.x);
-		else
-			porcentageX = pourcentage_of(ray->hit.y);
 		while (y < line_height)
 		{
 			porcentageY = (float)y / (float)line_height * 100;
@@ -87,11 +85,6 @@ void	draw_minimap(t_player player, t_map map)
 				draw_square(TILE_SIZE, v2_mult(p, TILE_SIZE), map.minimap, WALL_COL);
 			else if (ft_strchr("0NWSE", map.map[(int)p.y][(int)p.x]))
 				draw_square(TILE_SIZE, v2_mult(p, TILE_SIZE), map.minimap, map.floor_color);
-			else
-			{
-				;
-				//draw_square(TILE_SIZE, v2_mult(p, TILE_SIZE), map.minimap, NO_FLOOR_COL);
-			}
 			p.x++;
 		}
 		p.y++;
