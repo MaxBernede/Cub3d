@@ -57,9 +57,9 @@ int	start(t_param *param, t_window w)
 	param->background = mlx_new_image(param->mlx, w.width, w.height);
 	if (!param->background)
 		return (mlx_close_window(param->mlx), ERROR);
-	param->wall_img = mlx_new_image(param->mlx, w.width, w.height);
+	param->reality = mlx_new_image(param->mlx, w.width, w.height);
 	//! should we free background aswell in case of error ?
-	if (!param->wall_img)
+	if (!param->reality)
 		return (mlx_close_window(param->mlx), ERROR);
 	param->map.minimap = mlx_new_image(param->mlx, param->map.length * TILE_SIZE, param->map.height * TILE_SIZE);
 	if (!param->map.minimap)
@@ -67,7 +67,7 @@ int	start(t_param *param, t_window w)
 	param->map.floor_color = ft_pixel(param->floor.r, param->floor.g, param->floor.b, 90);
 	init_player(param->map, &param->player, param->floor);
 	draw_background(param->background, ft_pixel(param->floor.r, param->floor.g, param->floor.b, 255), ft_pixel(param->ceiling.r, param->ceiling.g, param->ceiling.b, 255));
-	renderer(param, param->player, param->map, param->wall_img);
+	renderer(param);
 	/*for (int y = 0; y < w.height; ++y)
 	{
 		for (int x = 0; x < w.width; ++x)
@@ -75,11 +75,11 @@ int	start(t_param *param, t_window w)
 			int r = x / 2;
 			int g = y / 2;
 			int b = 0;
-			mlx_put_pixel(param->wall_img, x, y, ft_pixel(r, g, b, 255));
+			mlx_put_pixel(param->reality, x, y, ft_pixel(r, g, b, 255));
 		}
 	} */
 	if (mlx_image_to_window(param->mlx, param->background, 0, 0) == -1
-		|| mlx_image_to_window(param->mlx, param->wall_img, 0, 0) == -1
+		|| mlx_image_to_window(param->mlx, param->reality, 0, 0) == -1
 		|| mlx_image_to_window(param->mlx, param->map.minimap, 0, 0) == -1)
 	{
 		mlx_close_window(param->mlx);

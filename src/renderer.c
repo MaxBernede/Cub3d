@@ -29,7 +29,7 @@ void	draw_square(int size, t_vec2 p, mlx_image_t *img, uint32_t color)
 		y = 0;
 		while (y < size)
 		{
-			if (p.x + y < 1023 && p.x + y >= 0 && p.y + x < 1023 && p.y + x >= 0)
+			if (p.x + y < img->width && p.x + y >= 0 && p.y + x < img->height && p.y + x >= 0)
 				mlx_put_pixel(img, p.x + y, p.y + x, color);
 			y++;
 		}
@@ -37,34 +37,32 @@ void	draw_square(int size, t_vec2 p, mlx_image_t *img, uint32_t color)
 	}
 }
 
-void	draw_wall(mlx_image_t *img, float ray_length, t_dda dda, mlx_texture_t *texture)
+void	draw_wall(t_param *param, t_dda dda)
 {
 	int	x;
 	int	y;
-	int	line_height;
-	int	line_width;
-	float porcentageX;
-	float porcentageY;
+	int	wall_height;
+	int	wall_width;
+	float percentageX;
 
 	x = 0;
-	line_height = (HEIGHT * 6) / ray_length;
-	line_width = WIDTH / (RAY_AMOUNT);
-	if (!line_width)
-		line_width = 1;
+	wall_height = (HEIGHT * 6) / (dda.hit_ray.length * cos(param->player.angle - dda.angle));
+	wall_width = WIDTH / (RAY_AMOUNT);
+	if (!wall_width)
+		wall_width = 1;
 	if (dda.hit_ray.side == S_NORTH || dda.hit_ray.side == S_SOUTH)
-		porcentageX = pourcentage_of(dda.hit_ray.hit.x);
+		percentageX = pourcentage_of(dda.hit_ray.hit.x);
 	else
-		porcentageX = pourcentage_of(dda.hit_ray.hit.y);
-	while (x < line_width)
+		percentageX = pourcentage_of(dda.hit_ray.hit.y);
+	while (x < wall_width)
 	{
 		y = 0;
-		while (y < line_height)
+		int xmap = wall_width * dda.rays + x;
+		while (y < wall_height)
 		{
-			porcentageY = (float)y / (float)line_height * 100;
-			int xmap = line_width * dda.rays + x;
-			int ymap = y + HALF_HEIGHT - line_height / 2;
+			int ymap = y + HALF_HEIGHT - wall_height / 2;
 			if (xmap < WIDTH && xmap >= 0 && ymap < HEIGHT && ymap >= 0)
-				mlx_put_pixel(img, line_width * dda.rays + x, y + HALF_HEIGHT - line_height / 2, get_color_wall(texture, porcentageX, porcentageY));
+				mlx_put_pixel(param->reality, xmap, ymap, get_color_wall(param->textures[dda.hit_ray.side], percentageX, (float)y / (float)wall_height * 100));
 			y++;
 		}
 		x++;
@@ -92,23 +90,23 @@ void	draw_minimap(t_player player, t_map map)
 	//printf("x: %f y: %f\n", player.pos.x, player.pos.y);
 }
 
-void	renderer(t_param *param, t_player player, t_map map, mlx_image_t *reality)
+void	renderer(t_param *param)
 {
 	t_dda	data;
 
-	clear_img(reality);
-	draw_minimap(player, map);
-	init_dda(&data, player.angle);
+	clear_img(param->reality);
+	draw_minimap(param->player, param->map);
+	init_dda(&data, param->player.angle);
 	while (data.rays < RAY_AMOUNT)
 	{
-		dda(&data, player.pos, map);
+		dda(&data, param->player.pos, param->map);
 		data.angle += DEGREE_STEP;
 		if (data.angle > TWO_PI)
 			data.angle -= TWO_PI;
 		//printf("ray hit x: %f, y: %f\n", pourcentage_of(data.hit_ray.hit.x), pourcentage_of(data.hit_ray.hit.y));
-		draw_wall(reality, data.hit_ray.length * cos(player.angle - data.angle), data, param->textures[data.hit_ray.side]);
-		draw_line(map.minimap, data.hit_ray.hit, player.pos, 0xFFFF00FF);
+		draw_wall(param, data);
+		draw_line(param->map.minimap, data.hit_ray.hit, param->player.pos, 0xFFFF00FF);
 		data.rays++;
 	}
-	draw_square(4, v2_sub(player.pos, v2_new(2, 2)), map.minimap, PLAYER_COL);
+	draw_square(4, v2_sub(param->player.pos, v2_new(2, 2)), param->map.minimap, PLAYER_COL);
 }

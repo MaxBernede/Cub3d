@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   dda.c                                              :+:    :+:            */
+/*   dda.c                                              :+:      :+:    :+:   */
 /*                                                     +:+                    */
 /*   By: maxb <maxb@student.42.fr>                    +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/16 01:45:30 by bjacobs       #+#    #+#                 */
-/*   Updated: 2024/02/04 19:46:18 by maxb          ########   odam.nl         */
+/*   Updated: 2024/02/06 20:12:09 by bjacobs          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,10 @@ float float_modulo(float dividend, float divisor) {
 
 float pourcentage_of(float coordinate)
 {
-	float value;
+	/*float value;
 
-	value = float_modulo(coordinate, TILE_SIZE);
-	return (value * 100) / TILE_SIZE;
+	value = float_modulo(coordinate, TILE_SIZE);*/
+	return (fmod(coordinate, TILE_SIZE) * 100) / TILE_SIZE;
 }
 
 void print_all_ray(t_ray *ray)
