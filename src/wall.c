@@ -6,14 +6,14 @@
 /*   By: mbernede <mbernede@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/07 13:43:37 by mbernede      #+#    #+#                 */
-/*   Updated: 2024/02/07 17:26:22 by mbernede      ########   odam.nl         */
+/*   Updated: 2024/02/07 18:13:30 by mbernede      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
 uint32_t	get_color_wall(mlx_texture_t *texture, float percentage_x,
-		float percentage_y)
+		float percentage_y, double shade)
 {
 	uint32_t	pos_x;
 	uint32_t	pos_y;
@@ -30,19 +30,25 @@ uint32_t	get_color_wall(mlx_texture_t *texture, float percentage_x,
 	else
 		pos_y = (uint32_t)(percentage_y / 100.0 * texture->width);
 	pixel_index = (pos_y * texture->width + pos_x) * texture->bytes_per_pixel;
-	c.r = texture->pixels[pixel_index];
-	c.g = texture->pixels[pixel_index + 1];
-	c.b = texture->pixels[pixel_index + 2];
+	c.r = texture->pixels[pixel_index] * shade;
+	c.g = texture->pixels[pixel_index + 1] * shade;
+	c.b = texture->pixels[pixel_index + 2] * shade;
 	color = (c.r << 24) | (c.g << 16) | (c.b << 8) | 255;
 	return (color);
 }
 
-void	get_percent_x(float *percent_x, t_dda dda)
+void	get_percent_x(float *percent_x, t_dda dda, double *shade)
 {
 	if (dda.hit_ray.side == S_NORTH || dda.hit_ray.side == S_SOUTH)
+	{
 		*percent_x = pourcentage_of(dda.hit_ray.hit.x);
+		*shade = 1;
+	}
 	else
+	{
 		*percent_x = pourcentage_of(dda.hit_ray.hit.y);
+		*shade = .8;
+	}
 }
 
 void	fill_wall(t_wall *wall, float ray_len, float dda_angle, float angle)
@@ -62,7 +68,8 @@ void	draw_wall(t_param *param, t_dda dda)
 
 	wall.x = 0;
 	fill_wall(&wall, dda.hit_ray.length, dda.angle, param->player.angle);
-	get_percent_x(&percent_x, dda);
+	get_percent_x(&percent_x, dda, &wall.shade);
+	wall.shade = exp(-15 * (dda.hit_ray.length / 1000));
 	while (wall.x < wall.width)
 	{
 		wall.y = 0;
@@ -73,7 +80,7 @@ void	draw_wall(t_param *param, t_dda dda)
 			if (xmap < WIDTH && xmap >= 0 && ymap < HEIGHT && ymap >= 0)
 				mlx_put_pixel(param->reality, xmap, ymap,
 					get_color_wall(param->textures[dda.hit_ray.side],
-						percent_x, (float)wall.y / (float)wall.height * 100));
+						percent_x, (float)wall.y / (float)wall.height * 100, wall.shade));
 			wall.y++;
 		}
 		wall.x++;

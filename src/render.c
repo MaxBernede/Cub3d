@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   renderer.c                                         :+:    :+:            */
+/*   render.c                                           :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: mbernede <mbernede@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/07 13:35:16 by mbernede      #+#    #+#                 */
-/*   Updated: 2024/02/07 16:39:02 by mbernede      ########   odam.nl         */
+/*   Updated: 2024/02/07 18:05:39 by mbernede      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void	draw_minimap(t_player player, t_map map)
 	}
 }
 
-void	renderer(t_param *param)
+void	render(t_param *param)
 {
 	t_dda	data;
 

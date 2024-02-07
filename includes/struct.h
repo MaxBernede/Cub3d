@@ -15,6 +15,7 @@ typedef struct s_wall
 {
 	int				height;
 	int				width;
+	double			shade;
 	int				x;
 	int 			y;
 }					t_wall;

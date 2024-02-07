@@ -6,7 +6,7 @@
 /*   By: mbernede <mbernede@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/07 13:32:59 by mbernede      #+#    #+#                 */
-/*   Updated: 2024/02/07 15:30:45 by mbernede      ########   odam.nl         */
+/*   Updated: 2024/02/07 18:04:34 by mbernede      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,6 @@ void	my_hook(void *param)
 			change_player_angle(&p->player, -1, p->mlx->delta_time);
 		if (mlx_is_key_down(p->mlx, MLX_KEY_D))
 			change_player_angle(&p->player, 1, p->mlx->delta_time);
-		renderer(param);
+		render(param);
 	}
 }

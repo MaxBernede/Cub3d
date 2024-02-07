@@ -60,7 +60,7 @@
 
 // Player variables
 # define WALKSPEED 15
-# define TURNSPEED 1.5
+# define TURNSPEED .05
 # define FOV 64
 
 // Rendering Variables
@@ -129,7 +129,7 @@ void		init_dda(t_dda *data, float player_angle);
 void		dda(t_dda *data, t_vec2 player_pos, t_map map);
 
 // renderer.c
-void		renderer(t_param *param);
+void		render(t_param *param);
 
 // check_map
 int			check_map(t_param *param);
@@ -150,7 +150,7 @@ char*		concatenate_strings(char** strings, int numStrings);
 void		print_flood(t_map map);
 
 //!Color_wall
-uint32_t get_color_wall(mlx_texture_t* texture, float percentageX, float percentageY);
+uint32_t get_color_wall(mlx_texture_t* texture, float percentageX, float percentageY, double shade);
 
 //! UTILS
 // clean.c

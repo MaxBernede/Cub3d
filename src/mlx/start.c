@@ -6,7 +6,7 @@
 /*   By: mbernede <mbernede@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/07 13:33:19 by mbernede      #+#    #+#                 */
-/*   Updated: 2024/02/07 16:16:54 by mbernede      ########   odam.nl         */
+/*   Updated: 2024/02/07 18:04:12 by mbernede      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	start(t_param *param, t_window w)
 		return (mlx_close_window(param->mlx), printf(ERR_IMG_CREA), ERROR);
 	init_player(param->map, &param->player, param->floor);
 	draw_background(param->background, param);
-	renderer(param);
+	render(param);
 	if (mlx_image_to_window(param->mlx, param->background, 0, 0) == -1
 		|| mlx_image_to_window(param->mlx, param->reality, 0, 0) == -1
 		|| mlx_image_to_window(param->mlx, param->map.minimap, 0, 0) == -1)

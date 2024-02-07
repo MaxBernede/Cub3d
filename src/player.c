@@ -6,7 +6,7 @@
 /*   By: mbernede <mbernede@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/07 15:30:48 by mbernede      #+#    #+#                 */
-/*   Updated: 2024/02/07 17:22:59 by mbernede      ########   odam.nl         */
+/*   Updated: 2024/02/07 17:59:29 by mbernede      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	move_player(t_player *player, char **map, int direction, double dt)
 
 void	change_player_angle(t_player *player, int direction, double dt)
 {
-	player->angle += TURNSPEED * direction * dt;
+	player->angle += TURNSPEED * direction;
 	if (player->angle < 0)
 		player->angle += TWO_PI;
 	else if (player->angle > TWO_PI)
