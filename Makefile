@@ -19,31 +19,31 @@ endif
 OBJ_DIR := ./obj
 SRC_DIR := ./src
 HEADERS := libft/libft.h includes/cub3d.h includes/struct.h
-SRC :=	main.c				\
-		player.c			\
-		valid_input.c		\
-		parsing.c			\
-		check_map.c			\
-		render.c			\
-		wall.c				\
-		draw_line.c			\
-		dda.c				\
-		utils/v2_operations.c		\
-		utils/check_line.c 	\
-		utils/clean.c		\
-		utils/ft_atof.c		\
-		utils/prints.c		\
-		utils/utils.c		\
-		utils/utils2.c		\
-		utils/normalize.c	\
-		fill_datas.c		\
-		mlx/start.c			\
-		mlx/hook.c			\
-		map_parse.c			\
-		gets.c				\
-		flood_fill.c		\
-		nodes.c				\
-		nodes2.c			\
+SRC :=	main.c					\
+		player.c				\
+		valid_input.c			\
+		parsing.c				\
+		check_map.c				\
+		rendering/render.c		\
+		rendering/wall.c		\
+		rendering/draw_line.c	\
+		rendering/dda.c			\
+		utils/v2_operations.c	\
+		utils/check_line.c 		\
+		utils/clean.c			\
+		utils/ft_atof.c			\
+		utils/prints.c			\
+		utils/utils.c			\
+		utils/utils2.c			\
+		utils/normalize.c		\
+		fill_datas.c			\
+		mlx/start.c				\
+		mlx/hook.c				\
+		map_parse.c				\
+		gets.c					\
+		flood_fill.c			\
+		nodes.c					\
+		nodes2.c				\
 
 OBJ := $(addprefix $(OBJ_DIR)/,$(SRC:.c=.o))
 SRC := $(addprefix $(SRC_DIR)/,$(SRC))

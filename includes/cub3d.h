@@ -60,7 +60,7 @@
 
 // Player variables
 # define WALKSPEED 15
-# define TURNSPEED .05
+# define TURNSPEED 2.5
 # define FOV 64
 
 // Rendering Variables

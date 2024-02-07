@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   start.c                                            :+:    :+:            */
+/*   start.c                                            :+:      :+:    :+:   */
 /*                                                     +:+                    */
 /*   By: mbernede <mbernede@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/07 13:33:19 by mbernede      #+#    #+#                 */
-/*   Updated: 2024/02/07 18:04:12 by mbernede      ########   odam.nl         */
+/*   Updated: 2024/02/07 20:55:04 by bjacobs          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,26 @@
 
 void	draw_background(mlx_image_t *background, t_param *param)
 {
-	int	x;
-	int	y;
+	int		x;
+	int		y;
+	double	shade;
 
-	x = 0;
-	while (x < WIDTH)
+	y = 0;
+	while (y < HEIGHT)
 	{
-		y = 0;
-		while (y < HEIGHT)
+		x = 0;
+		shade = (double)y / HEIGHT;
+		while (x < WIDTH)
 		{
 			if (y < HALF_HEIGHT)
 				mlx_put_pixel(background, x, y, param->map.ceil_color);
 			else
-				mlx_put_pixel(background, x, y, param->map.floor_color);
-			y++;
+				mlx_put_pixel(background, x, y,
+					ft_pixel(param->floor.r * shade, param->floor.g * shade,
+						param->floor.b * shade, 255));
+			++x;
 		}
-		x++;
+		++y;
 	}
 }
 

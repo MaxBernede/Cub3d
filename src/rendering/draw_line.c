@@ -6,11 +6,11 @@
 /*   By: bjacobs <bjacobs@student.codam.nl>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 18:07:29 by bjacobs           #+#    #+#             */
-/*   Updated: 2024/02/06 18:33:55 by bjacobs          ###   ########.fr       */
+/*   Updated: 2024/02/07 18:31:17 by bjacobs          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "cub3d.h"
 
 void	put_pixel(mlx_image_t *img, int x, int y, uint32_t color)
 {
