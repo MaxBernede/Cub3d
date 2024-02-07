@@ -6,7 +6,7 @@
 /*   By: maxb <maxb@student.42.fr>                    +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/26 12:27:02 by maxb          #+#    #+#                 */
-/*   Updated: 2024/02/07 13:53:03 by mbernede      ########   odam.nl         */
+/*   Updated: 2024/02/07 16:17:27 by mbernede      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,13 +102,11 @@ int	parse_map(char *line, t_param *p)
 	split = ft_split(sub, ' ');
 	if (!split)
 		return (free(line), free(sub), ERROR);
-	// this will exit when catching a parameter like NO,SO,EA,WE,F,C
 	if (get_type_no_space(split[0]) != ERROR)
 		return (ft_2dfree(split), OK);
-	if (full_textures(p) || fill_map(sub, p))
+	if (check_full_textures(p) || fill_map(sub, p))
 		return (ft_2dfree(split), ERROR);
 	ft_2dfree(split);
-	// Check below means the map have been filled,so we can check the validity of the map
 	if (p->map.map)
 		return (check_map(p));
 	return (OK);

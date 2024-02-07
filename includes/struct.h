@@ -103,6 +103,7 @@ typedef struct s_map
 	int				height;
 
 	uint32_t		floor_color;
+	uint32_t		ceil_color;
 	mlx_image_t		*minimap;
 }					t_map;
 

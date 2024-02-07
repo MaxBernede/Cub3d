@@ -6,7 +6,7 @@
 /*   By: mbernede <mbernede@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/07 13:43:37 by mbernede      #+#    #+#                 */
-/*   Updated: 2024/02/07 14:35:20 by mbernede      ########   odam.nl         */
+/*   Updated: 2024/02/07 15:28:38 by mbernede      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,55 +56,26 @@ void	fill_wall(t_wall *wall, float ray_len, float dda_angle, float angle)
 void	draw_wall(t_param *param, t_dda dda)
 {
 	t_wall	wall;
-	int		x;
-	int		y;
 	float	percent_x;
 	int		xmap;
 	int		ymap;
 
-	x = 0;
+	wall.x = 0;
 	fill_wall(&wall, dda.hit_ray.length, dda.angle, param->player.angle);
 	get_percent_x(&percent_x, dda);
-	while (x < wall.width)
+	while (wall.x < wall.width)
 	{
-		y = 0;
-		xmap = wall.width * dda.rays + x;
-		while (y < wall.height)
+		wall.y = 0;
+		xmap = wall.width * dda.rays + wall.x;
+		while (wall.y < wall.height)
 		{
-			ymap = y + HALF_HEIGHT - wall.height / 2;
+			ymap = wall.y + HALF_HEIGHT - wall.height / 2;
 			if (xmap < WIDTH && xmap >= 0 && ymap < HEIGHT && ymap >= 0)
 				mlx_put_pixel(param->reality, xmap, ymap,
 					get_color_wall(param->textures[dda.hit_ray.side],
-						percent_x, (float)y / (float)wall.height * 100));
-			y++;
+						percent_x, (float)wall.y / (float)wall.height * 100));
+			wall.y++;
 		}
-		x++;
+		wall.x++;
 	}
 }
-
-// void	draw_wall(t_param *param, t_dda dda)
-// {
-// 	t_wall	wall;
-// 	float	percent_x;
-// 	int		xmap;
-// 	int		ymap;
-
-// 	wall.x = 0;
-// 	fill_wall(&wall, dda);
-// 	get_percent_x(&percent_x, dda);
-// 	while (wall.x < wall.width)
-// 	{
-// 		wall.y = 0;
-// 		xmap = wall.width * dda.rays + wall.x;
-// 		while (wall.y < wall.height)
-// 		{
-// 			ymap = wall.y + HALF_HEIGHT - wall.height / 2;
-// 			if (xmap < WIDTH && xmap >= 0 && ymap < HEIGHT && ymap >= 0)
-// 				mlx_put_pixel(param->reality, xmap, ymap,
-// 					get_color_wall(param->textures[dda.hit_ray.side],
-// 						percent_x, (float)wall.y / (float)wall.height * 100));
-// 			wall.y++;
-// 		}
-// 		wall.x++;
-// 	}
-// }

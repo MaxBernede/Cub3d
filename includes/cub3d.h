@@ -21,6 +21,7 @@
 # define ERR_FILE_DATA "Error: File datas are not correct, exit\n"
 # define ERR_EMPTY_MAP "Error\nMap is empty\n"
 # define ERR_NO_MAP "Error\nNo map in\n"
+# define ERR_IMG_CREA "Error\nWhile creating MLX images\n"
 
 // Errors globals
 # define ERR_MLC "Error: Malloc Failed\n"
@@ -83,6 +84,13 @@
 # define EAST 6
 # define WEST 7
 
+//player.c
+void		fill_delta(t_player *player, t_vec2 *offset);
+void		move_player(t_player *player, char **map, int direction, double dt);
+void		change_player_angle(t_player *player, int direction, double dt);
+void		init_player(t_map map, t_player *player, t_color floor);
+
+
 //wall.c
 void		draw_wall(t_param *param, t_dda data);
 
@@ -122,7 +130,7 @@ void		renderer(t_param *param);
 
 // check_map
 int			check_map(t_param *param);
-int			full_textures(t_param *p);
+int			check_full_textures(t_param *p);
 
 // check_line.c
 int			get_str_without_nl(char *line, char **sub);
@@ -144,6 +152,7 @@ uint32_t get_color_wall(mlx_texture_t* texture, float percentageX, float percent
 //! UTILS
 // clean.c
 void		clean_everything(t_param *param);
+int32_t		ft_pixel(int32_t r, int32_t g, int32_t b, int32_t a);
 
 float pourcentage_of(float coordinate);
 
@@ -156,12 +165,16 @@ void		normalize_map(t_param *p);
 // to.c
 int			to_decimal(char *s, double *f);
 
-int			is_scale(char *s, double *f);
 int			is_colors(char *s, int *r, int *g, int *b);
 
 void		ft_2d_print(char **str);
 int			cmp(char *s1, char *s2);
 int			nb_or_comma(char *s);
+
+//utils2.c
+float		float_modulo(float dividend, float divisor);
+float		pourcentage_of(float coordinate);
+void		print_all_ray(t_ray *ray);
 
 // valid_input.c
 bool		check_file(char *arg);

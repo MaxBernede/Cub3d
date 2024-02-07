@@ -6,13 +6,13 @@
 /*   By: mbernede <mbernede@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/07 13:40:11 by mbernede      #+#    #+#                 */
-/*   Updated: 2024/02/07 13:40:12 by mbernede      ########   odam.nl         */
+/*   Updated: 2024/02/07 16:18:59 by mbernede      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-// Check the textures exists and can be opened them assigned them to the structure
+// Check textures exists and can be opened then assign them to the structure
 int	side_textures(int type, char *arg, t_param *p)
 {
 	int	fd;
@@ -60,10 +60,9 @@ int	check_line(char *line, t_param *param)
 	return (OK);
 }
 
-// will check the if we need to fill map, in case it start filling the map
-// the program won't run the checkline after parsemap itself will check
-// that there is nothing after the parsing of the map and we reached end of file 
-// or at least only \n
+// will check if we need to fill map, in case it start filling the map
+// the program won't run the checkline. Parsemap itself will check
+// that there is nothing after the parsing of the map
 int	parse_file(char *arg, t_param *p)
 {
 	char	*line;

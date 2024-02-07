@@ -20,6 +20,7 @@ OBJ_DIR := ./obj
 SRC_DIR := ./src
 HEADERS := libft/libft.h includes/cub3d.h includes/struct.h
 SRC :=	main.c				\
+		player.c			\
 		valid_input.c		\
 		parsing.c			\
 		check_map.c			\
@@ -31,11 +32,9 @@ SRC :=	main.c				\
 		utils/check_line.c 	\
 		utils/clean.c		\
 		utils/ft_atof.c		\
-		utils/is_color.c	\
 		utils/prints.c		\
-		utils/to.c			\
 		utils/utils.c		\
-		utils/concat_2d.c	\
+		utils/utils2.c		\
 		utils/normalize.c	\
 		fill_datas.c		\
 		mlx/start.c			\

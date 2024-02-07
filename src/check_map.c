@@ -6,7 +6,7 @@
 /*   By: maxb <maxb@student.42.fr>                    +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/27 17:52:04 by maxb          #+#    #+#                 */
-/*   Updated: 2024/02/07 13:48:24 by mbernede      ########   odam.nl         */
+/*   Updated: 2024/02/07 15:33:27 by mbernede      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	check_map(t_param *param)
 }
 
 //check if full textures and colors are filled
-int	full_textures(t_param *p)
+int	check_full_textures(t_param *p)
 {
 	if (!p->textures[S_SOUTH] || !p->textures[S_NORTH] || !p->textures[S_EAST]
 		|| !p->textures[S_WEST])

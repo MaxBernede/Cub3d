@@ -6,42 +6,13 @@
 /*   By: mbernede <mbernede@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/07 13:33:19 by mbernede      #+#    #+#                 */
-/*   Updated: 2024/02/07 13:33:20 by mbernede      ########   odam.nl         */
+/*   Updated: 2024/02/07 16:16:54 by mbernede      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-int32_t	ft_pixel(int32_t r, int32_t g, int32_t b, int32_t a)
-{
-	return (r << 24 | g << 16 | b << 8 | a);
-}
-
-void	init_player(t_map map, t_player *player, t_color floor)
-{
-	char	direction;
-	int		x;
-	int		y;
-
-	get_char_start(map, &y, &x);
-	direction = map.map[y][x];
-	printf("player x: %d, player y: %d, direction: %c\n", x, y, direction);
-	if (direction == 'N')
-		player->angle = HALF_PI;
-	else if (direction == 'W')
-		player->angle = PI;
-	else if (direction == 'S')
-		player->angle = PI + HALF_PI;
-	else
-		player->angle = 0;
-	player->pos.x = x * TILE_SIZE + TILE_SIZE * 0.5;
-	player->pos.y = y * TILE_SIZE + TILE_SIZE * 0.5;
-	player->delta.x = cos(player->angle) * WALKSPEED;
-	player->delta.y = sin(player->angle) * WALKSPEED;
-}
-
-void	draw_background(mlx_image_t *background, uint32_t floor_color,
-		uint32_t roof_color)
+void	draw_background(mlx_image_t *background, t_param *param)
 {
 	int	x;
 	int	y;
@@ -53,40 +24,39 @@ void	draw_background(mlx_image_t *background, uint32_t floor_color,
 		while (y < HEIGHT)
 		{
 			if (y < HALF_HEIGHT)
-				mlx_put_pixel(background, x, y, roof_color);
+				mlx_put_pixel(background, x, y, param->map.ceil_color);
 			else
-				mlx_put_pixel(background, x, y, floor_color);
+				mlx_put_pixel(background, x, y, param->map.floor_color);
 			y++;
 		}
 		x++;
 	}
 }
 
-int	start(t_param *param, t_window w)
+int	init_images(t_param *param, t_window w)
 {
-	int	r;
-	int	g;
-	int	b;
-
-	param->mlx = mlx_init(w.width, w.height, "cub3d", true);
-	if (!param->mlx)
-		return (ERROR);
 	param->background = mlx_new_image(param->mlx, w.width, w.height);
 	if (!param->background)
-		return (mlx_close_window(param->mlx), ERROR);
+		return (ERROR);
 	param->reality = mlx_new_image(param->mlx, w.width, w.height);
 	if (!param->reality)
-		return (mlx_close_window(param->mlx), ERROR);
+		return (ERROR);
 	param->map.minimap = mlx_new_image(param->mlx, param->map.length
 			* TILE_SIZE, param->map.height * TILE_SIZE);
 	if (!param->map.minimap)
-		return (mlx_close_window(param->mlx), ERROR);
-	param->map.floor_color = ft_pixel(param->floor.r, param->floor.g,
-			param->floor.b, 90);
+		return (ERROR);
+	return (OK);
+}
+
+int	start(t_param *param, t_window w)
+{
+	param->mlx = mlx_init(w.width, w.height, "cub3d", true);
+	if (!param->mlx)
+		return (ERROR);
+	if (init_images(param, w))
+		return (mlx_close_window(param->mlx), printf(ERR_IMG_CREA), ERROR);
 	init_player(param->map, &param->player, param->floor);
-	draw_background(param->background, ft_pixel(param->floor.r, param->floor.g,
-			param->floor.b, 255), ft_pixel(param->ceiling.r, param->ceiling.g,
-			param->ceiling.b, 255));
+	draw_background(param->background, param);
 	renderer(param);
 	if (mlx_image_to_window(param->mlx, param->background, 0, 0) == -1
 		|| mlx_image_to_window(param->mlx, param->reality, 0, 0) == -1

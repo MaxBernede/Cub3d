@@ -1,10 +1,10 @@
 NO textures/tpm.png
-SO textures/gold1.png
-WE textures/grass.png
-EA textures/water.png
+SO textures/tpm.png
+WE textures/tpm.png
+EA textures/tpm.png
 
-F 220,100,0
-C 225,30,0
+F 16,125,1
+C 0,81,181
 
         1111111111111111111111111
         1000000000110000000000001
