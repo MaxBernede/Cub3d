@@ -6,7 +6,7 @@
 /*   By: mbernede <mbernede@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/07 13:43:37 by mbernede      #+#    #+#                 */
-/*   Updated: 2024/02/07 15:28:38 by mbernede      ########   odam.nl         */
+/*   Updated: 2024/02/07 17:26:22 by mbernede      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	get_percent_x(float *percent_x, t_dda dda)
 
 void	fill_wall(t_wall *wall, float ray_len, float dda_angle, float angle)
 {
-	wall->height = (HEIGHT * 6) / (ray_len * cos(angle - dda_angle));
+	wall->height = (HEIGHT * 8) / (ray_len * cos(angle - dda_angle));
 	wall->width = WIDTH / (RAY_AMOUNT);
 	if (!wall->width)
 		wall->width = 1;

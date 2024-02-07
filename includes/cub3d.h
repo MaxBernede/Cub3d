@@ -59,7 +59,7 @@
 # define TILE_SIZE 8
 
 // Player variables
-# define WALKSPEED 12
+# define WALKSPEED 15
 # define TURNSPEED 1.5
 # define FOV 64
 
@@ -90,6 +90,9 @@ void		move_player(t_player *player, char **map, int direction, double dt);
 void		change_player_angle(t_player *player, int direction, double dt);
 void		init_player(t_map map, t_player *player, t_color floor);
 
+
+//valid_input.c
+bool		endswith(char *str, char *suffix);
 
 //wall.c
 void		draw_wall(t_param *param, t_dda data);

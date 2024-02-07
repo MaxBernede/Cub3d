@@ -6,7 +6,7 @@
 /*   By: mbernede <mbernede@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/07 13:35:16 by mbernede      #+#    #+#                 */
-/*   Updated: 2024/02/07 14:26:08 by mbernede      ########   odam.nl         */
+/*   Updated: 2024/02/07 16:39:02 by mbernede      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,43 +49,6 @@ void	draw_square(int size, t_vec2 p, mlx_image_t *img, uint32_t color)
 		x++;
 	}
 }
-
-// void	draw_wall(t_param *param, t_dda dda)
-// {
-// 	int		x;
-// 	int		y;
-// 	int		wall_height;
-// 	int		wall_width;
-// 	float	percent_x;
-// 	int		xmap;
-// 	int		ymap;
-
-// 	x = 0;
-// 	wall_height = (HEIGHT * 6) / (dda.hit_ray.length * cos(param->player.angle
-// 				- dda.angle));
-// 	wall_width = WIDTH / (RAY_AMOUNT);
-// 	if (!wall_width)
-// 		wall_width = 1;
-// 	if (dda.hit_ray.side == S_NORTH || dda.hit_ray.side == S_SOUTH)
-// 		percent_x = pourcentage_of(dda.hit_ray.hit.x);
-// 	else
-// 		percent_x = pourcentage_of(dda.hit_ray.hit.y);
-// 	while (x < wall_width)
-// 	{
-// 		y = 0;
-// 		xmap = wall_width * dda.rays + x;
-// 		while (y < wall_height)
-// 		{
-// 			ymap = y + HALF_HEIGHT - wall_height / 2;
-// 			if (xmap < WIDTH && xmap >= 0 && ymap < HEIGHT && ymap >= 0)
-// 				mlx_put_pixel(param->reality, xmap, ymap,
-// 					get_color_wall(param->textures[dda.hit_ray.side],
-// 						percent_x, (float)y / (float)wall_height * 100));
-// 			y++;
-// 		}
-// 		x++;
-// 	}
-// }
 
 void	draw_minimap(t_player player, t_map map)
 {

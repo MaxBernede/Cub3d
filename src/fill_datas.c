@@ -6,7 +6,7 @@
 /*   By: mbernede <mbernede@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/07 13:49:46 by mbernede      #+#    #+#                 */
-/*   Updated: 2024/02/07 16:17:07 by mbernede      ########   odam.nl         */
+/*   Updated: 2024/02/07 16:56:14 by mbernede      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,19 @@ int	floor_ceiling(int type, char *arg, t_param *p)
 
 int	fill_texture(mlx_texture_t **texture, char *s)
 {
-	*texture = mlx_load_png(s);
+	xpm_t *xpm_data;
+
+	if (endswith(s, ".xpm"))
+	{	
+		;
+		// xpm_data = mlx_load_xpm42(s);
+        // if (xpm_data == NULL) 
+		// 	return (printf("Error: Unable to load XPM file %s\n", s), ERROR)
+        // *texture = mlx_convert_xpm_to_texture(*texture, xpm_data);
+        // mlx_free_xpm42(xpm_data);
+	} 	
+	else if (endswith(s, ".png"))
+		*texture = mlx_load_png(s);
 	if (!(*texture))
 		return (ERROR);
 	return (OK);
