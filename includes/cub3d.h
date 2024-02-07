@@ -83,6 +83,9 @@
 # define EAST 6
 # define WEST 7
 
+//wall.c
+void		draw_wall(t_param *param, t_dda data);
+
 //fill_datas.c
 int			fill_texture(mlx_texture_t **texture, char *s);
 int			floor_ceiling(int type, char *arg, t_param *p);

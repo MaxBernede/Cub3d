@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   dda.c                                              :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: mbernede <mbernede@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/16 01:45:30 by bjacobs           #+#    #+#             */
-/*   Updated: 2024/02/07 13:26:35 by mbernede         ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   dda.c                                              :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: mbernede <mbernede@student.42.fr>            +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2023/12/16 01:45:30 by bjacobs       #+#    #+#                 */
+/*   Updated: 2024/02/07 13:57:38 by mbernede      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,6 @@ float	float_modulo(float dividend, float divisor)
 
 float	pourcentage_of(float coordinate)
 {
-	/*float value;
-	value = float_modulo(coordinate, TILE_SIZE);*/
 	return ((fmod(coordinate, TILE_SIZE) * 100) / TILE_SIZE);
 }
 
@@ -41,6 +39,8 @@ void	print_all_ray(t_ray *ray)
 	printf("ray side: %d\n", ray->side);
 }
 
+//angle < PI is looking up
+// else looking down
 int	init_xray(t_ray *ray, t_vec2 origin, float angle)
 {
 	float	atan;
@@ -49,12 +49,12 @@ int	init_xray(t_ray *ray, t_vec2 origin, float angle)
 		return (ray->length = 10000, EXIT_FAILURE);
 	atan = 1 / tan(angle);
 	ray->origin = origin;
-	if (angle < PI) // looking up
+	if (angle < PI)
 	{
 		ray->hit.y = (((int)ray->origin.y >> 3) << 3) - 0.0001;
 		ray->ray_step.y = -TILE_SIZE;
 	}
-	else // otherwise looking down
+	else
 	{
 		ray->hit.y = (((int)ray->origin.y >> 3) << 3) + TILE_SIZE;
 		ray->ray_step.y = TILE_SIZE;
@@ -65,11 +65,11 @@ int	init_xray(t_ray *ray, t_vec2 origin, float angle)
 		ray->side = S_SOUTH;
 	else
 		ray->side = S_NORTH;
-	// printf("Xray hit x: %f, hit y: %f\n", pourcentage_of(ray->hit.x),pourcentage_of(ray->hit.y));
-	// print_all_ray(ray);
 	return (EXIT_SUCCESS);
 }
 
+// angle < HALF_PI || angle > THIRD_PI is looking left
+// else right
 int	init_yray(t_ray *ray, t_vec2 origin, float angle)
 {
 	float	atan;
@@ -78,13 +78,13 @@ int	init_yray(t_ray *ray, t_vec2 origin, float angle)
 		return (ray->length = 10000, EXIT_FAILURE);
 	atan = tan(angle);
 	ray->origin = origin;
-	if (angle < HALF_PI || angle > THIRD_PI) // looking left
+	if (angle < HALF_PI || angle > THIRD_PI)
 	{
 		ray->hit.x = (((int)ray->origin.x >> 3) << 3) - 0.0001;
 		ray->ray_step.x = -TILE_SIZE;
 		ray->side = S_WEST;
 	}
-	else // otherwise looking right
+	else
 	{
 		ray->hit.x = (((int)ray->origin.x >> 3) << 3) + TILE_SIZE;
 		ray->ray_step.x = TILE_SIZE;
@@ -92,7 +92,6 @@ int	init_yray(t_ray *ray, t_vec2 origin, float angle)
 	}
 	ray->hit.y = (ray->hit.x - ray->origin.x) * atan + ray->origin.y;
 	ray->ray_step.y = ray->ray_step.x * atan;
-	// print_all_ray(ray);
 	return (EXIT_SUCCESS);
 }
 
@@ -114,7 +113,6 @@ void	cast_ray(t_ray *ray, t_map map)
 	ray->length = sqrt((ray->origin.x - ray->hit.x) * (ray->origin.x
 				- ray->hit.x) + (ray->origin.y - ray->hit.y) * (ray->origin.y
 				- ray->hit.y));
-	// printf("length: %f\n", ray->length);
 }
 
 void	init_dda(t_dda *data, float player_angle)

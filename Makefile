@@ -24,7 +24,7 @@ SRC :=	main.c				\
 		parsing.c			\
 		check_map.c			\
 		renderer.c			\
-		color_wall.c		\
+		wall.c				\
 		draw_line.c			\
 		dda.c				\
 		utils/v2_operations.c		\

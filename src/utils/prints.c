@@ -1,21 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   prints.c                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: mbernede <mbernede@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/07 13:18:48 by mbernede          #+#    #+#             */
-/*   Updated: 2024/02/07 13:19:15 by mbernede         ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   prints.c                                           :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: mbernede <mbernede@student.42.fr>            +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2024/02/07 13:18:48 by mbernede      #+#    #+#                 */
+/*   Updated: 2024/02/07 13:50:26 by mbernede      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-#define ANSI_RED "\x1b[31m"
-#define ANSI_GREEN "\x1b[32m"
-#define ANSI_WHITE "\x1b[37m"
-#define ANSI_RESET "\x1b[0m"
 
 void	print_pos(t_vec3 vec)
 {
@@ -25,31 +20,4 @@ void	print_pos(t_vec3 vec)
 void	print_color(t_color color)
 {
 	printf("colors:(%d,%d,%d) ", color.r, color.g, color.b);
-}
-
-void	print_flood(t_map map)
-{
-	int	y;
-	int	x;
-
-	y = 0;
-	printf("\n");
-	while (y < map.height)
-	{
-		x = 0;
-		while (x < map.length)
-		{
-			if (map.flood[y][x] == '1')
-				printf(ANSI_RED "■" ANSI_RESET);
-			else if (map.flood[y][x] == '9')
-				printf(ANSI_GREEN "■" ANSI_RESET);
-			else if (map.flood[y][x] == '0')
-				printf(ANSI_WHITE "■" ANSI_RESET);
-			else
-				printf("■");
-			++x;
-		}
-		printf("\n");
-		++y;
-	}
 }

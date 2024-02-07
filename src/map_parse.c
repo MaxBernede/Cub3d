@@ -6,7 +6,7 @@
 /*   By: maxb <maxb@student.42.fr>                    +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/26 12:27:02 by maxb          #+#    #+#                 */
-/*   Updated: 2024/02/07 13:48:21 by mbernede      ########   odam.nl         */
+/*   Updated: 2024/02/07 13:53:03 by mbernede      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,18 @@
 int	last_position(char *str)
 {
 	char	*set;
-	int		lastPos;
+	int		last_pos;
+	int		i;
 
 	set = "10NEWS";
-	lastPos = -1;
-	for (int i = 0; str[i] != '\0'; ++i)
+	last_pos = -1;
+	i = -1;
+	while (str[++i] != '\0')
 	{
 		if (ft_strchr(set, str[i]))
-			lastPos = i + 1;
+			last_pos = i + 1;
 	}
-	return (lastPos);
+	return (last_pos);
 }
 
 int	check_map_length(t_param *p)
