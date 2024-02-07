@@ -6,7 +6,7 @@
 /*   By: mbernede <mbernede@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/07 15:34:19 by mbernede      #+#    #+#                 */
-/*   Updated: 2024/02/07 15:34:41 by mbernede      ########   odam.nl         */
+/*   Updated: 2024/02/07 18:16:28 by mbernede      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ float	float_modulo(float dividend, float divisor)
 
 float	pourcentage_of(float coordinate)
 {
-	return ((fmod(coordinate, TILE_SIZE) * 100) / TILE_SIZE);
+	return ((fmod(coordinate, TILE_SIZE)) / TILE_SIZE);
 }
 
 void	print_all_ray(t_ray *ray)

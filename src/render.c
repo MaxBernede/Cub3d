@@ -6,7 +6,7 @@
 /*   By: mbernede <mbernede@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/07 13:35:16 by mbernede      #+#    #+#                 */
-/*   Updated: 2024/02/07 18:05:39 by mbernede      ########   odam.nl         */
+/*   Updated: 2024/02/07 18:15:09 by mbernede      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	clear_img(mlx_image_t *img)
 	{
 		if (img->pixels[j])
 			img->pixels[j] = 0;
-		i++;
+		++i;
 		j += 4;
 	}
 }

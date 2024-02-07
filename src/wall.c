@@ -6,7 +6,7 @@
 /*   By: mbernede <mbernede@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/07 13:43:37 by mbernede      #+#    #+#                 */
-/*   Updated: 2024/02/07 18:13:30 by mbernede      ########   odam.nl         */
+/*   Updated: 2024/02/07 18:16:46 by mbernede      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,11 @@ uint32_t	get_color_wall(mlx_texture_t *texture, float percentage_x,
 	if (percentage_x <= 0)
 		pos_x = 0;
 	else
-		pos_x = (uint32_t)(percentage_x / 100.0 * texture->width);
+		pos_x = (uint32_t)(percentage_x * texture->width);
 	if (percentage_y <= 0)
 		pos_y = 0;
 	else
-		pos_y = (uint32_t)(percentage_y / 100.0 * texture->width);
+		pos_y = (uint32_t)(percentage_y * texture->width);
 	pixel_index = (pos_y * texture->width + pos_x) * texture->bytes_per_pixel;
 	c.r = texture->pixels[pixel_index] * shade;
 	c.g = texture->pixels[pixel_index + 1] * shade;
@@ -80,7 +80,7 @@ void	draw_wall(t_param *param, t_dda dda)
 			if (xmap < WIDTH && xmap >= 0 && ymap < HEIGHT && ymap >= 0)
 				mlx_put_pixel(param->reality, xmap, ymap,
 					get_color_wall(param->textures[dda.hit_ray.side],
-						percent_x, (float)wall.y / (float)wall.height * 100, wall.shade));
+						percent_x, (float)wall.y / (float)wall.height, wall.shade));
 			wall.y++;
 		}
 		wall.x++;
