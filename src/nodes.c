@@ -1,10 +1,16 @@
-#include "cub3d.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   nodes.c                                            :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: mbernede <mbernede@student.codam.nl>         +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2024/02/07 13:38:12 by mbernede      #+#    #+#                 */
+/*   Updated: 2024/02/07 13:38:59 by mbernede      ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
 
-void	ft_free_node(t_node *node)
-{
-	free(node->line);
-	free(node);
-}
+#include "cub3d.h"
 
 int	ft_our_lst_size(t_node *lst)
 {

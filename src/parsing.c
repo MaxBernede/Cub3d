@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   parsing.c                                          :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: mbernede <mbernede@student.codam.nl>         +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2024/02/07 13:40:11 by mbernede      #+#    #+#                 */
+/*   Updated: 2024/02/07 13:40:12 by mbernede      ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
 // Check the textures exists and can be opened them assigned them to the structure
@@ -20,8 +32,8 @@ int	side_textures(int type, char *arg, t_param *p)
 	return (OK);
 }
 
-//remove the \n then check if empty
-//next, make a string with the rest of the output then fill
+// remove the \n then check if empty
+// next, make a string with the rest of the output then fill
 int	check_line(char *line, t_param *param)
 {
 	char	*sub;
@@ -50,7 +62,8 @@ int	check_line(char *line, t_param *param)
 
 // will check the if we need to fill map, in case it start filling the map
 // the program won't run the checkline after parsemap itself will check
-// that there is nothing after the parsing of the map and we reached the end of the file or at least only \n
+// that there is nothing after the parsing of the map and we reached end of file 
+// or at least only \n
 int	parse_file(char *arg, t_param *p)
 {
 	char	*line;

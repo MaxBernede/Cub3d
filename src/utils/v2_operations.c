@@ -41,4 +41,3 @@ t_vec2	v2_sub(t_vec2 v2, t_vec2 sub)
 	v2.y -= sub.y;
 	return (v2);
 }
-

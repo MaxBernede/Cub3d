@@ -1,11 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   gets.c                                             :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: mbernede <mbernede@student.codam.nl>         +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2024/02/07 13:43:24 by mbernede      #+#    #+#                 */
+/*   Updated: 2024/02/07 13:43:25 by mbernede      ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
 // The map is transformed from a linked list to a char **
 char	**get_map(t_param *p)
 {
-	t_node *current;
-	char **map;
-	int i;
+	t_node	*current;
+	char	**map;
+	int		i;
 
 	current = p->tmp_map;
 	i = 0;
@@ -22,7 +34,7 @@ char	**get_map(t_param *p)
 	return (map);
 }
 
-int get_type(char *line)
+int	get_type(char *line)
 {
 	if (!ft_strncmp("F ", line, 2))
 		return (FLOOR);
@@ -39,9 +51,9 @@ int get_type(char *line)
 	return (ERROR);
 }
 
-int get_type_no_space(char *line)
+int	get_type_no_space(char *line)
 {
-	int i;
+	int	i;
 
 	if (!line)
 		return (ERROR);

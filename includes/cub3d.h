@@ -119,6 +119,7 @@ void		renderer(t_param *param);
 
 // check_map
 int			check_map(t_param *param);
+int			full_textures(t_param *p);
 
 // check_line.c
 int			get_str_without_nl(char *line, char **sub);
@@ -130,7 +131,7 @@ void		my_hook(void *param);
 //! START
 int			start(t_param *param, t_window w);
 
-char*		concatenateStrings(char** strings, int numStrings);
+char*		concatenate_strings(char** strings, int numStrings);
 
 void		print_flood(t_map map);
 

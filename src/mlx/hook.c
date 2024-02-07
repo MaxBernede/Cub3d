@@ -1,16 +1,38 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   hook.c                                             :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: mbernede <mbernede@student.codam.nl>         +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2024/02/07 13:32:59 by mbernede      #+#    #+#                 */
+/*   Updated: 2024/02/07 13:33:00 by mbernede      ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 #include <math.h>
 
 bool	movement_key_down(mlx_t *mlx)
 {
-	if (mlx_is_key_down(mlx, MLX_KEY_W)
-		|| mlx_is_key_down(mlx, MLX_KEY_S)
-		|| mlx_is_key_down(mlx, MLX_KEY_A)
-		||  mlx_is_key_down(mlx, MLX_KEY_D))
+	if (mlx_is_key_down(mlx, MLX_KEY_W) || mlx_is_key_down(mlx, MLX_KEY_S)
+		|| mlx_is_key_down(mlx, MLX_KEY_A) || mlx_is_key_down(mlx, MLX_KEY_D))
 	{
 		return (true);
 	}
 	return (false);
+}
+
+void	fill_delta(t_player *player, t_vec2 *offset)
+{
+	if (player->delta.x < 0)
+		offset->x = -1;
+	else
+		offset->x = 1;
+	if (player->delta.y < 0)
+		offset->y = -1;
+	else
+		offset->y = 1;
 }
 
 void	move_player(t_player *player, char **map, int direction, double dt)
@@ -21,23 +43,18 @@ void	move_player(t_player *player, char **map, int direction, double dt)
 
 	if (dt > .25)
 		dt = .25;
-	if (player->delta.x < 0)
-		offset.x = -1;
-	else
-		offset.x = 1;
-	if (player->delta.y < 0)
-		offset.y = -1;
-	else
-		offset.y = 1;
+	fill_delta(player, &offset);
 	new_pos.x = player->pos.x + player->delta.x * direction * dt;
 	new_pos.y = player->pos.y + player->delta.y * direction * dt;
 	mapo = (new_pos.x + offset.x * direction) / TILE_SIZE;
 	if (ft_strchr("0NSEW", map[(int)((player->pos.y + 1) / TILE_SIZE)][mapo])
-			&& ft_strchr("0NSEW", map[(int)((player->pos.y - 1) / TILE_SIZE)][mapo]))
+		&& ft_strchr("0NSEW", map[(int)((player->pos.y - 1)
+				/ TILE_SIZE)][mapo]))
 		player->pos.x = new_pos.x;
 	mapo = (new_pos.y + offset.y * direction) / TILE_SIZE;
 	if (ft_strchr("0NSEW", map[mapo][(int)((player->pos.x + 1) / TILE_SIZE)])
-			&& ft_strchr("0NSEW", map[mapo][(int)((player->pos.x - 1) / TILE_SIZE)]))
+		&& ft_strchr("0NSEW", map[mapo][(int)((player->pos.x - 1)
+				/ TILE_SIZE)]))
 		player->pos.y = new_pos.y;
 }
 
@@ -69,7 +86,6 @@ void	my_hook(void *param)
 			change_player_angle(&p->player, -1, p->mlx->delta_time);
 		if (mlx_is_key_down(p->mlx, MLX_KEY_D))
 			change_player_angle(&p->player, 1, p->mlx->delta_time);
-		//printf("player x: %f, player y: %f player angle: %f\n", p->player.pos.x, p->player.pos.y, p->player.angle);
 		renderer(param);
 	}
 }

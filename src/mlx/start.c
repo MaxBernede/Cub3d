@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   start.c                                            :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: mbernede <mbernede@student.codam.nl>         +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2024/02/07 13:33:19 by mbernede      #+#    #+#                 */
+/*   Updated: 2024/02/07 13:33:20 by mbernede      ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/cub3d.h"
 
 int32_t	ft_pixel(int32_t r, int32_t g, int32_t b, int32_t a)
@@ -28,7 +40,8 @@ void	init_player(t_map map, t_player *player, t_color floor)
 	player->delta.y = sin(player->angle) * WALKSPEED;
 }
 
-void	draw_background(mlx_image_t *background, uint32_t floor_color, uint32_t roof_color)
+void	draw_background(mlx_image_t *background, uint32_t floor_color,
+		uint32_t roof_color)
 {
 	int	x;
 	int	y;
@@ -51,6 +64,10 @@ void	draw_background(mlx_image_t *background, uint32_t floor_color, uint32_t roo
 
 int	start(t_param *param, t_window w)
 {
+	int	r;
+	int	g;
+	int	b;
+
 	param->mlx = mlx_init(w.width, w.height, "cub3d", true);
 	if (!param->mlx)
 		return (ERROR);
@@ -58,26 +75,19 @@ int	start(t_param *param, t_window w)
 	if (!param->background)
 		return (mlx_close_window(param->mlx), ERROR);
 	param->reality = mlx_new_image(param->mlx, w.width, w.height);
-	//! should we free background aswell in case of error ?
 	if (!param->reality)
 		return (mlx_close_window(param->mlx), ERROR);
-	param->map.minimap = mlx_new_image(param->mlx, param->map.length * TILE_SIZE, param->map.height * TILE_SIZE);
+	param->map.minimap = mlx_new_image(param->mlx, param->map.length
+			* TILE_SIZE, param->map.height * TILE_SIZE);
 	if (!param->map.minimap)
 		return (mlx_close_window(param->mlx), ERROR);
-	param->map.floor_color = ft_pixel(param->floor.r, param->floor.g, param->floor.b, 90);
+	param->map.floor_color = ft_pixel(param->floor.r, param->floor.g,
+			param->floor.b, 90);
 	init_player(param->map, &param->player, param->floor);
-	draw_background(param->background, ft_pixel(param->floor.r, param->floor.g, param->floor.b, 255), ft_pixel(param->ceiling.r, param->ceiling.g, param->ceiling.b, 255));
+	draw_background(param->background, ft_pixel(param->floor.r, param->floor.g,
+			param->floor.b, 255), ft_pixel(param->ceiling.r, param->ceiling.g,
+			param->ceiling.b, 255));
 	renderer(param);
-	/*for (int y = 0; y < w.height; ++y)
-	{
-		for (int x = 0; x < w.width; ++x)
-		{
-			int r = x / 2;
-			int g = y / 2;
-			int b = 0;
-			mlx_put_pixel(param->reality, x, y, ft_pixel(r, g, b, 255));
-		}
-	} */
 	if (mlx_image_to_window(param->mlx, param->background, 0, 0) == -1
 		|| mlx_image_to_window(param->mlx, param->reality, 0, 0) == -1
 		|| mlx_image_to_window(param->mlx, param->map.minimap, 0, 0) == -1)

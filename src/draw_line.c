@@ -34,10 +34,8 @@ static void	init_data(int *delta, int *step, t_vec2 p1, t_vec2 p2)
 
 static int	out_of_bounds(t_vec2 p1, t_vec2 p2)
 {
-	return ((p1.x > WIDTH - 1 && p2.x > WIDTH - 1)
-		|| (p1.x < 0 && p2.x < 0)
-		|| (p1.y > HEIGHT - 1 && p2.y > HEIGHT - 1)
-		|| (p1.y < 0 && p2.y < 0));
+	return ((p1.x > WIDTH - 1 && p2.x > WIDTH - 1) || (p1.x < 0 && p2.x < 0)
+		|| (p1.y > HEIGHT - 1 && p2.y > HEIGHT - 1) || (p1.y < 0 && p2.y < 0));
 }
 
 void	draw_line(mlx_image_t *img, t_vec2 p1, t_vec2 p2, uint32_t color)
@@ -49,7 +47,8 @@ void	draw_line(mlx_image_t *img, t_vec2 p1, t_vec2 p2, uint32_t color)
 	init_data(delta, step, p1, p2);
 	err[0] = delta[0] - delta[1];
 	put_pixel(img, p1.x, p1.y, color);
-	while (((int)p1.x != (int)p2.x || (int)p1.y != (int)p2.y) && !out_of_bounds(p1, p2))
+	while (((int)p1.x != (int)p2.x || (int)p1.y != (int)p2.y)
+		&& !out_of_bounds(p1, p2))
 	{
 		err[1] = 2 * err[0];
 		if (err[1] >= -delta[1])

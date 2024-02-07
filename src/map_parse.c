@@ -1,36 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   map_parse.c                                        :+:      :+:    :+:   */
+/*   map_parse.c                                        :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: maxb <maxb@student.42.fr>                    +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/26 12:27:02 by maxb          #+#    #+#                 */
-/*   Updated: 2024/02/06 02:36:53 by bjacobs          ###   ########.fr       */
+/*   Updated: 2024/02/07 13:48:21 by mbernede      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int last_position(char *str)
+int	last_position(char *str)
 {
-    char *set = "10NEWS";
-    int lastPos = -1;
+	char	*set;
+	int		lastPos;
 
-	//printf("str: %s\n", str);
-    for (int i = 0; str[i] != '\0'; ++i)
+	set = "10NEWS";
+	lastPos = -1;
+	for (int i = 0; str[i] != '\0'; ++i)
 	{
-        if (ft_strchr(set, str[i]))
-            lastPos = i + 1;
-    }
-	//printf("lastPos: %d\n", lastPos);
-    return lastPos;
+		if (ft_strchr(set, str[i]))
+			lastPos = i + 1;
+	}
+	return (lastPos);
 }
 
-int check_map_length( t_param *p)
+int	check_map_length(t_param *p)
 {
-	int length;
-	t_node *tmp;
+	int		length;
+	t_node	*tmp;
 
 	length = 0;
 	tmp = p->tmp_map;
@@ -42,17 +42,6 @@ int check_map_length( t_param *p)
 		tmp = tmp->next;
 	}
 	return (p->map.length);
-}
-
-int full_textures(t_param *p)
-{
-	if (!p->textures[S_SOUTH] || !p->textures[S_NORTH] || !p->textures[S_EAST] || !p->textures[S_WEST])
-		return (ERROR);
-	if (p->floor.r < 0 || p->floor.g < 0 || p->floor.b < 0)
-		return (ERROR);
-	if (p->ceiling.r < 0 || p->ceiling.g < 0 || p->ceiling.b < 0)
-		return (ERROR);
-	return (OK);
 }
 
 char	*read_new_line(char *sub, t_param *p)
@@ -80,15 +69,6 @@ int	fill_map(char *sub, t_param *p)
 	t_map	*map;
 
 	map = &p->map;
-	// if (sub && map->length < 0)
-	// 	map->length = ft_strlen(sub);
-	// while (sub)
-	// {
-	// 	if (ft_strlen(sub) != map->length || insert_node(&p->tmp_map, sub))
-	// 		return (ft_free_lst(p->tmp_map), free(sub), ERROR);
-	// 	sub = read_new_line(sub, p);
-	// }
-	//!NEW
 	while (sub)
 	{
 		if (insert_node(&p->tmp_map, sub))
@@ -97,17 +77,14 @@ int	fill_map(char *sub, t_param *p)
 	}
 	map->length = check_map_length(p);
 	normalize_map(p);
-	//!END
 	p->map.map = get_map(p);
 	if (!p->map.map)
 		return (ERROR);
-	// prepare the floodfill map
 	p->map.flood = get_map(p);
 	if (!p->map.flood)
 		return (ERROR);
 	ft_free_lst(p->tmp_map);
 	p->tmp_map = NULL;
-	// ft_2d_print(p->map.map);
 	p->map.height = ft_2d_arrlen(p->map.map);
 	p->end_map_parse = true;
 	return (OK);
@@ -123,7 +100,7 @@ int	parse_map(char *line, t_param *p)
 	split = ft_split(sub, ' ');
 	if (!split)
 		return (free(line), free(sub), ERROR);
-	//this will exit when catching a parameter like NO,SO,EA,WE,F,C
+	// this will exit when catching a parameter like NO,SO,EA,WE,F,C
 	if (get_type_no_space(split[0]) != ERROR)
 		return (ft_2dfree(split), OK);
 	if (full_textures(p) || fill_map(sub, p))

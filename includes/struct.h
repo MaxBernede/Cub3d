@@ -11,6 +11,13 @@ typedef enum s_sides
     S_WEST,
 } t_sides;
 
+typedef struct s_ucolor
+{
+	uint32_t		r;
+	uint32_t		g;
+	uint32_t		b;
+}					t_ucolor;
+
 typedef struct s_color
 {
 	int				r;

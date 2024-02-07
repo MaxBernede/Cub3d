@@ -1,9 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   to.c                                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mbernede <mbernede@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/02/07 13:18:13 by mbernede          #+#    #+#             */
+/*   Updated: 2024/02/07 13:18:21 by mbernede         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
+//!add overflow checks
 int	to_decimal(char *s, double *f)
 {
-	//! TO BE ADDED OVERFLOWS CHECKS
-	// TODO overflows, specific error such as 1. as a data etc
 	*f = ft_atof(s);
 	return (OK);
 }

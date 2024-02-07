@@ -4,7 +4,8 @@ int	floor_ceiling(int type, char *arg, t_param *p)
 {
 	if (type == FLOOR && is_colors(arg, &p->floor.r, &p->floor.g, &p->floor.b))
 		return (printf(ERR_FILL_COLORS), ERROR);
-	if (type == CEILING && is_colors(arg, &p->ceiling.r, &p->ceiling.g, &p->ceiling.b))
+	if (type == CEILING && is_colors(arg, &p->ceiling.r, &p->ceiling.g,
+			&p->ceiling.b))
 		return (printf(ERR_FILL_COLORS), ERROR);
 	return (OK);
 }

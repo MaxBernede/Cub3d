@@ -44,6 +44,7 @@ SRC :=	main.c				\
 		gets.c				\
 		flood_fill.c		\
 		nodes.c				\
+		nodes2.c			\
 
 OBJ := $(addprefix $(OBJ_DIR)/,$(SRC:.c=.o))
 SRC := $(addprefix $(SRC_DIR)/,$(SRC))

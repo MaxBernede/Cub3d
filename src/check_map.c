@@ -6,7 +6,7 @@
 /*   By: maxb <maxb@student.42.fr>                    +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/27 17:52:04 by maxb          #+#    #+#                 */
-/*   Updated: 2024/01/23 19:51:30 by maxb          ########   odam.nl         */
+/*   Updated: 2024/02/07 13:48:24 by mbernede      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ int	check_char(t_map map)
 		}
 		++y;
 	}
-	printf("found: %d\n", found);
 	if (found != 1)
 		return (ERROR);
 	return (OK);
@@ -43,14 +42,24 @@ int	check_map(t_param *param)
 	int	x;
 	int	y;
 
-	//ft_2d_print(param->map);
 	if (check_char(param->map))
 		return (printf(ERR_CHARACTER), ERROR);
 	if (get_char_start(param->map, &y, &x))
 		return (printf(ERR_START_POS), ERROR);
-	//printf("Player : \n%dx %dy\n", x, y);
-	//printf("Map : \n%dx %dy\n", param->map.length, param->map.height);
 	if (flood_fill(param->map, x, y))
+		return (ERROR);
+	return (OK);
+}
+
+//check if full textures and colors are filled
+int	full_textures(t_param *p)
+{
+	if (!p->textures[S_SOUTH] || !p->textures[S_NORTH] || !p->textures[S_EAST]
+		|| !p->textures[S_WEST])
+		return (ERROR);
+	if (p->floor.r < 0 || p->floor.g < 0 || p->floor.b < 0)
+		return (ERROR);
+	if (p->ceiling.r < 0 || p->ceiling.g < 0 || p->ceiling.b < 0)
 		return (ERROR);
 	return (OK);
 }
