@@ -1,12 +1,12 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         ::::::::             #
-#    Makefile                                           :+:      :+:    :+:    #
+#    Makefile                                           :+:    :+:             #
 #                                                      +:+                     #
 #    By: maxb <maxb@student.42.fr>                    +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/10/07 10:45:43 by mbernede      #+#    #+#                  #
-#    Updated: 2024/01/18 17:28:31 by bjacobs          ###   ########.fr        #
+#    Updated: 2024/02/08 11:51:21 by maxb          ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,7 +44,7 @@ AR 		:= 		ar	-rc
 BONUSOBJ:=		$(addprefix ${OBJ_DIR},${BONUS:.c=.o})
 
 ${NAME}:	${OBJ}
-	@${AR} ${NAME} ${OBJ}
+	@ar -rc ${NAME} ${OBJ}
 # @echo "libft.a made"
 
 all : ${NAME}
@@ -63,7 +63,7 @@ fclean: 	clean
 re: 	fclean all
 
 bonus: ${OBJ} ${BONUSOBJ}
-	@${AR} ${NAME} ${OBJ} ${BONUSOBJ}
+	@ar -rc ${NAME} ${OBJ} ${BONUSOBJ}
 # @echo "libft.a made with bonus"
 
 .PHONY:		all clean fclean re bonus

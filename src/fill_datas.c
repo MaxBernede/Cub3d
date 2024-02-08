@@ -3,10 +3,10 @@
 /*                                                        ::::::::            */
 /*   fill_datas.c                                       :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: mbernede <mbernede@student.codam.nl>         +#+                     */
+/*   By: maxb <maxb@student.42.fr>                    +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/07 13:49:46 by mbernede      #+#    #+#                 */
-/*   Updated: 2024/02/07 16:56:14 by mbernede      ########   odam.nl         */
+/*   Updated: 2024/02/08 13:57:15 by maxb          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,18 +27,18 @@ int	floor_ceiling(int type, char *arg, t_param *p)
 	return (OK);
 }
 
-int	fill_texture(mlx_texture_t **texture, char *s)
+int	fill_texture(mlx_texture_t **texture, xpm_t **xpm, char *s)
 {
-	xpm_t *xpm_data;
-
 	if (endswith(s, ".xpm"))
 	{	
 		;
-		// xpm_data = mlx_load_xpm42(s);
-        // if (xpm_data == NULL) 
-		// 	return (printf("Error: Unable to load XPM file %s\n", s), ERROR)
-        // *texture = mlx_convert_xpm_to_texture(*texture, xpm_data);
-        // mlx_free_xpm42(xpm_data);
+		// void *img_ptr;
+
+		// img_ptr = mlx_xpm_file_to_image(g_mlx, s, &(*xpm)->width, &(*xpm)->height);
+		// *xpm = mlx_load_xpm42(s);
+        // if (*xpm == NULL) 
+		// 	return (printf("Error: Unable to load XPM file %s\n", s), ERROR);
+        // *texture = &(*xpm)->texture;
 	} 	
 	else if (endswith(s, ".png"))
 		*texture = mlx_load_png(s);

@@ -57,7 +57,7 @@ $(NAME): $(OBJ)
 	@echo $(Yellow) Building.. 🏠$(Color_Off)
 	@make -C MLX42/build/
 	@$(MAKE) -C libft bonus
-	@$(CC) -o $(NAME) $^ $(LIBSA) $(CFLAGS) $(INCLUDES) $(MLX_FLAGS)
+	@$(CC) -Ofast -o $(NAME) -pg $^ $(LIBSA) $(CFLAGS) $(INCLUDES) $(MLX_FLAGS)
 	@echo $(Green) Complete ✅ $(Color_Off)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(HEADERS) | $(OBJ_DIR)

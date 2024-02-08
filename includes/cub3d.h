@@ -33,12 +33,15 @@
 # define ERR_TEXTURES "Error\nTextures values error\n"
 # define ERR_FLOOR_CEILING "Error\nFloor and ceiling error\n"
 # define ERR_TYPE "Error\nParsing type data incorrect\n"
+# define ERR_NOTEXT "Error\ndoor or key but no texture\n"
 
 // Sides Error
 # define ERR_NO "Error\nError North\n"
 # define ERR_SO "Error\nError South\n"
 # define ERR_EA "Error\nError East\n"
 # define ERR_WE "Error\nError West\n"
+# define ERR_DOOR "Error\nError Door\n"
+# define ERR_KEY "Error\nError Key\n"
 
 // Minimap Colors
 # define WALL_COL 0xFFFFFF5A
@@ -83,6 +86,8 @@
 # define SOUTH 5
 # define EAST 6
 # define WEST 7
+# define KEY 8
+# define DOOR 9
 
 //player.c
 void		fill_delta(t_player *player, t_vec2 *offset);
@@ -98,7 +103,7 @@ bool		endswith(char *str, char *suffix);
 void		draw_wall(t_param *param, t_dda data);
 
 //fill_datas.c
-int			fill_texture(mlx_texture_t **texture, char *s);
+int			fill_texture(mlx_texture_t **texture, xpm_t **xpm, char *s);
 int			floor_ceiling(int type, char *arg, t_param *p);
 
 //parsing.c
@@ -134,6 +139,7 @@ void		render(t_param *param);
 // check_map
 int			check_map(t_param *param);
 int			check_full_textures(t_param *p);
+int			search_in_map(t_param *p, char *c);
 
 // check_line.c
 int			get_str_without_nl(char *line, char **sub);
@@ -193,5 +199,6 @@ void		ft_free_lst(t_node *head);
 void		ft_free_node(t_node *node);
 int			insert_node(t_node **head, char *line);
 int			ft_our_lst_size(t_node *lst);
+char		*ft_strchr_nolast(const char *s, int c);
 
 #endif

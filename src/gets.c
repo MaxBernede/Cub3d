@@ -3,10 +3,10 @@
 /*                                                        ::::::::            */
 /*   gets.c                                             :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: mbernede <mbernede@student.codam.nl>         +#+                     */
+/*   By: maxb <maxb@student.42.fr>                    +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/07 13:43:24 by mbernede      #+#    #+#                 */
-/*   Updated: 2024/02/07 13:43:25 by mbernede      ########   odam.nl         */
+/*   Updated: 2024/02/08 17:30:53 by maxb          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,10 @@ int	get_type_no_space(char *line)
 		return (EAST);
 	if (!ft_strncmp("WE", line, 2))
 		return (WEST);
+	if (i == 3 && !ft_strncmp("KEY", line, 3))
+		return (KEY);
+	if (i == 4 && !ft_strncmp("DOOR", line, 4))
+		return (DOOR);
 	return (ERROR);
 }
 
