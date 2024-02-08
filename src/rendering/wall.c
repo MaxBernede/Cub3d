@@ -6,7 +6,7 @@
 /*   By: mbernede <mbernede@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/07 13:43:37 by mbernede      #+#    #+#                 */
-/*   Updated: 2024/02/07 20:58:35 by bjacobs          ###   ########.fr       */
+/*   Updated: 2024/02/08 20:45:50 by bjacobs          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,11 @@ uint32_t	get_color_wall(mlx_texture_t *texture, float percentage_x,
 	uint32_t	pixel_index;
 	t_ucolor	c;
 
-	if (percentage_x <= 0)
+	if (percentage_x < 0)
 		pos_x = 0;
 	else
 		pos_x = (uint32_t)(percentage_x * texture->width);
-	if (percentage_y <= 0)
+	if (percentage_y < 0)
 		pos_y = 0;
 	else
 		pos_y = (uint32_t)(percentage_y * texture->width);
@@ -49,7 +49,7 @@ void	get_percent_x(float *percent_x, t_dda dda, double *shade)
 
 void	fill_wall(t_wall *wall, float ray_len, float dda_angle, float angle)
 {
-	wall->height = (HEIGHT * 10) / (ray_len * cos(angle - dda_angle));
+	wall->height = (HEIGHT * 10) / ray_len;
 	wall->width = WIDTH / (RAY_AMOUNT);
 	if (!wall->width)
 		wall->width = 1;
@@ -58,13 +58,14 @@ void	fill_wall(t_wall *wall, float ray_len, float dda_angle, float angle)
 void	draw_wall(t_param *param, t_dda dda)
 {
 	t_wall	wall;
-	float	percent_x;
+	float	percent[2];
 	int		xmap;
 	int		ymap;
 
 	wall.x = 0;
 	fill_wall(&wall, dda.hit_ray.length, dda.angle, param->player.angle);
-	get_percent_x(&percent_x, dda, &wall.shade);
+	get_percent_x(&percent[0], dda, &wall.shade);
+	percent[1] = 1.0 / (float)wall.height;
 	while (wall.x < wall.width)
 	{
 		wall.y = 0;
@@ -75,7 +76,7 @@ void	draw_wall(t_param *param, t_dda dda)
 			if (xmap < WIDTH && xmap >= 0 && ymap < HEIGHT && ymap >= 0)
 				mlx_put_pixel(param->reality, xmap, ymap,
 					get_color_wall(param->textures[dda.hit_ray.side],
-						percent_x, (float)wall.y / (float)wall.height,
+						percent[0], percent[1] * wall.y,
 						wall.shade));
 			wall.y++;
 		}

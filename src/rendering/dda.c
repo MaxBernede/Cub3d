@@ -6,7 +6,7 @@
 /*   By: mbernede <mbernede@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/16 01:45:30 by bjacobs       #+#    #+#                 */
-/*   Updated: 2024/02/07 18:34:47 by bjacobs          ###   ########.fr       */
+/*   Updated: 2024/02/08 20:59:39 by bjacobs          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	init_xray(t_ray *ray, t_vec2 origin, float angle)
 
 	if (angle == 0 || angle == PI)
 		return (ray->length = 10000, EXIT_FAILURE);
-	atan = 1 / tan(angle);
+	atan = 1.0 / tan(angle);
 	ray->origin = origin;
 	if (angle < PI)
 	{
@@ -69,7 +69,7 @@ int	init_yray(t_ray *ray, t_vec2 origin, float angle)
 	return (EXIT_SUCCESS);
 }
 
-void	cast_ray(t_ray *ray, t_map map)
+void	cast_ray(t_ray *ray, t_map map, float player_angle)
 {
 	int	mapx;
 	int	mapy;
@@ -84,9 +84,8 @@ void	cast_ray(t_ray *ray, t_map map)
 		mapx = (int)ray->hit.x >> 3;
 		mapy = (int)ray->hit.y >> 3;
 	}
-	ray->length = sqrt((ray->origin.x - ray->hit.x) * (ray->origin.x
-				- ray->hit.x) + (ray->origin.y - ray->hit.y) * (ray->origin.y
-				- ray->hit.y));
+	ray->length = -((ray->hit.x - ray->origin.x) * cos(player_angle) \
+			+ (ray->hit.y - ray->origin.y) * sin(player_angle));
 }
 
 void	init_dda(t_dda *data, float player_angle)
@@ -97,12 +96,12 @@ void	init_dda(t_dda *data, float player_angle)
 	data->rays = 0;
 }
 
-void	dda(t_dda *data, t_vec2 player_pos, t_map map)
+void	dda(t_dda *data, t_player *player, t_map map)
 {
-	if (!init_xray(&data->xray, player_pos, data->angle))
-		cast_ray(&data->xray, map);
-	if (!init_yray(&data->yray, player_pos, data->angle))
-		cast_ray(&data->yray, map);
+	if (!init_xray(&data->xray, player->pos, data->angle))
+		cast_ray(&data->xray, map, player->angle);
+	if (!init_yray(&data->yray, player->pos, data->angle))
+		cast_ray(&data->yray, map, player->angle);
 	if (data->xray.length < data->yray.length)
 		data->hit_ray = data->xray;
 	else

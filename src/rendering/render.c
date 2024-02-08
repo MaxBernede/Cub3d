@@ -6,7 +6,7 @@
 /*   By: mbernede <mbernede@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/07 13:35:16 by mbernede      #+#    #+#                 */
-/*   Updated: 2024/02/07 20:38:59 by bjacobs          ###   ########.fr       */
+/*   Updated: 2024/02/08 21:18:36 by bjacobs          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,22 +74,23 @@ void	draw_minimap(t_player player, t_map map)
 
 void	render(t_param *param)
 {
-	t_dda	data;
+	t_dda			data;
+	static float	degree_step = ONE_DEGREE / SHARPNESS;
 
 	clear_img(param->reality);
 	draw_minimap(param->player, param->map);
 	init_dda(&data, param->player.angle);
 	while (data.rays < RAY_AMOUNT)
 	{
-		dda(&data, param->player.pos, param->map);
-		data.angle += DEGREE_STEP;
+		dda(&data, &param->player, param->map);
+		data.angle += degree_step;
 		if (data.angle > TWO_PI)
 			data.angle -= TWO_PI;
 		draw_wall(param, data);
-		draw_line(param->map.minimap, data.hit_ray.hit, param->player.pos,
-			0xFFFF00FF);
+		draw_line(param->map.minimap, data.hit_ray.hit,
+			param->player.pos, RAY_COL);
 		data.rays++;
 	}
-	draw_square(4, v2_sub(param->player.pos, v2_new(2, 2)), param->map.minimap,
-		PLAYER_COL);
+	draw_square(4, v2_sub(param->player.pos, v2_new(2, 2)),
+		param->map.minimap, PLAYER_COL);
 }

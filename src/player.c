@@ -6,13 +6,13 @@
 /*   By: mbernede <mbernede@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/07 15:30:48 by mbernede      #+#    #+#                 */
-/*   Updated: 2024/02/07 18:53:58 by bjacobs          ###   ########.fr       */
+/*   Updated: 2024/02/08 21:21:32 by bjacobs          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	fill_delta(t_player *player, t_vec2 *offset)
+void	init_offset(t_player *player, t_vec2 *offset)
 {
 	if (player->delta.x < 0)
 		offset->x = -1;
@@ -32,7 +32,7 @@ void	move_player(t_player *player, char **map, int direction, double dt)
 
 	if (dt > .25)
 		dt = .25;
-	fill_delta(player, &offset);
+	init_offset(player, &offset);
 	new_pos.x = player->pos.x + player->delta.x * direction * dt;
 	new_pos.y = player->pos.y + player->delta.y * direction * dt;
 	mapo = (new_pos.x + offset.x * direction) / TILE_SIZE;

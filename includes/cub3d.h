@@ -42,7 +42,7 @@
 
 // Minimap Colors
 # define WALL_COL 0xFFFFFF5A
-# define NO_FLOOR_COL 0x808080FF
+# define RAY_COL 0xFFFF00FF
 # define PLAYER_COL 0x00FF00FF
 
 //Wall color test
@@ -74,7 +74,6 @@
 # define TWO_PI PI * 2
 # define THIRD_PI 3 * PI / 2
 # define ONE_DEGREE 0.0174532925f
-# define DEGREE_STEP ONE_DEGREE / SHARPNESS
 
 //Type of datas
 # define FLOOR 2
@@ -126,7 +125,7 @@ void		draw_line(mlx_image_t *img, t_vec2 p1, t_vec2 p2, uint32_t color);
 
 // DDA.c
 void		init_dda(t_dda *data, float player_angle);
-void		dda(t_dda *data, t_vec2 player_pos, t_map map);
+void		dda(t_dda *data, t_player *player, t_map map);
 
 // renderer.c
 void		render(t_param *param);
