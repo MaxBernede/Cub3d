@@ -11,7 +11,6 @@ src/gets.c; get_map; line 12 & 17
 src/utils/check_line.c; ft_substr; line 19
 src/parsing.c; mlx_load_png; line 16 & 12 & 18 & 14
 
-shading
-speed of functions
 xpm files texture pointing to them
 360 background
+doors

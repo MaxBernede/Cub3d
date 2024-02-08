@@ -6,7 +6,7 @@
 /*   By: maxb <maxb@student.42.fr>                    +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/27 17:52:04 by maxb          #+#    #+#                 */
-/*   Updated: 2024/02/07 15:33:27 by mbernede      ########   odam.nl         */
+/*   Updated: 2024/02/08 17:54:17 by maxb          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,46 @@ int	check_char(t_map map)
 	return (OK);
 }
 
+int	check_datas(t_map map)
+{
+	int	x;
+	int	y;
+
+	y = 0;
+	while (y < map.height)
+	{
+		x = 0;
+		while (x < map.length)
+		{
+			if (!ft_strchr("NSEW10 DK", map.map[y][x]))
+				return (ERROR);
+			++x;
+		}
+		++y;
+	}
+	return (OK);
+}
+
+int search_in_map(t_param *p, char *c)
+{
+	int	x;
+	int	y;
+
+	y = 0;
+	while (y < p->map.height)
+	{
+		x = 0;
+		while (x < p->map.length)
+		{
+			if (ft_strchr_nolast(c, p->map.map[y][x]))
+				return (OK);
+			++x;
+		}
+		++y;
+	}
+	return (ERROR);
+}
+
 int	check_map(t_param *param)
 {
 	int	x;
@@ -44,6 +84,8 @@ int	check_map(t_param *param)
 
 	if (check_char(param->map))
 		return (printf(ERR_CHARACTER), ERROR);
+	if (check_datas(param->map))
+		return (printf(ERR_FILE_DATA), ERROR);
 	if (get_char_start(param->map, &y, &x))
 		return (printf(ERR_START_POS), ERROR);
 	if (flood_fill(param->map, x, y))

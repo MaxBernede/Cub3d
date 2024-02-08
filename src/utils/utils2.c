@@ -3,10 +3,10 @@
 /*                                                        ::::::::            */
 /*   utils2.c                                           :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: mbernede <mbernede@student.codam.nl>         +#+                     */
+/*   By: maxb <maxb@student.42.fr>                    +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/07 15:34:19 by mbernede      #+#    #+#                 */
-/*   Updated: 2024/02/07 18:16:28 by mbernede      ########   odam.nl         */
+/*   Updated: 2024/02/08 17:49:25 by maxb          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,20 @@ float	float_modulo(float dividend, float divisor)
 float	pourcentage_of(float coordinate)
 {
 	return ((fmod(coordinate, TILE_SIZE)) / TILE_SIZE);
+}
+
+char	*ft_strchr_nolast(const char *s, int c)
+{
+	char	*ptr;
+
+	ptr = (char *)s;
+	while (*ptr)
+	{
+		if (*ptr == (char)c)
+			return (ptr);
+		ptr++;
+	}
+	return (NULL);
 }
 
 void	print_all_ray(t_ray *ray)

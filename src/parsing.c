@@ -3,10 +3,10 @@
 /*                                                        ::::::::            */
 /*   parsing.c                                          :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: mbernede <mbernede@student.codam.nl>         +#+                     */
+/*   By: maxb <maxb@student.42.fr>                    +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/07 13:40:11 by mbernede      #+#    #+#                 */
-/*   Updated: 2024/02/07 16:39:19 by mbernede      ########   odam.nl         */
+/*   Updated: 2024/02/08 17:34:03 by maxb          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,18 @@ int	side_textures(int type, char *arg, t_param *p)
 	if (fd < 1)
 		return (printf(ERR_OPEN_TEXTURES), ERROR);
 	close(fd);
-	if (type == NORTH && fill_texture(&(p->textures[S_NORTH]), arg))
+	if (type == NORTH && fill_texture(&(p->textures[S_NORTH]), &(p->xpms[S_NORTH]), arg))
 		return (printf(ERR_NO), ERROR);
-	if (type == SOUTH && fill_texture(&(p->textures[S_SOUTH]), arg))
+	if (type == SOUTH && fill_texture(&(p->textures[S_SOUTH]), &(p->xpms[S_SOUTH]), arg))
 		return (printf(ERR_SO), ERROR);
-	if (type == EAST && fill_texture(&(p->textures[S_EAST]), arg))
+	if (type == EAST && fill_texture(&(p->textures[S_EAST]), &(p->xpms[S_EAST]), arg))
 		return (printf(ERR_EA), ERROR);
-	if (type == WEST && fill_texture(&(p->textures[S_WEST]), arg))
+	if (type == WEST && fill_texture(&(p->textures[S_WEST]), &(p->xpms[S_WEST]), arg))
 		return (printf(ERR_WE), ERROR);
+	if (type == DOOR && fill_texture(&(p->door_key[0]), &(p->xpms[4]), arg))
+		return (printf(ERR_DOOR), ERROR);
+	if (type == KEY && fill_texture(&(p->door_key[1]), &(p->xpms[5]), arg))
+		return (printf(ERR_KEY), ERROR);
 	return (OK);
 }
 
