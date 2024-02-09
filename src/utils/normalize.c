@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   normalize.c                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: mbernede <mbernede@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/07 13:21:32 by mbernede          #+#    #+#             */
-/*   Updated: 2024/02/07 13:21:33 by mbernede         ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   normalize.c                                        :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: mbernede <mbernede@student.42.fr>            +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2024/02/07 13:21:32 by mbernede      #+#    #+#                 */
+/*   Updated: 2024/02/09 14:34:27 by mbernede      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ int	process_string(char **input, int n)
 	if (len == n)
 		return (OK);
 	result = (char *)malloc((n + 1) * sizeof(char));
+	if (!result)
+		return (ERROR);
 	if (len > n)
 		ft_strlcpy(result, *input, n + 1);
 	else
@@ -37,6 +39,7 @@ int	process_string(char **input, int n)
 	}
 	free(*input);
 	*input = ft_strdup(result);
+	free(result);
 	return (OK);
 }
 

@@ -9,7 +9,8 @@ typedef enum s_sides
     S_SOUTH,
     S_EAST,
     S_WEST,
-	S_DOOR
+	S_DOOR,
+	S_KEY
 } t_sides;
 
 typedef struct s_wall
@@ -122,8 +123,7 @@ typedef struct s_param
 {
 	t_color			floor;
 	t_color			ceiling;
-	mlx_texture_t	*textures[4];
-	mlx_texture_t	*door_key[2];
+	mlx_texture_t	*textures[6];
 	xpm_t			*xpms[6];
 	int				fd;
 	bool			end_map_parse;
