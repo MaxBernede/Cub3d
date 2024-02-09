@@ -6,7 +6,7 @@
 /*   By: maxb <maxb@student.42.fr>                    +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/07 13:40:11 by mbernede      #+#    #+#                 */
-/*   Updated: 2024/02/08 17:34:03 by maxb          ########   odam.nl         */
+/*   Updated: 2024/02/09 14:31:40 by mbernede      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ int	side_textures(int type, char *arg, t_param *p)
 		return (printf(ERR_EA), ERROR);
 	if (type == WEST && fill_texture(&(p->textures[S_WEST]), &(p->xpms[S_WEST]), arg))
 		return (printf(ERR_WE), ERROR);
-	if (type == DOOR && fill_texture(&(p->door_key[0]), &(p->xpms[4]), arg))
+	if (type == DOOR && fill_texture(&(p->textures[S_DOOR]), &(p->xpms[S_DOOR]), arg))
 		return (printf(ERR_DOOR), ERROR);
-	if (type == KEY && fill_texture(&(p->door_key[1]), &(p->xpms[5]), arg))
+	if (type == KEY && fill_texture(&(p->textures[S_KEY]), &(p->xpms[S_KEY]), arg))
 		return (printf(ERR_KEY), ERROR);
 	return (OK);
 }
