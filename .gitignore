@@ -1,3 +1,4 @@
 obj/
 cub3D
 .vscode
+gmon.out

@@ -6,7 +6,7 @@
 /*   By: mbernede <mbernede@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/16 01:45:30 by bjacobs       #+#    #+#                 */
-/*   Updated: 2024/02/09 21:06:58 by bjacobs          ###   ########.fr       */
+/*   Updated: 2024/02/09 21:27:47 by bjacobs          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,8 +84,9 @@ void	cast_ray(t_ray *ray, t_map map, float player_angle, char *hit_condition)
 		mapx = (int)ray->hit.x >> 3;
 		mapy = (int)ray->hit.y >> 3;
 	}
-	//if (map.map[mapy][mapx] == 'D') comment out for open_door function to work
-	//	ray->side = S_DOOR;
+	if (mapy < map.height && mapx < map.length && mapy >= 0 && mapx >= 0
+			&& map.map[mapy][mapx] == 'D')
+		ray->side = S_DOOR;
 	ray->length = -((ray->hit.x - ray->origin.x) * cos(player_angle) \
 			+ (ray->hit.y - ray->origin.y) * sin(player_angle));
 }

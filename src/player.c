@@ -6,7 +6,7 @@
 /*   By: mbernede <mbernede@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/07 15:30:48 by mbernede      #+#    #+#                 */
-/*   Updated: 2024/02/09 05:01:18 by bjacobs          ###   ########.fr       */
+/*   Updated: 2024/02/09 21:30:59 by bjacobs          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	open_door(t_player *player, t_map *map)
 
 	init_dda(&data, player->angle);
 	dda(&data, player, *map, "1D");
-	if (data.ray.side == S_DOOR  && data.ray.length <= 25)
+	if (data.ray.side == S_DOOR  && data.ray.length <= 10)
 		map->map[(int)data.ray.hit.y >> 3][(int)data.ray.hit.x >> 3] = '0';
 	draw_line(map->minimap, data.ray.hit, player->pos, 0xFF0000FF);
 }
