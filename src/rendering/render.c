@@ -6,7 +6,7 @@
 /*   By: mbernede <mbernede@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/07 13:35:16 by mbernede      #+#    #+#                 */
-/*   Updated: 2024/02/09 05:05:26 by bjacobs          ###   ########.fr       */
+/*   Updated: 2024/02/09 20:37:20 by bjacobs          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,9 @@ void	draw_square(int size, t_vec2 p, mlx_image_t *img, uint32_t color)
 			if (p.x + y < img->width && p.x + y >= 0 && p.y + x < img->height
 				&& p.y + x >= 0)
 				mlx_put_pixel(img, p.x + y, p.y + x, color);
-			y++;
+			++y;
 		}
-		x++;
+		++x;
 	}
 }
 
@@ -72,9 +72,9 @@ void	draw_minimap(t_player player, t_map map)
 			else if (map.map[(int)p.y][(int)p.x] == 'K')
 				draw_square(TILE_SIZE, v2_mult(p, TILE_SIZE), map.minimap,
 					KEY_COL);
-			p.x++;
+			++p.x;
 		}
-		p.y++;
+		++p.y;
 	}
 }
 

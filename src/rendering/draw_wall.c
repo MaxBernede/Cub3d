@@ -6,7 +6,7 @@
 /*   By: mbernede <mbernede@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/07 13:43:37 by mbernede      #+#    #+#                 */
-/*   Updated: 2024/02/09 05:02:09 by bjacobs          ###   ########.fr       */
+/*   Updated: 2024/02/09 20:41:14 by bjacobs          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,30 +30,32 @@ uint32_t	get_color_wall(mlx_texture_t *texture, uint32_t pos_x,
 	return (ft_pixel(c.r, c.g, c.b, 255));
 }
 
-void	fill_wall(t_wall *wall, t_dda dda, int text_width)
+void	fill_wall(t_wall *wall, t_dda dda, int tex_width)
 {
+	float	tex_offset;
+
 	wall->height = (HEIGHT * 10) / dda.ray.length;
-	wall->py_step = (float)text_width / (float)wall->height;
+	wall->py_step = (float)tex_width / (float)wall->height;
 	if (wall->height > HEIGHT)
 	{
-		wall->text_offset = (float)(wall->height - HEIGHT) / 2.0;
+		tex_offset = (float)(wall->height - HEIGHT) / 2.0;
 		wall->height = HEIGHT;
 	}
 	else
-		wall->text_offset = 0;
+		tex_offset = 0;
 	wall->width = WIDTH / (RAY_AMOUNT);
 	if (!wall->width)
 		wall->width = 1;
 	wall->shade = exp(-0.015 * dda.ray.length);
-	if (dda.ray.side == S_NORTH || dda.ray.side == S_SOUTH)
+	if (dda.ray.type == Y)
 		wall->percent_x = pourcentage_of(dda.ray.hit.x);
 	else
 	{
 		wall->percent_x = pourcentage_of(dda.ray.hit.y);
 		wall->shade *= .8;
 	}
-	wall->percent_x *= (float)text_width;
-	wall->percent_y = wall->text_offset * wall->py_step;
+	wall->percent_x *= (float)tex_width;
+	wall->percent_y = tex_offset * wall->py_step;
 }
 
 void	draw_wall(t_param *param, t_dda dda)

@@ -6,7 +6,7 @@
 /*   By: bjacobs <bjacobs@student.codam.nl>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 18:07:29 by bjacobs           #+#    #+#             */
-/*   Updated: 2024/02/08 20:44:13 by bjacobs          ###   ########.fr       */
+/*   Updated: 2024/02/09 20:31:21 by bjacobs          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,16 @@ void	put_pixel(mlx_image_t *img, int x, int y, uint32_t color)
 
 static void	init_data(int *delta, int *step, t_vec2 p1, t_vec2 p2)
 {
-	delta[0] = abs((int)p2.x - (int)p1.x);
-	delta[1] = abs((int)p2.y - (int)p1.y);
+	delta[X] = abs((int)p2.x - (int)p1.x);
+	delta[Y] = abs((int)p2.y - (int)p1.y);
 	if (p1.x < p2.x)
-		step[0] = 1;
+		step[X] = 1;
 	else
-		step[0] = -1;
+		step[X] = -1;
 	if (p1.y < p2.y)
-		step[1] = 1;
+		step[Y] = 1;
 	else
-		step[1] = -1;
+		step[Y] = -1;
 }
 
 static int	out_of_bounds(t_vec2 p1, t_vec2 p2, mlx_image_t *img)
@@ -46,23 +46,23 @@ void	draw_line(mlx_image_t *img, t_vec2 p1, t_vec2 p2, uint32_t color)
 	int	err[2];
 
 	init_data(delta, step, p1, p2);
-	err[0] = delta[0] - delta[1];
+	err[X] = delta[X] - delta[Y];
 	put_pixel(img, p1.x, p1.y, color);
 	while (!out_of_bounds(p1, p2, img)
 		&& ((int)p1.x != (int)p2.x || (int)p1.y != (int)p2.y))
 	{
-		err[1] = 2 * err[0];
-		if (err[1] >= -delta[1])
+		err[Y] = 2 * err[X];
+		if (err[Y] >= -delta[Y])
 		{
-			err[0] -= delta[1];
+			err[X] -= delta[Y];
 			if ((int)p1.x != (int)p2.x)
-				p1.x += step[0];
+				p1.x += step[X];
 		}
-		if (err[1] <= delta[0])
+		if (err[Y] <= delta[X])
 		{
-			err[0] += delta[0];
+			err[X] += delta[X];
 			if ((int)p1.y != (int)p2.y)
-				p1.y += step[1];
+				p1.y += step[Y];
 		}
 		put_pixel(img, p1.x, p1.y, color);
 	}

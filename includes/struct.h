@@ -3,6 +3,12 @@
 
 # include "../MLX42/include/MLX42/MLX42.h"
 
+typedef enum s_xy
+{
+	X,
+	Y
+}			t_xy;
+
 typedef enum s_sides
 {
     S_NORTH,
@@ -16,7 +22,6 @@ typedef struct s_wall
 {
 	int				height;
 	int				width;
-	float			text_offset;
 	float			percent_y;
 	float			percent_x;
 	float			py_step;
@@ -54,11 +59,11 @@ typedef struct s_vec3
 
 typedef struct s_ray_data
 {
-	t_vec2	hit;
-	t_vec2	ray_step;
-	int		max_steps;
-	t_vec2	origin;
-	float	length;
+	t_vec2			hit;
+	t_vec2			ray_step;
+	t_vec2			origin;
+	float			length;
+	enum s_xy		type;
 	enum s_sides	side;
 }	t_ray;
 
