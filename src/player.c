@@ -6,7 +6,7 @@
 /*   By: mbernede <mbernede@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/07 15:30:48 by mbernede      #+#    #+#                 */
-/*   Updated: 2024/02/08 21:21:32 by bjacobs          ###   ########.fr       */
+/*   Updated: 2024/02/09 05:01:18 by bjacobs          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,15 +36,26 @@ void	move_player(t_player *player, char **map, int direction, double dt)
 	new_pos.x = player->pos.x + player->delta.x * direction * dt;
 	new_pos.y = player->pos.y + player->delta.y * direction * dt;
 	mapo = (new_pos.x + offset.x * direction) / TILE_SIZE;
-	if (ft_strchr("0NSEW", map[(int)((player->pos.y + 1) / TILE_SIZE)][mapo])
-		&& ft_strchr("0NSEW", map[(int)((player->pos.y - 1)
+	if (!ft_strchr("1D", map[(int)((player->pos.y + 1) / TILE_SIZE)][mapo])
+		&& !ft_strchr("1D", map[(int)((player->pos.y - 1)
 				/ TILE_SIZE)][mapo]))
 		player->pos.x = new_pos.x;
 	mapo = (new_pos.y + offset.y * direction) / TILE_SIZE;
-	if (ft_strchr("0NSEW", map[mapo][(int)((player->pos.x + 1) / TILE_SIZE)])
-		&& ft_strchr("0NSEW", map[mapo][(int)((player->pos.x - 1)
+	if (!ft_strchr("1D", map[mapo][(int)((player->pos.x + 1) / TILE_SIZE)])
+		&& !ft_strchr("1D", map[mapo][(int)((player->pos.x - 1)
 				/ TILE_SIZE)]))
 		player->pos.y = new_pos.y;
+}
+
+void	open_door(t_player *player, t_map *map)
+{
+	t_dda	data;
+
+	init_dda(&data, player->angle);
+	dda(&data, player, *map, "1D");
+	if (data.ray.side == S_DOOR  && data.ray.length <= 25)
+		map->map[(int)data.ray.hit.y >> 3][(int)data.ray.hit.x >> 3] = '0';
+	draw_line(map->minimap, data.ray.hit, player->pos, 0xFF0000FF);
 }
 
 void	change_player_angle(t_player *player, int direction, double dt)

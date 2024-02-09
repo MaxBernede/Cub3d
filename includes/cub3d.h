@@ -47,6 +47,8 @@
 # define WALL_COL 0xFFFFFF5A
 # define RAY_COL 0xFFFF00FF
 # define PLAYER_COL 0x00FF00FF
+# define DOOR_COL 0xd1001F5A
+# define KEY_COL 0x8B9A465F
 
 //Wall color test
 # define SILVER 0xC0C0C0FF
@@ -93,7 +95,7 @@ void		fill_delta(t_player *player, t_vec2 *offset);
 void		move_player(t_player *player, char **map, int direction, double dt);
 void		change_player_angle(t_player *player, int direction, double dt);
 void		init_player(t_map map, t_player *player, t_color floor);
-
+void		open_door(t_player *player, t_map *map);
 
 //valid_input.c
 bool		endswith(char *str, char *suffix);
@@ -130,7 +132,7 @@ void		draw_line(mlx_image_t *img, t_vec2 p1, t_vec2 p2, uint32_t color);
 
 // DDA.c
 void		init_dda(t_dda *data, float player_angle);
-void		dda(t_dda *data, t_player *player, t_map map);
+void		dda(t_dda *data, t_player *player, t_map map, char *hit_condition);
 
 // renderer.c
 void		render(t_param *param);
@@ -153,9 +155,6 @@ int			start(t_param *param, t_window w);
 char*		concatenate_strings(char** strings, int numStrings);
 
 void		print_flood(t_map map);
-
-//!Color_wall
-uint32_t get_color_wall(mlx_texture_t* texture, float percentageX, float percentageY, double shade);
 
 //! UTILS
 // clean.c

@@ -9,12 +9,17 @@ typedef enum s_sides
     S_SOUTH,
     S_EAST,
     S_WEST,
+	S_DOOR
 } t_sides;
 
 typedef struct s_wall
 {
 	int				height;
 	int				width;
+	float			text_offset;
+	float			percent_y;
+	float			percent_x;
+	float			py_step;
 	double			shade;
 	int				x;
 	int 			y;
@@ -51,6 +56,7 @@ typedef struct s_ray_data
 {
 	t_vec2	hit;
 	t_vec2	ray_step;
+	int		max_steps;
 	t_vec2	origin;
 	float	length;
 	enum s_sides	side;
@@ -58,9 +64,7 @@ typedef struct s_ray_data
 
 typedef struct s_dda_data
 {
-	t_ray	xray;
-	t_ray	yray;
-	t_ray	hit_ray;
+	t_ray	ray;
 	float	angle;
 	int		rays;
 }			t_dda;

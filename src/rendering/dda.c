@@ -6,7 +6,7 @@
 /*   By: mbernede <mbernede@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/16 01:45:30 by bjacobs       #+#    #+#                 */
-/*   Updated: 2024/02/08 20:59:39 by bjacobs          ###   ########.fr       */
+/*   Updated: 2024/02/09 04:59:46 by bjacobs          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,18 +27,16 @@ int	init_xray(t_ray *ray, t_vec2 origin, float angle)
 	{
 		ray->hit.y = (((int)ray->origin.y >> 3) << 3) - 0.0001;
 		ray->ray_step.y = -TILE_SIZE;
+		ray->side = S_NORTH;
 	}
 	else
 	{
 		ray->hit.y = (((int)ray->origin.y >> 3) << 3) + TILE_SIZE;
 		ray->ray_step.y = TILE_SIZE;
+		ray->side = S_SOUTH;
 	}
 	ray->hit.x = (ray->hit.y - ray->origin.y) * atan + ray->origin.x;
 	ray->ray_step.x = ray->ray_step.y * atan;
-	if (ray->ray_step.y == TILE_SIZE)
-		ray->side = S_SOUTH;
-	else
-		ray->side = S_NORTH;
 	return (EXIT_SUCCESS);
 }
 
@@ -69,7 +67,7 @@ int	init_yray(t_ray *ray, t_vec2 origin, float angle)
 	return (EXIT_SUCCESS);
 }
 
-void	cast_ray(t_ray *ray, t_map map, float player_angle)
+void	cast_ray(t_ray *ray, t_map map, float player_angle, char *hit_condition)
 {
 	int	mapx;
 	int	mapy;
@@ -77,33 +75,35 @@ void	cast_ray(t_ray *ray, t_map map, float player_angle)
 	mapx = (int)ray->hit.x >> 3;
 	mapy = (int)ray->hit.y >> 3;
 	while (mapy < map.height && mapx < map.length && mapy >= 0 && mapx >= 0
-		&& map.map[mapy][mapx] != '1')
+		&& !ft_strchr(hit_condition, map.map[mapy][mapx]))
 	{
 		ray->hit.y += ray->ray_step.y;
 		ray->hit.x += ray->ray_step.x;
 		mapx = (int)ray->hit.x >> 3;
 		mapy = (int)ray->hit.y >> 3;
 	}
+	//if (map.map[mapy][mapx] == 'D') comment out for door detection
+	//	ray->side = S_DOOR;
 	ray->length = -((ray->hit.x - ray->origin.x) * cos(player_angle) \
 			+ (ray->hit.y - ray->origin.y) * sin(player_angle));
 }
 
-void	init_dda(t_dda *data, float player_angle)
+void	init_dda(t_dda *data, float ray_angle)
 {
-	data->angle = player_angle - (ONE_DEGREE * FOV) / 2;
+	data->angle = ray_angle;
 	if (data->angle < 0)
 		data->angle += TWO_PI;
 	data->rays = 0;
 }
 
-void	dda(t_dda *data, t_player *player, t_map map)
+void	dda(t_dda *data, t_player *player, t_map map, char *hit_condition)
 {
-	if (!init_xray(&data->xray, player->pos, data->angle))
-		cast_ray(&data->xray, map, player->angle);
-	if (!init_yray(&data->yray, player->pos, data->angle))
-		cast_ray(&data->yray, map, player->angle);
-	if (data->xray.length < data->yray.length)
-		data->hit_ray = data->xray;
-	else
-		data->hit_ray = data->yray;
+	t_ray	ray;
+
+	if (!init_xray(&data->ray, player->pos, data->angle))
+		cast_ray(&data->ray, map, player->angle, hit_condition);
+	if (!init_yray(&ray, player->pos, data->angle))
+		cast_ray(&ray, map, player->angle, hit_condition);
+	if (data->ray.length > ray.length)
+		data->ray = ray;
 }
