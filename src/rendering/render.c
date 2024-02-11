@@ -6,7 +6,7 @@
 /*   By: mbernede <mbernede@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/07 13:35:16 by mbernede      #+#    #+#                 */
-/*   Updated: 2024/02/09 20:37:20 by bjacobs          ###   ########.fr       */
+/*   Updated: 2024/02/11 04:04:40 by bjacobs          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void	draw_minimap(t_player player, t_map map)
 			else if (map.map[(int)p.y][(int)p.x] == 'K')
 				draw_square(TILE_SIZE, v2_mult(p, TILE_SIZE), map.minimap,
 					KEY_COL);
-			++p.x;
+++p.x;
 		}
 		++p.y;
 	}
@@ -81,17 +81,16 @@ void	draw_minimap(t_player player, t_map map)
 void	render(t_param *p)
 {
 	t_dda			data;
-	static float	degree_step = ONE_DEGREE / SHARPNESS;
+	static float	degree_step = ONE_DEGREE * ((float)FOV / (float)WIDTH);
 
 	clear_img(p->reality);
 	draw_minimap(p->player, p->map);
 	init_dda(&data, p->player.angle - (ONE_DEGREE * FOV) / 2);
-	while (data.rays < RAY_AMOUNT)
+	while (data.rays < WIDTH)
 	{
-		dda(&data, &p->player, p->map, "1D");
+		dda(&data, &p->player, p->map, 1000);
 		data.angle += degree_step;
-		if (data.angle > TWO_PI)
-			data.angle -= TWO_PI;
+		data.angle = fix_angle(data.angle);
 		draw_wall(p, data);
 		draw_line(p->map.minimap, data.ray.hit,
 			p->player.pos, RAY_COL);

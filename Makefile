@@ -36,6 +36,7 @@ SRC :=	main.c					\
 		utils/utils.c			\
 		utils/utils2.c			\
 		utils/normalize.c		\
+		utils/fix_angle.c		\
 		fill_datas.c			\
 		mlx/start.c				\
 		mlx/hook.c				\

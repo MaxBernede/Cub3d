@@ -66,18 +66,17 @@
 // Player variables
 # define WALKSPEED 15
 # define TURNSPEED 2.5
+# define MOUSESPEED .15
 # define FOV 64
 
 // Rendering Variables
 # define HALF_HEIGHT HEIGHT / 2
-# define SHARPNESS 8
-# define RAY_AMOUNT FOV * SHARPNESS
 
 // Math for raycasting & rendering
-# define PI 3.1415926535f
-# define HALF_PI PI / 2
-# define TWO_PI PI * 2
-# define THIRD_PI 3 * PI / 2
+# define PI 3.14159265359f
+# define HALF_PI 1.57079632679f
+# define TWO_PI 6.28318530718f
+# define THIRD_PI 4.71238898038f
 # define ONE_DEGREE 0.0174532925f
 
 //Type of datas
@@ -92,8 +91,9 @@
 
 //player.c
 void		fill_delta(t_player *player, t_vec2 *offset);
-void		move_player(t_player *player, char **map, int direction, double dt);
-void		change_player_angle(t_player *player, int direction, double dt);
+void		move_player_y(t_player *player, char **map, int direction, double dt);
+void		move_player_x(t_player *player, char **map, int direction, double dt);
+void		change_player_angle(t_player *player, double turnspeed, double dt);
 void		init_player(t_map map, t_player *player, t_color floor);
 void		open_door(t_player *player, t_map *map);
 
@@ -132,7 +132,7 @@ void		draw_line(mlx_image_t *img, t_vec2 p1, t_vec2 p2, uint32_t color);
 
 // DDA.c
 void		init_dda(t_dda *data, float player_angle);
-void		dda(t_dda *data, t_player *player, t_map map, char *hit_condition);
+void		dda(t_dda *data, t_player *player, t_map map, int max_steps);
 
 // renderer.c
 void		render(t_param *param);
@@ -147,6 +147,7 @@ int			get_str_without_nl(char *line, char **sub);
 char 		*get_str_no_space(char *line);
 
 //! MLX
+void		cursor_hook(double x, double y, void *param);
 void		my_hook(void *param);
 
 //! START
@@ -162,6 +163,9 @@ void		clean_everything(t_param *param);
 int32_t		ft_pixel(int32_t r, int32_t g, int32_t b, int32_t a);
 
 float pourcentage_of(float coordinate);
+
+// fix_angle.c
+float		fix_angle(float angle);
 
 // ft_atof.c
 double		ft_atof(char *nptr);

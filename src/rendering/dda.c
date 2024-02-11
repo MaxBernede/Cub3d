@@ -6,7 +6,7 @@
 /*   By: mbernede <mbernede@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/16 01:45:30 by bjacobs       #+#    #+#                 */
-/*   Updated: 2024/02/09 21:27:47 by bjacobs          ###   ########.fr       */
+/*   Updated: 2024/02/11 04:08:16 by bjacobs          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ int	init_xray(t_ray *ray, t_vec2 origin, float angle)
 	float	atan;
 
 	if (angle == 0 || angle == PI)
-		return (ray->length = 10000, EXIT_FAILURE);
-	atan = 1.0 / tan(angle);
+		return (ray->length = 100000, EXIT_FAILURE);
+	atan = 1.0f / tan(angle);
 	ray->origin = origin;
 	ray->type = X;
 	if (angle < PI)
@@ -45,11 +45,11 @@ int	init_xray(t_ray *ray, t_vec2 origin, float angle)
 // else right
 int	init_yray(t_ray *ray, t_vec2 origin, float angle)
 {
-	float	atan;
+	float	tang;
 
 	if (angle == HALF_PI || angle == THIRD_PI)
-		return (ray->length = 10000, EXIT_FAILURE);
-	atan = tan(angle);
+		return (ray->length = 100000, EXIT_FAILURE);
+	tang = tan(angle);
 	ray->origin = origin;
 	ray->type = Y;
 	if (angle < HALF_PI || angle > THIRD_PI)
@@ -64,25 +64,28 @@ int	init_yray(t_ray *ray, t_vec2 origin, float angle)
 		ray->ray_step.x = TILE_SIZE;
 		ray->side = S_EAST;
 	}
-	ray->hit.y = (ray->hit.x - ray->origin.x) * atan + ray->origin.y;
-	ray->ray_step.y = ray->ray_step.x * atan;
+	ray->hit.y = (ray->hit.x - ray->origin.x) * tang + ray->origin.y;
+	ray->ray_step.y = ray->ray_step.x * tang;
 	return (EXIT_SUCCESS);
 }
 
-void	cast_ray(t_ray *ray, t_map map, float player_angle, char *hit_condition)
+void	cast_ray(t_ray *ray, t_map map, float player_angle, int max_steps)
 {
 	int	mapx;
 	int	mapy;
+	int	steps;
 
+	steps = 0;
 	mapx = (int)ray->hit.x >> 3;
 	mapy = (int)ray->hit.y >> 3;
 	while (mapy < map.height && mapx < map.length && mapy >= 0 && mapx >= 0
-		&& !ft_strchr(hit_condition, map.map[mapy][mapx]))
+		&& !ft_strchr("1D", map.map[mapy][mapx]) &&  steps < max_steps)
 	{
 		ray->hit.y += ray->ray_step.y;
 		ray->hit.x += ray->ray_step.x;
 		mapx = (int)ray->hit.x >> 3;
 		mapy = (int)ray->hit.y >> 3;
+		++steps;
 	}
 	if (mapy < map.height && mapx < map.length && mapy >= 0 && mapx >= 0
 			&& map.map[mapy][mapx] == 'D')
@@ -93,20 +96,18 @@ void	cast_ray(t_ray *ray, t_map map, float player_angle, char *hit_condition)
 
 void	init_dda(t_dda *data, float ray_angle)
 {
-	data->angle = ray_angle;
-	if (data->angle < 0)
-		data->angle += TWO_PI;
+	data->angle = fix_angle(ray_angle);
 	data->rays = 0;
 }
 
-void	dda(t_dda *data, t_player *player, t_map map, char *hit_condition)
+void	dda(t_dda *data, t_player *player, t_map map, int max_steps)
 {
 	t_ray	ray;
 
 	if (!init_xray(&data->ray, player->pos, data->angle))
-		cast_ray(&data->ray, map, player->angle, hit_condition);
+		cast_ray(&data->ray, map, player->angle, max_steps);
 	if (!init_yray(&ray, player->pos, data->angle))
-		cast_ray(&ray, map, player->angle, hit_condition);
+		cast_ray(&ray, map, player->angle, max_steps);
 	if (data->ray.length > ray.length)
 		data->ray = ray;
 }

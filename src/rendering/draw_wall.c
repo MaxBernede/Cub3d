@@ -6,7 +6,7 @@
 /*   By: mbernede <mbernede@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/07 13:43:37 by mbernede      #+#    #+#                 */
-/*   Updated: 2024/02/09 21:24:07 by bjacobs          ###   ########.fr       */
+/*   Updated: 2024/02/11 04:03:00 by bjacobs          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,15 +38,15 @@ void	fill_wall(t_wall *wall, t_dda dda, int tex_width)
 	wall->py_step = (float)tex_width / (float)wall->height;
 	if (wall->height > HEIGHT)
 	{
-		tex_offset = (float)(wall->height - HEIGHT) / 2.0;
+		tex_offset = (float)(wall->height - HEIGHT) / 2.0f;
 		wall->height = HEIGHT;
 	}
 	else
 		tex_offset = 0;
-	wall->width = WIDTH / (RAY_AMOUNT);
+	wall->width = 1;
 	if (!wall->width)
 		wall->width = 1;
-	wall->shade = exp(-0.015 * dda.ray.length);
+	wall->shade = exp(-0.020 * dda.ray.length);
 	if (dda.ray.type == X)
 		wall->percent_x = pourcentage_of(dda.ray.hit.x);
 	else

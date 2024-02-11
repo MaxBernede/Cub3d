@@ -6,7 +6,7 @@
 /*   By: mbernede <mbernede@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/07 13:33:19 by mbernede      #+#    #+#                 */
-/*   Updated: 2024/02/07 20:55:04 by bjacobs          ###   ########.fr       */
+/*   Updated: 2024/02/11 02:14:49 by bjacobs          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	draw_background(mlx_image_t *background, t_param *param)
 		shade = (double)y / HEIGHT;
 		while (x < WIDTH)
 		{
-			if (y < HALF_HEIGHT)
+			if (y < HEIGHT >> 1)
 				mlx_put_pixel(background, x, y, param->map.ceil_color);
 			else
 				mlx_put_pixel(background, x, y,
@@ -39,10 +39,10 @@ void	draw_background(mlx_image_t *background, t_param *param)
 
 int	init_images(t_param *param, t_window w)
 {
-	param->background = mlx_new_image(param->mlx, w.width, w.height);
+	param->background = mlx_new_image(param->mlx, WIDTH, HEIGHT);
 	if (!param->background)
 		return (ERROR);
-	param->reality = mlx_new_image(param->mlx, w.width, w.height);
+	param->reality = mlx_new_image(param->mlx, WIDTH, HEIGHT);
 	if (!param->reality)
 		return (ERROR);
 	param->map.minimap = mlx_new_image(param->mlx, param->map.length
@@ -54,7 +54,7 @@ int	init_images(t_param *param, t_window w)
 
 int	start(t_param *param, t_window w)
 {
-	param->mlx = mlx_init(w.width, w.height, "cub3d", true);
+	param->mlx = mlx_init(WIDTH, HEIGHT, "cub3d", true);
 	if (!param->mlx)
 		return (ERROR);
 	if (init_images(param, w))
@@ -71,6 +71,7 @@ int	start(t_param *param, t_window w)
 		return (EXIT_FAILURE);
 	}
 	mlx_loop_hook(param->mlx, my_hook, param);
+	mlx_cursor_hook(param->mlx, cursor_hook, param);
 	mlx_loop(param->mlx);
 	mlx_terminate(param->mlx);
 	return (OK);
