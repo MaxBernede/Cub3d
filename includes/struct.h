@@ -101,8 +101,6 @@ typedef struct s_player
 {
 	t_vec2		pos;
 	t_vec2		delta;
-	int			fov;
-	uint32_t	color;
 	float		angle;
 }			t_player;
 

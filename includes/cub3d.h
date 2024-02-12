@@ -67,7 +67,8 @@
 # define WALKSPEED 15
 # define TURNSPEED 2.5
 # define MOUSESPEED .15
-# define FOV 64
+// .8 = 64 degrees
+# define FOV .8
 
 // Rendering Variables
 # define HALF_HEIGHT HEIGHT / 2

@@ -6,7 +6,7 @@
 /*   By: mbernede <mbernede@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/07 15:30:48 by mbernede      #+#    #+#                 */
-/*   Updated: 2024/02/11 04:02:37 by bjacobs          ###   ########.fr       */
+/*   Updated: 2024/02/13 00:22:30 by bjacobs          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,7 @@ void	open_door(t_player *player, t_map *map)
 
 void	change_player_angle(t_player *player, double turnspeed, double dt)
 {
-	player->angle += turnspeed * dt;
-	player->angle = fix_angle(player->angle);
+	player->angle = fix_angle(player->angle + turnspeed * dt);
 	player->delta.x = cos(player->angle) * WALKSPEED;
 	player->delta.y = sin(player->angle) * WALKSPEED;
 }

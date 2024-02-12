@@ -6,7 +6,7 @@
 /*   By: mbernede <mbernede@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/07 13:33:19 by mbernede      #+#    #+#                 */
-/*   Updated: 2024/02/11 02:14:49 by bjacobs          ###   ########.fr       */
+/*   Updated: 2024/02/13 00:19:58 by bjacobs          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ int	start(t_param *param, t_window w)
 		return (mlx_close_window(param->mlx), printf(ERR_IMG_CREA), ERROR);
 	init_player(param->map, &param->player, param->floor);
 	draw_background(param->background, param);
+	mlx_set_mouse_pos(param->mlx, 512, 256);
 	render(param);
 	if (mlx_image_to_window(param->mlx, param->background, 0, 0) == -1
 		|| mlx_image_to_window(param->mlx, param->reality, 0, 0) == -1
@@ -70,8 +71,8 @@ int	start(t_param *param, t_window w)
 		puts(mlx_strerror(mlx_errno));
 		return (EXIT_FAILURE);
 	}
-	mlx_loop_hook(param->mlx, my_hook, param);
 	mlx_cursor_hook(param->mlx, cursor_hook, param);
+	mlx_loop_hook(param->mlx, my_hook, param);
 	mlx_loop(param->mlx);
 	mlx_terminate(param->mlx);
 	return (OK);

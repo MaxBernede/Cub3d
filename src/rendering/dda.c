@@ -6,7 +6,7 @@
 /*   By: mbernede <mbernede@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/16 01:45:30 by bjacobs       #+#    #+#                 */
-/*   Updated: 2024/02/11 04:08:16 by bjacobs          ###   ########.fr       */
+/*   Updated: 2024/02/12 23:55:50 by bjacobs          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@
 // else looking down
 int	init_xray(t_ray *ray, t_vec2 origin, float angle)
 {
-	float	atan;
+	float	tangent;
 
 	if (angle == 0 || angle == PI)
 		return (ray->length = 100000, EXIT_FAILURE);
-	atan = 1.0f / tan(angle);
+	tangent = 1.0f / tan(angle);
 	ray->origin = origin;
 	ray->type = X;
 	if (angle < PI)
@@ -36,8 +36,8 @@ int	init_xray(t_ray *ray, t_vec2 origin, float angle)
 		ray->ray_step.y = TILE_SIZE;
 		ray->side = S_SOUTH;
 	}
-	ray->hit.x = (ray->hit.y - ray->origin.y) * atan + ray->origin.x;
-	ray->ray_step.x = ray->ray_step.y * atan;
+	ray->hit.x = (ray->hit.y - ray->origin.y) * tangent + ray->origin.x;
+	ray->ray_step.x = ray->ray_step.y * tangent;
 	return (EXIT_SUCCESS);
 }
 
@@ -45,11 +45,11 @@ int	init_xray(t_ray *ray, t_vec2 origin, float angle)
 // else right
 int	init_yray(t_ray *ray, t_vec2 origin, float angle)
 {
-	float	tang;
+	float	tangent;
 
 	if (angle == HALF_PI || angle == THIRD_PI)
 		return (ray->length = 100000, EXIT_FAILURE);
-	tang = tan(angle);
+	tangent = tan(angle);
 	ray->origin = origin;
 	ray->type = Y;
 	if (angle < HALF_PI || angle > THIRD_PI)
@@ -64,8 +64,8 @@ int	init_yray(t_ray *ray, t_vec2 origin, float angle)
 		ray->ray_step.x = TILE_SIZE;
 		ray->side = S_EAST;
 	}
-	ray->hit.y = (ray->hit.x - ray->origin.x) * tang + ray->origin.y;
-	ray->ray_step.y = ray->ray_step.x * tang;
+	ray->hit.y = (ray->hit.x - ray->origin.x) * tangent + ray->origin.y;
+	ray->ray_step.y = ray->ray_step.x * tangent;
 	return (EXIT_SUCCESS);
 }
 

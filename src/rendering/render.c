@@ -6,7 +6,7 @@
 /*   By: mbernede <mbernede@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/07 13:35:16 by mbernede      #+#    #+#                 */
-/*   Updated: 2024/02/11 04:04:40 by bjacobs          ###   ########.fr       */
+/*   Updated: 2024/02/13 00:00:02 by bjacobs          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void	draw_minimap(t_player player, t_map map)
 			else if (map.map[(int)p.y][(int)p.x] == 'K')
 				draw_square(TILE_SIZE, v2_mult(p, TILE_SIZE), map.minimap,
 					KEY_COL);
-++p.x;
+			++p.x;
 		}
 		++p.y;
 	}
@@ -81,20 +81,22 @@ void	draw_minimap(t_player player, t_map map)
 void	render(t_param *p)
 {
 	t_dda			data;
-	static float	degree_step = ONE_DEGREE * ((float)FOV / (float)WIDTH);
+	float			camera_x;
+	static float	x_step = 1.0f / WIDTH;
 
 	clear_img(p->reality);
 	draw_minimap(p->player, p->map);
-	init_dda(&data, p->player.angle - (ONE_DEGREE * FOV) / 2);
+	data.rays = 0;
+	camera_x = -.5f;
 	while (data.rays < WIDTH)
 	{
+		data.angle = fix_angle(p->player.angle + atan2(camera_x, FOV));
 		dda(&data, &p->player, p->map, 1000);
-		data.angle += degree_step;
-		data.angle = fix_angle(data.angle);
 		draw_wall(p, data);
 		draw_line(p->map.minimap, data.ray.hit,
 			p->player.pos, RAY_COL);
 		data.rays++;
+		camera_x += x_step;
 	}
 	draw_square(4, v2_sub(p->player.pos, v2_new(2, 2)),
 		p->map.minimap, PLAYER_COL);
