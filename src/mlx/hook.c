@@ -6,7 +6,7 @@
 /*   By: mbernede <mbernede@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/07 13:32:59 by mbernede      #+#    #+#                 */
-/*   Updated: 2024/02/13 00:35:19 by bjacobs          ###   ########.fr       */
+/*   Updated: 2024/02/14 21:31:59 by bjacobs          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,18 +21,28 @@ bool	action_key_down(mlx_t *mlx)
 
 void	cursor_hook(double xpos, double ypos, void *param)
 {
-	static double	prev_x = 0;
-	double			dx;
-	t_param			*p;
+	static bool	active = false;
+	double		dx;
+	t_param		*p;
 
-	dx = xpos - prev_x;
 	p = (t_param*)param;
-	if (!mlx_is_key_down(p->mlx, MLX_KEY_LEFT_ALT) && dx < 10)
+	if (mlx_is_key_down(p->mlx, MLX_KEY_LEFT_ALT))
 	{
-		change_player_angle(&p->player, dx * MOUSESPEED, p->mlx->delta_time);
-		mlx_set_mouse_pos(p->mlx, 512, 256);
+		if (active)
+		{
+			active = false;
+			mlx_set_cursor_mode(p->mlx, MLX_MOUSE_NORMAL);
+		}
+		return ;
 	}
-	prev_x = xpos;
+	mlx_set_mouse_pos(p->mlx, 512, 256);
+	dx = xpos - 512.0;
+	change_player_angle(&p->player, dx * MOUSESPEED, p->mlx->delta_time);
+	if (!active)
+	{
+		active = true;
+		mlx_set_cursor_mode(p->mlx, MLX_MOUSE_HIDDEN);
+	}
 }
 
 void	my_hook(void *param)

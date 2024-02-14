@@ -22,13 +22,10 @@ typedef enum s_sides
 typedef struct s_wall
 {
 	int				height;
-	int				width;
 	float			percent_y;
 	float			percent_x;
 	float			py_step;
 	double			shade;
-	int				x;
-	int 			y;
 }					t_wall;
 
 typedef struct s_ucolor

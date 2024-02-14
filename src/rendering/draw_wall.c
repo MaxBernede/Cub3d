@@ -6,7 +6,7 @@
 /*   By: mbernede <mbernede@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/07 13:43:37 by mbernede      #+#    #+#                 */
-/*   Updated: 2024/02/13 00:01:31 by bjacobs          ###   ########.fr       */
+/*   Updated: 2024/02/14 21:38:18 by bjacobs          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,6 @@ void	fill_wall(t_wall *wall, t_dda dda, int tex_width)
 	}
 	else
 		tex_offset = 0;
-	wall->width = 1;
-	if (!wall->width)
-		wall->width = 1;
 	wall->shade = exp(-0.020 * dda.ray.length);
 	if (dda.ray.type == X)
 		wall->percent_x = pourcentage_of(dda.ray.hit.x);
@@ -54,6 +51,8 @@ void	fill_wall(t_wall *wall, t_dda dda, int tex_width)
 		wall->percent_x = pourcentage_of(dda.ray.hit.y);
 		wall->shade *= .8;
 	}
+	if (dda.ray.side == S_SOUTH || dda.ray.side == S_EAST)
+		wall->percent_x = 1.0f - wall->percent_x;
 	wall->percent_x *= (float)tex_width;
 	wall->percent_y = tex_offset * wall->py_step;
 }
@@ -61,24 +60,18 @@ void	fill_wall(t_wall *wall, t_dda dda, int tex_width)
 void	draw_wall(t_param *param, t_dda dda)
 {
 	t_wall	wall;
-	int		xmap;
 	int		ymap;
+	int		y;
 
-	wall.y = 0;
+	y = 0;
 	fill_wall(&wall, dda, param->textures[dda.ray.side]->width);
-	while (wall.y < wall.height)
+	while (y < wall.height)
 	{
-		wall.x = 0;
-		ymap = wall.y + HALF_HEIGHT - wall.height / 2;
-		while (wall.x < wall.width)
-		{
-			xmap = wall.width * dda.rays + wall.x;
-			mlx_put_pixel(param->reality, xmap, ymap,
-					get_color_wall(param->textures[dda.ray.side],
-						wall.percent_x, wall.percent_y, wall.shade));
-			++wall.x;
-		}
+		ymap = y + HALF_HEIGHT - (wall.height >> 1);
+		mlx_put_pixel(param->reality, dda.rays, ymap,
+				get_color_wall(param->textures[dda.ray.side],
+					wall.percent_x, wall.percent_y, wall.shade));
 		wall.percent_y += wall.py_step;
-		++wall.y;
+		++y;
 	}
 }

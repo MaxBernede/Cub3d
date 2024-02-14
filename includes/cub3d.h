@@ -66,11 +66,12 @@
 // Player variables
 # define WALKSPEED 15
 # define TURNSPEED 2.5
-# define MOUSESPEED .15
+# define MOUSESPEED .05
 // .8 = 64 degrees
 # define FOV .8
 
 // Rendering Variables
+# define DULLNESS 4
 # define HALF_HEIGHT HEIGHT / 2
 
 // Math for raycasting & rendering
