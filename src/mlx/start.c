@@ -6,7 +6,7 @@
 /*   By: mbernede <mbernede@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/07 13:33:19 by mbernede      #+#    #+#                 */
-/*   Updated: 2024/02/15 04:25:52 by bjacobs          ###   ########.fr       */
+/*   Updated: 2024/02/15 21:09:03 by bjacobs          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	init_images(t_param *param)
 	return (OK);
 }
 
-int	start(t_param *param, t_window w)
+int	start(t_param *param)
 {
 	mlx_set_setting(MLX_STRETCH_IMAGE, 1);
 	param->mlx = mlx_init(WIDTH, HEIGHT, "cub3d", true);
@@ -60,7 +60,7 @@ int	start(t_param *param, t_window w)
 		return (ERROR);
 	if (init_images(param))
 		return (mlx_close_window(param->mlx), printf(ERR_IMG_CREA), ERROR);
-	init_player(param->map, &param->player, param->floor);
+	init_player(param->map, &param->player);
 	draw_background(param->background, param);
 	mlx_set_mouse_pos(param->mlx, 512, 256);
 	render(param);

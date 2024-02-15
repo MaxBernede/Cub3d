@@ -6,7 +6,7 @@
 /*   By: mbernede <mbernede@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/07 13:32:59 by mbernede      #+#    #+#                 */
-/*   Updated: 2024/02/15 04:29:32 by bjacobs          ###   ########.fr       */
+/*   Updated: 2024/02/15 20:58:38 by bjacobs          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	cursor_hook(double xpos, double ypos, void *param)
 	double		dx;
 	t_param		*p;
 
-	p = (t_param*)param;
+	p = (t_param *)param;
 	if (mlx_is_key_down(p->mlx, MLX_KEY_LEFT_ALT))
 	{
 		if (active)
@@ -41,6 +41,7 @@ void	cursor_hook(double xpos, double ypos, void *param)
 	if (!active)
 	{
 		active = true;
+		ypos = ypos;
 		mlx_set_cursor_mode(p->mlx, MLX_MOUSE_HIDDEN);
 	}
 }
@@ -53,13 +54,13 @@ void	my_hook(void *param)
 	if (mlx_is_key_down(p->mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(p->mlx);
 	if (mlx_is_key_down(p->mlx, MLX_KEY_W))
-		move_player_y(&p->player, p->map.map, -1, p->mlx->delta_time);
+		move_player(p, false, -1, p->mlx->delta_time);
 	if (mlx_is_key_down(p->mlx, MLX_KEY_S))
-		move_player_y(&p->player, p->map.map, 1, p->mlx->delta_time);
+		move_player(p, false, 1, p->mlx->delta_time);
 	if (mlx_is_key_down(p->mlx, MLX_KEY_D))
-		move_player_x(&p->player, p->map.map, -1, p->mlx->delta_time);
+		move_player(p, true, -1, p->mlx->delta_time);
 	if (mlx_is_key_down(p->mlx, MLX_KEY_A))
-		move_player_x(&p->player, p->map.map, 1, p->mlx->delta_time);
+		move_player(p, true, 1, p->mlx->delta_time);
 	if (mlx_is_key_down(p->mlx, MLX_KEY_LEFT))
 		change_player_angle(&p->player, -1 * TURNSPEED, p->mlx->delta_time);
 	if (mlx_is_key_down(p->mlx, MLX_KEY_RIGHT))

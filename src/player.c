@@ -6,77 +6,67 @@
 /*   By: mbernede <mbernede@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/07 15:30:48 by mbernede      #+#    #+#                 */
-/*   Updated: 2024/02/15 03:02:11 by bjacobs          ###   ########.fr       */
+/*   Updated: 2024/02/15 20:45:00 by bjacobs          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	init_offset(double x,  double y, int *offset)
+static t_vec2	init_movement(t_player *player, int *offset,
+	bool strafing, double direction)
 {
-	if (x < 0)
+	t_vec2	new_pos;
+	t_vec2	delta;
+
+	if (strafing)
+		delta = v2_new(-player->delta.y, player->delta.x);
+	else
+		delta = player->delta;
+	if (delta.x < 0)
 		offset[X] = -1;
 	else
 		offset[X] = 1;
-	if (y < 0)
+	if (delta.y < 0)
 		offset[Y] = -1;
 	else
 		offset[Y] = 1;
+	new_pos.x = player->pos.x + delta.x * direction;
+	new_pos.y = player->pos.y + delta.y * direction;
+	return (new_pos);
 }
 
-void	move_player_y(t_player *player, char **map, int direction, double dt)
+void	move_player(t_param *p, bool strafing, int direction, double dt)
 {
 	t_vec2	new_pos;
 	int		offset[2];
-	int		mapo;
+	int		mapo[2];
 
 	if (dt > .25)
 		dt = .25;
-	init_offset(player->delta.x, player->delta.y, offset);
-	new_pos.x = player->pos.x + player->delta.x * direction * dt;
-	new_pos.y = player->pos.y + player->delta.y * direction * dt;
-	mapo = (new_pos.x + offset[X] * direction) / CELL_SIZE;
-	if (!ft_strchr("1D", map[(int)((player->pos.y + 1) / CELL_SIZE)][mapo])
-		&& !ft_strchr("1D", map[(int)((player->pos.y - 1)
-				/ CELL_SIZE)][mapo]))
-		player->pos.x = new_pos.x;
-	mapo = (new_pos.y + offset[Y] * direction) / CELL_SIZE;
-	if (!ft_strchr("1D", map[mapo][(int)((player->pos.x + 1) / CELL_SIZE)])
-		&& !ft_strchr("1D", map[mapo][(int)((player->pos.x - 1)
-				/ CELL_SIZE)]))
-		player->pos.y = new_pos.y;
-}
-
-void	move_player_x(t_player *player, char **map, int direction, double dt)
-{
-	t_vec2	new_pos;
-	int		offset[2];
-	int		mapo;
-
-	if (dt > .25)
-		dt = .25;
-	init_offset(-player->delta.y, player->delta.x, offset);
-	new_pos.x = player->pos.x + -player->delta.y * direction * dt;
-	new_pos.y = player->pos.y + player->delta.x * direction * dt;
-	mapo = (new_pos.x + offset[X] * direction) / CELL_SIZE;
-	if (!ft_strchr("1D", map[(int)((player->pos.y + 1) / CELL_SIZE)][mapo])
-		&& !ft_strchr("1D", map[(int)((player->pos.y - 1)
-				/ CELL_SIZE)][mapo]))
-		player->pos.x = new_pos.x;
-	mapo = (new_pos.y + offset[Y] * direction) / CELL_SIZE;
-	if (!ft_strchr("1D", map[mapo][(int)((player->pos.x + 1) / CELL_SIZE)])
-		&& !ft_strchr("1D", map[mapo][(int)((player->pos.x - 1)
-				/ CELL_SIZE)]))
-		player->pos.y = new_pos.y;
+	new_pos = init_movement(&p->player, offset, strafing, direction * dt);
+	mapo[X] = (new_pos.x + offset[X] * direction) / CELL_SIZE;
+	mapo[Y] = (int)(p->player.pos.y + 1) / CELL_SIZE;
+	if (!ft_strchr("1D", p->map.map[mapo[Y]][mapo[X]])
+		&& !ft_strchr("1D", p->map.map[mapo[Y]][mapo[X]]))
+	{
+		p->player.pos.x = new_pos.x;
+	}
+	mapo[X] = (int)(p->player.pos.x + 1) / CELL_SIZE;
+	mapo[Y] = (new_pos.y + offset[Y] * direction) / CELL_SIZE;
+	if (!ft_strchr("1D", p->map.map[mapo[Y]][mapo[X]])
+		&& !ft_strchr("1D", p->map.map[mapo[Y]][mapo[X]]))
+	{
+		p->player.pos.y = new_pos.y;
+	}
 }
 
 void	open_door(t_player *player, t_map *map)
 {
 	t_dda	data;
 
-	init_dda(&data, player->angle);
+	data.angle = player->angle;
 	dda(&data, player, *map, 1);
-	if (data.ray.side == S_DOOR  && data.ray.length <= 10)
+	if (data.ray.side == S_DOOR && data.ray.length <= 10)
 		map->map[(int)data.ray.hit.y >> 3][(int)data.ray.hit.x >> 3] = '0';
 }
 
@@ -87,7 +77,7 @@ void	change_player_angle(t_player *player, double turnspeed, double dt)
 	player->delta.y = sin(player->angle) * WALKSPEED;
 }
 
-void	init_player(t_map map, t_player *player, t_color floor)
+void	init_player(t_map map, t_player *player)
 {
 	char	direction;
 	int		x;

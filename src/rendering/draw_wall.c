@@ -6,7 +6,7 @@
 /*   By: mbernede <mbernede@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/07 13:43:37 by mbernede      #+#    #+#                 */
-/*   Updated: 2024/02/15 04:59:11 by bjacobs          ###   ########.fr       */
+/*   Updated: 2024/02/15 20:49:03 by bjacobs          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,9 @@
 uint32_t	get_color_wall(mlx_texture_t *texture, uint32_t pos_x,
 		uint32_t pos_y, double shade)
 {
-
 	uint32_t	pixel_index;
 	t_ucolor	c;
 
-	if (pos_x < 0)
-		pos_x = 0;
-	if (pos_y < 0)
-		pos_y = 0;
 	pixel_index = (pos_y * texture->width + pos_x) * texture->bytes_per_pixel;
 	c.r = texture->pixels[pixel_index] * shade;
 	c.g = texture->pixels[pixel_index + 1] * shade;
@@ -52,7 +47,7 @@ void	fill_wall(t_wall *wall, t_dda dda, int tex_width)
 		wall->shade *= .8;
 	}
 	if (dda.ray.side == S_SOUTH || dda.ray.side == S_EAST)
-		wall->percent_x = 1.0f - wall->percent_x;
+		wall->percent_x = 0.99999999999f - wall->percent_x;
 	wall->percent_x *= (float)tex_width;
 	wall->percent_y = tex_offset * wall->py_step;
 }
@@ -69,8 +64,8 @@ void	draw_wall(t_param *param, t_dda dda)
 	{
 		ymap = y + HALF_HEIGHT - (wall.height >> 1);
 		mlx_put_pixel(param->reality, dda.rays, ymap,
-				get_color_wall(param->textures[dda.ray.side],
-					wall.percent_x, wall.percent_y, wall.shade));
+			get_color_wall(param->textures[dda.ray.side],
+				wall.percent_x, wall.percent_y, wall.shade));
 		wall.percent_y += wall.py_step;
 		++y;
 	}

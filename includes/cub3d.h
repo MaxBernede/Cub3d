@@ -71,7 +71,6 @@
 # define FOV .8
 
 // Rendering Variables
-# define DULLNESS 4
 # define HALF_HEIGHT HEIGHT / 2
 
 // Math for raycasting & rendering
@@ -93,10 +92,9 @@
 
 //player.c
 void		fill_delta(t_player *player, t_vec2 *offset);
-void		move_player_y(t_player *player, char **map, int direction, double dt);
-void		move_player_x(t_player *player, char **map, int direction, double dt);
+void		move_player(t_param *p, bool strafing, int direction, double dt);
 void		change_player_angle(t_player *player, double turnspeed, double dt);
-void		init_player(t_map map, t_player *player, t_color floor);
+void		init_player(t_map map, t_player *player);
 void		open_door(t_player *player, t_map *map);
 
 //valid_input.c
@@ -129,11 +127,10 @@ t_vec2		v2_sub(t_vec2 v2, t_vec2 sub);
 
 // for drawing the minimap
 int			get_char_start(t_map map, int *y, int *x);
-void		put_pixel(mlx_image_t *img, int x, int y, uint32_t color);
+void		put_pixel(mlx_image_t *img, uint32_t x, uint32_t y, uint32_t color);
 void		draw_line(mlx_image_t *img, t_vec2 p1, t_vec2 p2, uint32_t color);
 
 // DDA.c
-void		init_dda(t_dda *data, float player_angle);
 void		dda(t_dda *data, t_player *player, t_map map, int max_steps);
 
 // renderer.c
@@ -153,7 +150,7 @@ void		cursor_hook(double x, double y, void *param);
 void		my_hook(void *param);
 
 //! START
-int			start(t_param *param, t_window w);
+int			start(t_param *param);
 
 char*		concatenate_strings(char** strings, int numStrings);
 

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   valid_input.c                                      :+:    :+:            */
+/*   valid_input.c                                      :+:      :+:    :+:   */
 /*                                                     +:+                    */
 /*   By: mbernede <mbernede@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/07 13:34:11 by mbernede      #+#    #+#                 */
-/*   Updated: 2024/02/07 13:34:12 by mbernede      ########   odam.nl         */
+/*   Updated: 2024/02/15 20:47:54 by bjacobs          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 // check if exist and we can open it
 int	open_file(char *arg)
 {
-	char	*filepath;
 	int		fd;
 
 	fd = open(arg, O_RDONLY);

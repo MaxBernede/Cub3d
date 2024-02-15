@@ -6,7 +6,7 @@
 /*   By: mbernede <mbernede@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/16 01:45:30 by bjacobs       #+#    #+#                 */
-/*   Updated: 2024/02/15 03:02:34 by bjacobs          ###   ########.fr       */
+/*   Updated: 2024/02/15 20:23:42 by bjacobs          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void	cast_ray(t_ray *ray, t_map map, float player_angle, int max_steps)
 	mapx = (int)ray->hit.x >> 3;
 	mapy = (int)ray->hit.y >> 3;
 	while (mapy < map.height && mapx < map.length && mapy >= 0 && mapx >= 0
-		&& !ft_strchr("1D", map.map[mapy][mapx]) &&  steps < max_steps)
+		&& !ft_strchr("1D", map.map[mapy][mapx]) && steps < max_steps)
 	{
 		ray->hit.y += ray->ray_step.y;
 		ray->hit.x += ray->ray_step.x;
@@ -88,16 +88,12 @@ void	cast_ray(t_ray *ray, t_map map, float player_angle, int max_steps)
 		++steps;
 	}
 	if (mapy < map.height && mapx < map.length && mapy >= 0 && mapx >= 0
-			&& map.map[mapy][mapx] == 'D')
+		&& map.map[mapy][mapx] == 'D')
+	{
 		ray->side = S_DOOR;
+	}
 	ray->length = -((ray->hit.x - ray->origin.x) * cos(player_angle) \
 			+ (ray->hit.y - ray->origin.y) * sin(player_angle));
-}
-
-void	init_dda(t_dda *data, float ray_angle)
-{
-	data->angle = fix_angle(ray_angle);
-	data->rays = 0;
 }
 
 void	dda(t_dda *data, t_player *player, t_map map, int max_steps)

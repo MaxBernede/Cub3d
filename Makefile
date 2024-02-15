@@ -2,7 +2,9 @@
 
 # Variables
 NAME	:= cub3D
-LIBSA	:= ./libft/libft.a MLX42/build/libmlx42.a
+MLX_DIR	:= MLX42/
+MLX42	:= $(MLX_DIR)build/
+LIBSA	:= ./libft/libft.a $(MLX42)libmlx42.a
 INCLUDES := -I libft -I MLX42 -I includes
 
 # Compiler and Flags
@@ -54,9 +56,9 @@ SRC := $(addprefix $(SRC_DIR)/,$(SRC))
 
 all: $(NAME)
 
-$(NAME): $(OBJ)
+$(NAME): $(OBJ) | $(MLX42)
 	@echo $(Yellow) Building.. 🏠$(Color_Off)
-	@make -C MLX42/build/
+	@make -C $(MLX42)
 	@$(MAKE) -C libft bonus
 	@$(CC) -Ofast -o $(NAME) -pg $^ $(LIBSA) $(CFLAGS) $(INCLUDES) $(MLX_FLAGS)
 	@echo $(Green) Complete ✅ $(Color_Off)
@@ -65,6 +67,9 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(HEADERS) | $(OBJ_DIR)
 	@mkdir -p $(@D)
 	@echo $(Purple) Compiling.. 🧱 $< $(Color_Off)
 	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+
+$(MLX42):
+	@cmake $(MLX_DIR) -B $(MLX_DIR)build
 
 $(OBJ_DIR):
 	@mkdir $@

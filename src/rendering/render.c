@@ -6,7 +6,7 @@
 /*   By: mbernede <mbernede@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/07 13:35:16 by mbernede      #+#    #+#                 */
-/*   Updated: 2024/02/15 04:03:09 by bjacobs          ###   ########.fr       */
+/*   Updated: 2024/02/15 20:48:45 by bjacobs          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	draw_square(int size, t_vec2 p, mlx_image_t *img, uint32_t color)
 	}
 }
 
-void	draw_minimap(t_player player, t_map map)
+void	draw_minimap(t_map map)
 {
 	t_vec2	p;
 
@@ -84,10 +84,10 @@ void	render(t_param *p)
 	float			camera_x;
 	static float	x_step = 1.0f / WIDTH;
 
-	clear_img(p->reality);
-	draw_minimap(p->player, p->map);
 	data.rays = 0;
 	camera_x = -.5f;
+	clear_img(p->reality);
+	draw_minimap(p->map);
 	while (data.rays < WIDTH)
 	{
 		data.angle = fix_angle(p->player.angle + atan2(camera_x, FOV));

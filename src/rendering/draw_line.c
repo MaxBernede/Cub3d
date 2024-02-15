@@ -6,15 +6,15 @@
 /*   By: bjacobs <bjacobs@student.codam.nl>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 18:07:29 by bjacobs           #+#    #+#             */
-/*   Updated: 2024/02/09 22:14:11 by bjacobs          ###   ########.fr       */
+/*   Updated: 2024/02/15 20:52:17 by bjacobs          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	put_pixel(mlx_image_t *img, int x, int y, uint32_t color)
+void	put_pixel(mlx_image_t *img, uint32_t x, uint32_t y, uint32_t color)
 {
-	if (x < img->width && x >= 0 && y < img->height && y >= 0)
+	if (x < img->width && y < img->height)
 		mlx_put_pixel(img, x, y, color);
 }
 

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   main.c                                             :+:    :+:            */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                     +:+                    */
 /*   By: maxb <maxb@student.42.fr>                    +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/07 13:43:17 by mbernede      #+#    #+#                 */
-/*   Updated: 2024/02/09 14:37:42 by mbernede      ########   odam.nl         */
+/*   Updated: 2024/02/15 21:08:19 by bjacobs          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	main(int argc, char **argv)
 		return (printf(ERR_NOTEXT), 1);
 	if (!search_in_map(&param, "K") && !param.textures[S_KEY])
 		return (printf(ERR_NOTEXT), 1);
-	if (start(&param, param.window))
+	if (start(&param))
 		return (0);
 	clean_everything(&param);
 	return (0);
