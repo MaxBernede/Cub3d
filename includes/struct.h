@@ -107,6 +107,8 @@ typedef struct s_map
 	char			**map;
 	int				length;
 	int				height;
+	int				tile_size;
+
 
 	uint32_t		floor_color;
 	uint32_t		ceil_color;

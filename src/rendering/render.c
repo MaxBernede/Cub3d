@@ -6,7 +6,7 @@
 /*   By: mbernede <mbernede@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/07 13:35:16 by mbernede      #+#    #+#                 */
-/*   Updated: 2024/02/14 21:34:34 by bjacobs          ###   ########.fr       */
+/*   Updated: 2024/02/15 04:03:09 by bjacobs          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,16 +61,16 @@ void	draw_minimap(t_player player, t_map map)
 		while (p.x < map.length)
 		{
 			if (map.map[(int)p.y][(int)p.x] == '1')
-				draw_square(TILE_SIZE, v2_mult(p, TILE_SIZE), map.minimap,
+				draw_square(CELL_SIZE, v2_mult(p, CELL_SIZE), map.minimap,
 					WALL_COL);
 			else if (ft_strchr("0NWSE", map.map[(int)p.y][(int)p.x]))
-				draw_square(TILE_SIZE, v2_mult(p, TILE_SIZE), map.minimap,
+				draw_square(CELL_SIZE, v2_mult(p, CELL_SIZE), map.minimap,
 					map.floor_color);
 			else if (map.map[(int)p.y][(int)p.x] == 'D')
-				draw_square(TILE_SIZE, v2_mult(p, TILE_SIZE), map.minimap,
+				draw_square(CELL_SIZE, v2_mult(p, CELL_SIZE), map.minimap,
 					DOOR_COL);
 			else if (map.map[(int)p.y][(int)p.x] == 'K')
-				draw_square(TILE_SIZE, v2_mult(p, TILE_SIZE), map.minimap,
+				draw_square(CELL_SIZE, v2_mult(p, CELL_SIZE), map.minimap,
 					KEY_COL);
 			++p.x;
 		}

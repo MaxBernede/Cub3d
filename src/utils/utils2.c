@@ -1,30 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   utils2.c                                           :+:    :+:            */
+/*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                     +:+                    */
 /*   By: maxb <maxb@student.42.fr>                    +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/07 15:34:19 by mbernede      #+#    #+#                 */
-/*   Updated: 2024/02/08 17:49:25 by maxb          ########   odam.nl         */
+/*   Updated: 2024/02/15 03:02:46 by bjacobs          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-float	float_modulo(float dividend, float divisor)
-{
-	if (divisor == 0)
-	{
-		printf("Error: Division by zero\n");
-		return (0);
-	}
-	return (fmod(dividend, divisor));
-}
-
 float	pourcentage_of(float coordinate)
 {
-	return ((fmod(coordinate, TILE_SIZE)) / TILE_SIZE);
+	return ((fmodf(coordinate, CELL_SIZE)) / (float)CELL_SIZE);
 }
 
 char	*ft_strchr_nolast(const char *s, int c)

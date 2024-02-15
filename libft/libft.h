@@ -6,7 +6,7 @@
 /*   By: maxb <maxb@student.42.fr>                    +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/04 18:59:25 by mbernede      #+#    #+#                 */
-/*   Updated: 2024/02/14 21:19:44 by bjacobs          ###   ########.fr       */
+/*   Updated: 2024/02/15 03:11:47 by bjacobs          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ int		ft_atoi_overflow(const char *str, int *numb);
 int		ft_isspace(int c);
 void	ft_2d_print(char **str);
 int		ft_max(int n1, int n2);
+int		ft_min(int n1, int n2);
 int		cmp(char *s1, char *s2);
 
 #endif

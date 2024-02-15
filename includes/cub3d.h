@@ -61,7 +61,7 @@
 # define HEIGHT 512
 
 // map/world tile size
-# define TILE_SIZE 8
+# define CELL_SIZE 8
 
 // Player variables
 # define WALKSPEED 15

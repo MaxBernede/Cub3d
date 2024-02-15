@@ -6,7 +6,7 @@
 /*   By: mbernede <mbernede@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/07 15:30:48 by mbernede      #+#    #+#                 */
-/*   Updated: 2024/02/13 00:22:30 by bjacobs          ###   ########.fr       */
+/*   Updated: 2024/02/15 03:02:11 by bjacobs          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,15 +35,15 @@ void	move_player_y(t_player *player, char **map, int direction, double dt)
 	init_offset(player->delta.x, player->delta.y, offset);
 	new_pos.x = player->pos.x + player->delta.x * direction * dt;
 	new_pos.y = player->pos.y + player->delta.y * direction * dt;
-	mapo = (new_pos.x + offset[X] * direction) / TILE_SIZE;
-	if (!ft_strchr("1D", map[(int)((player->pos.y + 1) / TILE_SIZE)][mapo])
+	mapo = (new_pos.x + offset[X] * direction) / CELL_SIZE;
+	if (!ft_strchr("1D", map[(int)((player->pos.y + 1) / CELL_SIZE)][mapo])
 		&& !ft_strchr("1D", map[(int)((player->pos.y - 1)
-				/ TILE_SIZE)][mapo]))
+				/ CELL_SIZE)][mapo]))
 		player->pos.x = new_pos.x;
-	mapo = (new_pos.y + offset[Y] * direction) / TILE_SIZE;
-	if (!ft_strchr("1D", map[mapo][(int)((player->pos.x + 1) / TILE_SIZE)])
+	mapo = (new_pos.y + offset[Y] * direction) / CELL_SIZE;
+	if (!ft_strchr("1D", map[mapo][(int)((player->pos.x + 1) / CELL_SIZE)])
 		&& !ft_strchr("1D", map[mapo][(int)((player->pos.x - 1)
-				/ TILE_SIZE)]))
+				/ CELL_SIZE)]))
 		player->pos.y = new_pos.y;
 }
 
@@ -58,15 +58,15 @@ void	move_player_x(t_player *player, char **map, int direction, double dt)
 	init_offset(-player->delta.y, player->delta.x, offset);
 	new_pos.x = player->pos.x + -player->delta.y * direction * dt;
 	new_pos.y = player->pos.y + player->delta.x * direction * dt;
-	mapo = (new_pos.x + offset[X] * direction) / TILE_SIZE;
-	if (!ft_strchr("1D", map[(int)((player->pos.y + 1) / TILE_SIZE)][mapo])
+	mapo = (new_pos.x + offset[X] * direction) / CELL_SIZE;
+	if (!ft_strchr("1D", map[(int)((player->pos.y + 1) / CELL_SIZE)][mapo])
 		&& !ft_strchr("1D", map[(int)((player->pos.y - 1)
-				/ TILE_SIZE)][mapo]))
+				/ CELL_SIZE)][mapo]))
 		player->pos.x = new_pos.x;
-	mapo = (new_pos.y + offset[Y] * direction) / TILE_SIZE;
-	if (!ft_strchr("1D", map[mapo][(int)((player->pos.x + 1) / TILE_SIZE)])
+	mapo = (new_pos.y + offset[Y] * direction) / CELL_SIZE;
+	if (!ft_strchr("1D", map[mapo][(int)((player->pos.x + 1) / CELL_SIZE)])
 		&& !ft_strchr("1D", map[mapo][(int)((player->pos.x - 1)
-				/ TILE_SIZE)]))
+				/ CELL_SIZE)]))
 		player->pos.y = new_pos.y;
 }
 
@@ -104,8 +104,8 @@ void	init_player(t_map map, t_player *player, t_color floor)
 		player->angle = THIRD_PI;
 	else
 		player->angle = 0;
-	player->pos.x = x * TILE_SIZE + TILE_SIZE * 0.5;
-	player->pos.y = y * TILE_SIZE + TILE_SIZE * 0.5;
+	player->pos.x = x * CELL_SIZE + CELL_SIZE * 0.5;
+	player->pos.y = y * CELL_SIZE + CELL_SIZE * 0.5;
 	player->delta.x = cos(player->angle) * WALKSPEED;
 	player->delta.y = sin(player->angle) * WALKSPEED;
 }

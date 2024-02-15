@@ -21,9 +21,11 @@ SRC_DIR := ./src
 HEADERS := libft/libft.h includes/cub3d.h includes/struct.h
 SRC :=	main.c					\
 		player.c				\
-		valid_input.c			\
-		parsing.c				\
-		check_map.c				\
+		parsing/valid_input.c	\
+		parsing/parsing.c		\
+		parsing/check_map.c		\
+		parsing/map_parse.c		\
+		parsing/flood_fill.c	\
 		rendering/render.c		\
 		rendering/draw_wall.c	\
 		rendering/draw_line.c	\
@@ -40,9 +42,7 @@ SRC :=	main.c					\
 		fill_datas.c			\
 		mlx/start.c				\
 		mlx/hook.c				\
-		map_parse.c				\
 		gets.c					\
-		flood_fill.c			\
 		nodes.c					\
 		nodes2.c				\
 

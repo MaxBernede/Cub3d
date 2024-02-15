@@ -6,7 +6,7 @@
 /*   By: mbernede <mbernede@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/16 01:45:30 by bjacobs       #+#    #+#                 */
-/*   Updated: 2024/02/12 23:55:50 by bjacobs          ###   ########.fr       */
+/*   Updated: 2024/02/15 03:02:34 by bjacobs          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,13 @@ int	init_xray(t_ray *ray, t_vec2 origin, float angle)
 	if (angle < PI)
 	{
 		ray->hit.y = (((int)ray->origin.y >> 3) << 3) - 0.0001;
-		ray->ray_step.y = -TILE_SIZE;
+		ray->ray_step.y = -CELL_SIZE;
 		ray->side = S_NORTH;
 	}
 	else
 	{
-		ray->hit.y = (((int)ray->origin.y >> 3) << 3) + TILE_SIZE;
-		ray->ray_step.y = TILE_SIZE;
+		ray->hit.y = (((int)ray->origin.y >> 3) << 3) + CELL_SIZE;
+		ray->ray_step.y = CELL_SIZE;
 		ray->side = S_SOUTH;
 	}
 	ray->hit.x = (ray->hit.y - ray->origin.y) * tangent + ray->origin.x;
@@ -55,13 +55,13 @@ int	init_yray(t_ray *ray, t_vec2 origin, float angle)
 	if (angle < HALF_PI || angle > THIRD_PI)
 	{
 		ray->hit.x = (((int)ray->origin.x >> 3) << 3) - 0.0001;
-		ray->ray_step.x = -TILE_SIZE;
+		ray->ray_step.x = -CELL_SIZE;
 		ray->side = S_WEST;
 	}
 	else
 	{
-		ray->hit.x = (((int)ray->origin.x >> 3) << 3) + TILE_SIZE;
-		ray->ray_step.x = TILE_SIZE;
+		ray->hit.x = (((int)ray->origin.x >> 3) << 3) + CELL_SIZE;
+		ray->ray_step.x = CELL_SIZE;
 		ray->side = S_EAST;
 	}
 	ray->hit.y = (ray->hit.x - ray->origin.x) * tangent + ray->origin.y;

@@ -6,7 +6,7 @@
 /*   By: mbernede <mbernede@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/07 13:33:19 by mbernede      #+#    #+#                 */
-/*   Updated: 2024/02/14 20:52:07 by bjacobs          ###   ########.fr       */
+/*   Updated: 2024/02/15 04:25:52 by bjacobs          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	draw_background(mlx_image_t *background, t_param *param)
 	}
 }
 
-int	init_images(t_param *param, t_window w)
+int	init_images(t_param *param)
 {
 	param->background = mlx_new_image(param->mlx, WIDTH, HEIGHT);
 	if (!param->background)
@@ -46,7 +46,7 @@ int	init_images(t_param *param, t_window w)
 	if (!param->reality)
 		return (ERROR);
 	param->map.minimap = mlx_new_image(param->mlx, param->map.length
-			* TILE_SIZE, param->map.height * TILE_SIZE);
+			* CELL_SIZE, param->map.height * CELL_SIZE);
 	if (!param->map.minimap)
 		return (ERROR);
 	return (OK);
@@ -54,10 +54,11 @@ int	init_images(t_param *param, t_window w)
 
 int	start(t_param *param, t_window w)
 {
+	mlx_set_setting(MLX_STRETCH_IMAGE, 1);
 	param->mlx = mlx_init(WIDTH, HEIGHT, "cub3d", true);
 	if (!param->mlx)
 		return (ERROR);
-	if (init_images(param, w))
+	if (init_images(param))
 		return (mlx_close_window(param->mlx), printf(ERR_IMG_CREA), ERROR);
 	init_player(param->map, &param->player, param->floor);
 	draw_background(param->background, param);

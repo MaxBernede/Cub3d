@@ -6,7 +6,7 @@
 /*   By: mbernede <mbernede@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/07 13:43:37 by mbernede      #+#    #+#                 */
-/*   Updated: 2024/02/14 21:38:18 by bjacobs          ###   ########.fr       */
+/*   Updated: 2024/02/15 04:59:11 by bjacobs          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	fill_wall(t_wall *wall, t_dda dda, int tex_width)
 	}
 	else
 		tex_offset = 0;
-	wall->shade = exp(-0.020 * dda.ray.length);
+	wall->shade = exp(-0.015 * dda.ray.length);
 	if (dda.ray.type == X)
 		wall->percent_x = pourcentage_of(dda.ray.hit.x);
 	else
