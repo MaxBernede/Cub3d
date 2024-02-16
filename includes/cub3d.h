@@ -131,7 +131,7 @@ void		put_pixel(mlx_image_t *img, uint32_t x, uint32_t y, uint32_t color);
 void		draw_line(mlx_image_t *img, t_vec2 p1, t_vec2 p2, uint32_t color);
 
 // DDA.c
-void		dda(t_dda *data, t_player *player, t_map map, int max_steps);
+void		dda(t_dda *data, t_player *player, t_map map, char *hit_condition);
 
 // renderer.c
 void		render(t_param *param);

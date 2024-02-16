@@ -6,7 +6,7 @@
 /*   By: mbernede <mbernede@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/07 13:28:44 by mbernede      #+#    #+#                 */
-/*   Updated: 2024/02/16 16:11:34 by mbernede      ########   odam.nl         */
+/*   Updated: 2024/02/16 17:19:23 by mbernede      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	clean_textures(t_param *param)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < 6)
