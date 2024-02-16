@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
+/*                                                        :::      ::::::::   */
 /*   player.c                                           :+:      :+:    :+:   */
-/*                                                     +:+                    */
-/*   By: mbernede <mbernede@student.codam.nl>         +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2024/02/07 15:30:48 by mbernede      #+#    #+#                 */
-/*   Updated: 2024/02/16 18:33:55 by bjacobs          ###   ########.fr       */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bjacobs <bjacobs@student.codam.nl>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/02/16 18:39:52 by bjacobs           #+#    #+#             */
+/*   Updated: 2024/02/16 18:39:55 by bjacobs          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,15 @@ void	open_door(t_player *player, t_map *map)
 	t_dda	data;
 
 	data.angle = player->angle;
-	dda(&data, player, *map, 1);
+	dda(&data, player, *map, "DO1");
 	if (data.ray.side == S_DOOR && data.ray.length <= 10)
-		map->map[(int)data.ray.hit.y >> 3][(int)data.ray.hit.x >> 3] = '0';
+	{
+		if (map->map[(int)data.ray.hit.y >> 3][(int)data.ray.hit.x >> 3] == 'D')
+			map->map[(int)data.ray.hit.y >> 3][(int)data.ray.hit.x >> 3] = 'O';
+		else
+			map->map[(int)data.ray.hit.y >> 3][(int)data.ray.hit.x >> 3] = 'D';
+	usleep(100000);
+	}
 }
 
 void	change_player_angle(t_player *player, double turnspeed, double dt)

@@ -6,14 +6,14 @@
 /*   By: maxb <maxb@student.42.fr>                    +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/07 13:43:17 by mbernede      #+#    #+#                 */
-/*   Updated: 2024/02/16 16:13:25 by mbernede      ########   odam.nl         */
+/*   Updated: 2024/02/16 17:57:28 by mbernede      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
 // this is made to free more easily in case of a parsing error
-void	init_null(t_param *p)
+int	init_null(t_param *p)
 {
 	int	i;
 
@@ -35,6 +35,7 @@ void	init_null(t_param *p)
 	p->tmp_map = NULL;
 	p->window.height = HEIGHT;
 	p->window.width = WIDTH;
+	return (OK);
 }
 
 int	main(int argc, char **argv)
@@ -43,7 +44,8 @@ int	main(int argc, char **argv)
 
 	if (argc != 2)
 		return (printf(ERR_ARG), 1);
-	init_null(&param);
+	if (init_null(&param))
+		return (ERROR);
 	if (check_file(argv[1]))
 		return (clean_everything(&param), ERROR);
 	if (parse_file(argv[1], &param))

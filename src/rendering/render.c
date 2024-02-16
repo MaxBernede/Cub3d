@@ -1,14 +1,15 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
+/*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
-/*                                                     +:+                    */
-/*   By: mbernede <mbernede@student.codam.nl>         +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2024/02/07 13:35:16 by mbernede      #+#    #+#                 */
-/*   Updated: 2024/02/16 18:34:42 by bjacobs          ###   ########.fr       */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bjacobs <bjacobs@student.codam.nl>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/02/16 18:40:18 by bjacobs           #+#    #+#             */
+/*   Updated: 2024/02/16 18:40:19 by bjacobs          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "cub3d.h"
 
@@ -91,7 +92,7 @@ void	render(t_param *p)
 	while (data.rays < WIDTH)
 	{
 		data.angle = fix_angle(p->player.angle + atan2(camera_x, FOV));
-		dda(&data, &p->player, p->map, 1000);
+		dda(&data, &p->player, p->map, "1D");
 		draw_wall(p, data);
 		draw_line(p->map.minimap, data.ray.hit,
 			p->player.pos, RAY_COL);

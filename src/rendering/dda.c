@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
+/*                                                        :::      ::::::::   */
 /*   dda.c                                              :+:      :+:    :+:   */
-/*                                                     +:+                    */
-/*   By: mbernede <mbernede@student.42.fr>            +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2023/12/16 01:45:30 by bjacobs       #+#    #+#                 */
-/*   Updated: 2024/02/16 17:58:25 by bjacobs          ###   ########.fr       */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bjacobs <bjacobs@student.codam.nl>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/02/16 18:40:37 by bjacobs           #+#    #+#             */
+/*   Updated: 2024/02/16 18:40:39 by bjacobs          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,26 +69,23 @@ int	init_yray(t_ray *ray, t_vec2 origin, float angle)
 	return (EXIT_SUCCESS);
 }
 
-void	cast_ray(t_ray *ray, t_map map, float player_angle, int max_steps)
+void	cast_ray(t_ray *ray, t_map map, float player_angle, char *hit_condition)
 {
 	int	mapx;
 	int	mapy;
-	int	steps;
 
-	steps = 0;
 	mapx = (int)ray->hit.x >> 3;
 	mapy = (int)ray->hit.y >> 3;
 	while (mapy < map.height && mapx < map.length && mapy >= 0 && mapx >= 0
-		&& !ft_strchr("1D", map.map[mapy][mapx]) && steps < max_steps)
+		&& !ft_strchr(hit_condition, map.map[mapy][mapx]))
 	{
 		ray->hit.y += ray->ray_step.y;
 		ray->hit.x += ray->ray_step.x;
 		mapx = (int)ray->hit.x >> 3;
 		mapy = (int)ray->hit.y >> 3;
-		++steps;
 	}
 	if (mapy < map.height && mapx < map.length && mapy >= 0 && mapx >= 0
-		&& map.map[mapy][mapx] == 'D')
+		&& (map.map[mapy][mapx] == 'D' || map.map[mapy][mapx] == 'O'))
 	{
 		ray->side = S_DOOR;
 	}
@@ -96,14 +93,16 @@ void	cast_ray(t_ray *ray, t_map map, float player_angle, int max_steps)
 			+ (ray->hit.y - ray->origin.y) * sin(player_angle));
 }
 
-void	dda(t_dda *data, t_player *player, t_map map, int max_steps)
+void	dda(t_dda *data, t_player *player, t_map map, char *hit_condition)
 {
 	t_ray	ray;
 
 	if (!init_xray(&data->ray, player->pos, data->angle))
-		cast_ray(&data->ray, map, player->angle, max_steps);
+		cast_ray(&data->ray, map, player->angle, hit_condition);
 	if (!init_yray(&ray, player->pos, data->angle))
-		cast_ray(&ray, map, player->angle, max_steps);
+		cast_ray(&ray, map, player->angle, hit_condition);
 	if (data->ray.length > ray.length)
 		data->ray = ray;
 }
+
+

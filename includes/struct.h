@@ -16,7 +16,8 @@ typedef enum s_sides
     S_EAST,
     S_WEST,
 	S_DOOR,
-	S_KEY
+	S_KEY,
+	S_DOOR_OPEN
 } t_sides;
 
 typedef struct s_wall
@@ -132,7 +133,6 @@ typedef struct s_param
 	t_node			*tmp_map;
 	t_map			map;
 	t_player		player;
-
 	mlx_t			*mlx;
 	mlx_image_t		*reality;
 	mlx_image_t		*background;
