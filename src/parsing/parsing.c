@@ -6,7 +6,7 @@
 /*   By: maxb <maxb@student.42.fr>                    +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/07 13:40:11 by mbernede      #+#    #+#                 */
-/*   Updated: 2024/02/16 15:56:58 by mbernede      ########   odam.nl         */
+/*   Updated: 2024/02/16 16:20:55 by mbernede      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int	parse_file(char *arg, t_param *p)
 	while (line)
 	{
 		if (!p->end_map_parse && parse_map(line, p))
-			return (printf(ERR_FILL_MAP), close(p->fd), ERROR);
+			return (free(line), printf(ERR_FILL_MAP), close(p->fd), ERROR);
 		if (!p->end_map_parse && check_line(line, p))
 			return (free(line), printf(ERR_FILE_DATA), close(p->fd), ERROR);
 		free(line);

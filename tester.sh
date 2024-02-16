@@ -9,6 +9,7 @@ TIMEOUT=0.5
 
 run_test() {
     ./cub3D "$1" > /dev/null 2> /dev/null &
+    #./cub3D "$1" &
     command_pid=$!
     sleep $TIMEOUT
 

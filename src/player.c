@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   player.c                                           :+:      :+:    :+:   */
+/*   player.c                                           :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: mbernede <mbernede@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/07 15:30:48 by mbernede      #+#    #+#                 */
-/*   Updated: 2024/02/15 20:45:00 by bjacobs          ###   ########.fr       */
+/*   Updated: 2024/02/16 16:08:45 by mbernede      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,6 @@ void	init_player(t_map map, t_player *player)
 
 	get_char_start(map, &y, &x);
 	direction = map.map[y][x];
-	printf("player x: %d, player y: %d, direction: %c\n", x, y, direction);
 	if (direction == 'N')
 		player->angle = HALF_PI;
 	else if (direction == 'W')
