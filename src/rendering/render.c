@@ -6,7 +6,7 @@
 /*   By: mbernede <mbernede@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/07 13:35:16 by mbernede      #+#    #+#                 */
-/*   Updated: 2024/02/15 20:48:45 by bjacobs          ###   ########.fr       */
+/*   Updated: 2024/02/16 18:34:42 by bjacobs          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,12 +66,12 @@ void	draw_minimap(t_map map)
 			else if (ft_strchr("0NWSE", map.map[(int)p.y][(int)p.x]))
 				draw_square(CELL_SIZE, v2_mult(p, CELL_SIZE), map.minimap,
 					map.floor_color);
-			else if (map.map[(int)p.y][(int)p.x] == 'D')
+			else if (ft_strchr("DO", map.map[(int)p.y][(int)p.x]))
 				draw_square(CELL_SIZE, v2_mult(p, CELL_SIZE), map.minimap,
 					DOOR_COL);
-			else if (map.map[(int)p.y][(int)p.x] == 'K')
+			else
 				draw_square(CELL_SIZE, v2_mult(p, CELL_SIZE), map.minimap,
-					KEY_COL);
+					0x00000000);
 			++p.x;
 		}
 		++p.y;

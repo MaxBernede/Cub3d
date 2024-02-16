@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   player.c                                           :+:    :+:            */
+/*   player.c                                           :+:      :+:    :+:   */
 /*                                                     +:+                    */
 /*   By: mbernede <mbernede@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/07 15:30:48 by mbernede      #+#    #+#                 */
-/*   Updated: 2024/02/16 16:08:45 by mbernede      ########   odam.nl         */
+/*   Updated: 2024/02/16 18:33:55 by bjacobs          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,22 +39,22 @@ void	move_player(t_param *p, bool strafing, int direction, double dt)
 {
 	t_vec2	new_pos;
 	int		offset[2];
-	int		mapo[2];
+	int		mapo;
 
 	if (dt > .25)
 		dt = .25;
 	new_pos = init_movement(&p->player, offset, strafing, direction * dt);
-	mapo[X] = (new_pos.x + offset[X] * direction) / CELL_SIZE;
-	mapo[Y] = (int)(p->player.pos.y + 1) / CELL_SIZE;
-	if (!ft_strchr("1D", p->map.map[mapo[Y]][mapo[X]])
-		&& !ft_strchr("1D", p->map.map[mapo[Y]][mapo[X]]))
+	mapo = (new_pos.x + offset[X] * direction) / CELL_SIZE;
+	if (!ft_strchr("1D",
+		p->map.map[(int)(p->player.pos.y + 1) / CELL_SIZE][mapo])
+		&& !ft_strchr("1D",
+			p->map.map[(int)(p->player.pos.y - 1) / CELL_SIZE][mapo]))
 	{
 		p->player.pos.x = new_pos.x;
 	}
-	mapo[X] = (int)(p->player.pos.x + 1) / CELL_SIZE;
-	mapo[Y] = (new_pos.y + offset[Y] * direction) / CELL_SIZE;
-	if (!ft_strchr("1D", p->map.map[mapo[Y]][mapo[X]])
-		&& !ft_strchr("1D", p->map.map[mapo[Y]][mapo[X]]))
+	mapo = (new_pos.y + offset[Y] * direction) / CELL_SIZE;
+	if (!ft_strchr("1D", p->map.map[mapo][(int)(p->player.pos.x + 1) / CELL_SIZE])
+		&& !ft_strchr("1D", p->map.map[mapo][(int)(p->player.pos.x + 1) / CELL_SIZE]))
 	{
 		p->player.pos.y = new_pos.y;
 	}

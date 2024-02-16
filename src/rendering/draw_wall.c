@@ -6,7 +6,7 @@
 /*   By: mbernede <mbernede@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/07 13:43:37 by mbernede      #+#    #+#                 */
-/*   Updated: 2024/02/15 20:49:03 by bjacobs          ###   ########.fr       */
+/*   Updated: 2024/02/16 18:30:51 by bjacobs          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ void	fill_wall(t_wall *wall, t_dda dda, int tex_width)
 	}
 	if (dda.ray.side == S_SOUTH || dda.ray.side == S_EAST)
 		wall->percent_x = 0.99999999999f - wall->percent_x;
+	if (wall->percent_x < 0)
+		wall->percent_x = 0;
 	wall->percent_x *= (float)tex_width;
 	wall->percent_y = tex_offset * wall->py_step;
 }
