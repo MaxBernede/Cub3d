@@ -2,7 +2,7 @@ NO textures/tpm.png
 SO textures/tpm.png
 WE textures/tpm.png
 EA textures/tpm.png
-DOOR textures/wood.png
+DOOR textures/r_door.png
 
 F 16,125,1
 C 0,81,181
