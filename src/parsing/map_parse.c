@@ -6,7 +6,7 @@
 /*   By: maxb <maxb@student.42.fr>                    +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/26 12:27:02 by maxb          #+#    #+#                 */
-/*   Updated: 2024/02/07 16:17:27 by mbernede      ########   odam.nl         */
+/*   Updated: 2024/02/16 16:03:40 by mbernede      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,9 +105,9 @@ int	parse_map(char *line, t_param *p)
 	if (get_type_no_space(split[0]) != ERROR)
 		return (ft_2dfree(split), OK);
 	if (check_full_textures(p) || fill_map(sub, p))
-		return (ft_2dfree(split), ERROR);
+		return (ft_2dfree(split), free(sub), ERROR);
 	ft_2dfree(split);
 	if (p->map.map)
 		return (check_map(p));
-	return (OK);
+	return (free(sub), OK);
 }

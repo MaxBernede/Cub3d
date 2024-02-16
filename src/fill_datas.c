@@ -6,7 +6,7 @@
 /*   By: maxb <maxb@student.42.fr>                    +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/07 13:49:46 by mbernede      #+#    #+#                 */
-/*   Updated: 2024/02/08 13:57:15 by maxb          ########   odam.nl         */
+/*   Updated: 2024/02/16 15:10:35 by mbernede      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,13 @@ int	floor_ceiling(int type, char *arg, t_param *p)
 	return (OK);
 }
 
-int	fill_texture(mlx_texture_t **texture, xpm_t **xpm, char *s)
+int	fill_texture(int t ,t_param *p, char *s)
 {
+	int type;
+
+	type = t - 4;
 	if (endswith(s, ".xpm"))
-	{	
+	{
 		;
 		// void *img_ptr;
 
@@ -39,10 +42,10 @@ int	fill_texture(mlx_texture_t **texture, xpm_t **xpm, char *s)
         // if (*xpm == NULL) 
 		// 	return (printf("Error: Unable to load XPM file %s\n", s), ERROR);
         // *texture = &(*xpm)->texture;
-	} 	
+	}
 	else if (endswith(s, ".png"))
-		*texture = mlx_load_png(s);
-	if (!(*texture))
+		p->textures[type] = mlx_load_png(s);
+	if (!(p->textures[type]))
 		return (ERROR);
 	return (OK);
 }

@@ -6,7 +6,7 @@
 /*   By: maxb <maxb@student.42.fr>                    +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/07 13:43:24 by mbernede      #+#    #+#                 */
-/*   Updated: 2024/02/09 14:41:38 by mbernede      ########   odam.nl         */
+/*   Updated: 2024/02/16 15:14:38 by mbernede      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,21 +58,17 @@ int	get_type_no_space(char *line)
 	if (!line)
 		return (ERROR);
 	i = ft_strlen(line);
-	if (i < 1)
-		return (ERROR);
-	if (!ft_strncmp("F", line, 1))
+	if (i == 1 && !ft_strncmp("F", line, 1))
 		return (FLOOR);
-	if (!ft_strncmp("C", line, 1))
+	if (i == 1 && !ft_strncmp("C", line, 1))
 		return (CEILING);
-	if (i < 2)
-		return (ERROR);
-	if (!ft_strncmp("NO", line, 2))
+	if (i == 2 && !ft_strncmp("NO", line, 2))
 		return (NORTH);
-	if (!ft_strncmp("SO", line, 2))
+	if (i == 2 && !ft_strncmp("SO", line, 2))
 		return (SOUTH);
-	if (!ft_strncmp("EA", line, 2))
+	if (i == 2 && !ft_strncmp("EA", line, 2))
 		return (EAST);
-	if (!ft_strncmp("WE", line, 2))
+	if (i == 2 && !ft_strncmp("WE", line, 2))
 		return (WEST);
 	if (i == 3 && !ft_strncmp("KEY", line, 3))
 		return (KEY);

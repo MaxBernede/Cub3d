@@ -87,8 +87,8 @@
 # define SOUTH 5
 # define EAST 6
 # define WEST 7
-# define KEY 8
-# define DOOR 9
+# define DOOR 8
+# define KEY 9
 
 //player.c
 void		fill_delta(t_player *player, t_vec2 *offset);
@@ -104,7 +104,7 @@ bool		endswith(char *str, char *suffix);
 void		draw_wall(t_param *param, t_dda data);
 
 //fill_datas.c
-int			fill_texture(mlx_texture_t **texture, xpm_t **xpm, char *s);
+int			fill_texture(int t ,t_param *p, char *s);
 int			floor_ceiling(int type, char *arg, t_param *p);
 
 //parsing.c
@@ -191,7 +191,6 @@ bool		check_file(char *arg);
 int			open_file(char *arg);
 
 // map_parse
-char		**get_map(t_param *p);
 int			parse_map(char *line, t_param *param);
 
 // nodes

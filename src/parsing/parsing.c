@@ -6,7 +6,7 @@
 /*   By: maxb <maxb@student.42.fr>                    +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/07 13:40:11 by mbernede      #+#    #+#                 */
-/*   Updated: 2024/02/09 14:31:40 by mbernede      ########   odam.nl         */
+/*   Updated: 2024/02/16 15:56:58 by mbernede      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,18 +21,8 @@ int	side_textures(int type, char *arg, t_param *p)
 	if (fd < 1)
 		return (printf(ERR_OPEN_TEXTURES), ERROR);
 	close(fd);
-	if (type == NORTH && fill_texture(&(p->textures[S_NORTH]), &(p->xpms[S_NORTH]), arg))
-		return (printf(ERR_NO), ERROR);
-	if (type == SOUTH && fill_texture(&(p->textures[S_SOUTH]), &(p->xpms[S_SOUTH]), arg))
-		return (printf(ERR_SO), ERROR);
-	if (type == EAST && fill_texture(&(p->textures[S_EAST]), &(p->xpms[S_EAST]), arg))
-		return (printf(ERR_EA), ERROR);
-	if (type == WEST && fill_texture(&(p->textures[S_WEST]), &(p->xpms[S_WEST]), arg))
-		return (printf(ERR_WE), ERROR);
-	if (type == DOOR && fill_texture(&(p->textures[S_DOOR]), &(p->xpms[S_DOOR]), arg))
-		return (printf(ERR_DOOR), ERROR);
-	if (type == KEY && fill_texture(&(p->textures[S_KEY]), &(p->xpms[S_KEY]), arg))
-		return (printf(ERR_KEY), ERROR);
+	if (fill_texture(type, p, arg))
+		return (printf("Error filling textures"), ERROR);
 	return (OK);
 }
 
@@ -48,10 +38,10 @@ int	check_line(char *line, t_param *param)
 		return (OK);
 	split = ft_split(sub, ' ');
 	if (!split)
-		return (printf(ERR_MLC), ERROR);
+		return (printf(ERR_MLC), free(sub), ERROR);
 	type = get_type_no_space(split[0]);
 	if (type == ERROR)
-		return (ft_2dfree(split), printf(ERR_TYPE), ERROR);
+		return (ft_2dfree(split), free(sub), printf(ERR_TYPE), ERROR);
 	sub = get_str_no_space(sub);
 	if (!sub)
 		return (ft_2dfree(split), printf(ERR_MLC), ERROR);

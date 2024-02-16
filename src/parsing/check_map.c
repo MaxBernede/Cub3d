@@ -6,7 +6,7 @@
 /*   By: maxb <maxb@student.42.fr>                    +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/27 17:52:04 by maxb          #+#    #+#                 */
-/*   Updated: 2024/02/08 17:54:17 by maxb          ########   odam.nl         */
+/*   Updated: 2024/02/16 15:24:53 by mbernede      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	check_datas(t_map map)
 	return (OK);
 }
 
-int search_in_map(t_param *p, char *c)
+int	search_in_map(t_param *p, char *c)
 {
 	int	x;
 	int	y;
