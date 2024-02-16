@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   struct.h                                           :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: mbernede <mbernede@student.codam.nl>         +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2024/02/16 18:50:26 by mbernede      #+#    #+#                 */
+/*   Updated: 2024/02/16 18:51:09 by mbernede      ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef STRUCT_H
 # define STRUCT_H
 
@@ -11,14 +23,14 @@ typedef enum s_xy
 
 typedef enum s_sides
 {
-    S_NORTH,
-    S_SOUTH,
-    S_EAST,
-    S_WEST,
+	S_NORTH,
+	S_SOUTH,
+	S_EAST,
+	S_WEST,
 	S_DOOR,
 	S_KEY,
 	S_DOOR_OPEN
-} t_sides;
+}					t_sides;
 
 typedef struct s_wall
 {
@@ -109,8 +121,6 @@ typedef struct s_map
 	int				length;
 	int				height;
 	int				tile_size;
-
-
 	uint32_t		floor_color;
 	uint32_t		ceil_color;
 	mlx_image_t		*minimap;

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   player.c                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: bjacobs <bjacobs@student.codam.nl>         +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/16 18:39:52 by bjacobs           #+#    #+#             */
-/*   Updated: 2024/02/16 18:39:55 by bjacobs          ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   player.c                                           :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: bjacobs <bjacobs@student.codam.nl>           +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2024/02/16 18:39:52 by bjacobs       #+#    #+#                 */
+/*   Updated: 2024/02/16 18:45:44 by mbernede      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,15 +46,17 @@ void	move_player(t_param *p, bool strafing, int direction, double dt)
 	new_pos = init_movement(&p->player, offset, strafing, direction * dt);
 	mapo = (new_pos.x + offset[X] * direction) / CELL_SIZE;
 	if (!ft_strchr("1D",
-		p->map.map[(int)(p->player.pos.y + 1) / CELL_SIZE][mapo])
-		&& !ft_strchr("1D",
+			p->map.map[(int)(p->player.pos.y + 1) / CELL_SIZE][mapo])
+			&& !ft_strchr("1D",
 			p->map.map[(int)(p->player.pos.y - 1) / CELL_SIZE][mapo]))
 	{
 		p->player.pos.x = new_pos.x;
 	}
 	mapo = (new_pos.y + offset[Y] * direction) / CELL_SIZE;
-	if (!ft_strchr("1D", p->map.map[mapo][(int)(p->player.pos.x + 1) / CELL_SIZE])
-		&& !ft_strchr("1D", p->map.map[mapo][(int)(p->player.pos.x + 1) / CELL_SIZE]))
+	if (!ft_strchr("1D", p->map.map[mapo][(int)(p->player.pos.x + 1) \
+		/ CELL_SIZE])
+		&& !ft_strchr("1D", p->map.map[mapo][(int)(p->player.pos.x + 1) \
+		/ CELL_SIZE]))
 	{
 		p->player.pos.y = new_pos.y;
 	}
@@ -72,7 +74,7 @@ void	open_door(t_player *player, t_map *map)
 			map->map[(int)data.ray.hit.y >> 3][(int)data.ray.hit.x >> 3] = 'O';
 		else
 			map->map[(int)data.ray.hit.y >> 3][(int)data.ray.hit.x >> 3] = 'D';
-	usleep(100000);
+		usleep(100000);
 	}
 }
 

@@ -1,18 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   cub3d.h                                            :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: mbernede <mbernede@student.codam.nl>         +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2024/02/16 18:47:10 by mbernede      #+#    #+#                 */
+/*   Updated: 2024/02/16 18:55:33 by mbernede      ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef CUB3D_H
 # define CUB3D_H
-
-# include "../MLX42/include/MLX42/MLX42.h"
-# include "../libft/libft.h"
-# include "struct.h"
-# include <fcntl.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <math.h>
 
 # define OK 0
 # define ERROR 1
 
-// Run errors
 # define ERR_START_POS "Position not found\n"
 # define ERR_CHARACTER "Character not found or more than 1 time in the file\n"
 # define ERR_ARG "Error: Not enough arguments\nShould be ./cub3d 'file.cub'\n"
@@ -23,10 +26,8 @@
 # define ERR_NO_MAP "Error\nNo map in\n"
 # define ERR_IMG_CREA "Error\nWhile creating MLX images\n"
 
-// Errors globals
 # define ERR_MLC "Error: Malloc Failed\n"
 
-// Errors fills
 # define ERR_FILL_COLORS "Error\n Error fill colors\n"
 # define ERR_FILL_MAP "Error\nMap fill error\n"
 # define ERR_OPEN_TEXTURES "Error\nCannot open textures\n"
@@ -35,7 +36,6 @@
 # define ERR_TYPE "Error\nParsing type data incorrect\n"
 # define ERR_NOTEXT "Error\ndoor or key but no texture\n"
 
-// Sides Error
 # define ERR_NO "Error\nError North\n"
 # define ERR_SO "Error\nError South\n"
 # define ERR_EA "Error\nError East\n"
@@ -43,44 +43,34 @@
 # define ERR_DOOR "Error\nError Door\n"
 # define ERR_KEY "Error\nError Key\n"
 
-// Minimap Colors
 # define WALL_COL 0xFFFFFF5A
 # define RAY_COL 0xFFFF00FF
 # define PLAYER_COL 0x00FF00FF
 # define DOOR_COL 0xd1001F5A
 # define KEY_COL 0x8B9A465F
 
-//Wall color test
 # define SILVER 0xC0C0C0FF
 # define BLUE 0x00FFFFFF
 # define GREEN 0x008000FF
 # define PURPLE 0x800080FF
 
-// Screen dimentions
 # define WIDTH 1024
 # define HEIGHT 512
+# define HALF_HEIGHT 256
 
-// map/world tile size
 # define CELL_SIZE 8
 
-// Player variables
 # define WALKSPEED 15
 # define TURNSPEED 2.5
 # define MOUSESPEED .05
-// .8 = 64 degrees
 # define FOV .8
 
-// Rendering Variables
-# define HALF_HEIGHT HEIGHT / 2
-
-// Math for raycasting & rendering
 # define PI 3.14159265359f
 # define HALF_PI 1.57079632679f
 # define TWO_PI 6.28318530718f
 # define THIRD_PI 4.71238898038f
 # define ONE_DEGREE 0.0174532925f
 
-//Type of datas
 # define FLOOR 2
 # define CEILING 3
 # define NORTH 4
@@ -89,6 +79,14 @@
 # define WEST 7
 # define DOOR 8
 # define KEY 9
+
+# include "../MLX42/include/MLX42/MLX42.h"
+# include "../libft/libft.h"
+# include "struct.h"
+# include <fcntl.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <math.h>
 
 //player.c
 void		fill_delta(t_player *player, t_vec2 *offset);
@@ -104,7 +102,7 @@ bool		endswith(char *str, char *suffix);
 void		draw_wall(t_param *param, t_dda data);
 
 //fill_datas.c
-int			fill_texture(int t ,t_param *p, char *s);
+int			fill_texture(int t, t_param *p, char *s);
 int			floor_ceiling(int type, char *arg, t_param *p);
 
 //parsing.c
@@ -143,7 +141,7 @@ int			search_in_map(t_param *p, char *c);
 
 // check_line.c
 int			get_str_without_nl(char *line, char **sub);
-char 		*get_str_no_space(char *line);
+char		*get_str_no_space(char *line);
 
 //! MLX
 void		cursor_hook(double x, double y, void *param);
@@ -152,7 +150,7 @@ void		my_hook(void *param);
 //! START
 int			start(t_param *param);
 
-char*		concatenate_strings(char** strings, int numStrings);
+char		*concatenate_strings(char **strings, int num_string);
 
 void		print_flood(t_map map);
 
@@ -161,7 +159,7 @@ void		print_flood(t_map map);
 void		clean_everything(t_param *param);
 int32_t		ft_pixel(int32_t r, int32_t g, int32_t b, int32_t a);
 
-float pourcentage_of(float coordinate);
+float		pourcentage_of(float coordinate);
 
 // fix_angle.c
 float		fix_angle(float angle);

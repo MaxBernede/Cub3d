@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   dda.c                                              :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: bjacobs <bjacobs@student.codam.nl>         +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/16 18:40:37 by bjacobs           #+#    #+#             */
-/*   Updated: 2024/02/16 18:40:39 by bjacobs          ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   dda.c                                              :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: bjacobs <bjacobs@student.codam.nl>           +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2024/02/16 18:40:37 by bjacobs       #+#    #+#                 */
+/*   Updated: 2024/02/16 18:44:00 by mbernede      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,5 +104,3 @@ void	dda(t_dda *data, t_player *player, t_map map, char *hit_condition)
 	if (data->ray.length > ray.length)
 		data->ray = ray;
 }
-
-
