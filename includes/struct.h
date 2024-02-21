@@ -6,7 +6,7 @@
 /*   By: mbernede <mbernede@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/16 18:50:26 by mbernede      #+#    #+#                 */
-/*   Updated: 2024/02/16 18:51:09 by mbernede      ########   odam.nl         */
+/*   Updated: 2024/02/21 17:28:20 by mbernede      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,13 +61,6 @@ typedef struct s_vec2
 	double			y;
 }					t_vec2;
 
-typedef struct s_vec3
-{
-	double			x;
-	double			y;
-	double			z;
-}					t_vec3;
-
 typedef struct s_ray_data
 {
 	t_vec2			hit;
@@ -84,28 +77,6 @@ typedef struct s_dda_data
 	float	angle;
 	int		rays;
 }			t_dda;
-
-typedef struct s_window
-{
-	int				width;
-	int				height;
-}					t_window;
-
-typedef struct s_lkd_list
-{
-	double			scale;
-	t_vec3			p;
-	t_color			color;
-	struct s_list	*next;
-}					t_lkd_list;
-
-typedef struct s_shapes
-{
-	t_vec3			p;
-	t_vec3			vec;
-	t_color			color;
-	struct s_shapes	*next;
-}					t_shapes;
 
 typedef struct s_player
 {
@@ -136,8 +107,8 @@ typedef struct s_param
 {
 	t_color			floor;
 	t_color			ceiling;
-	mlx_texture_t	*textures[6];
-	xpm_t			*xpms[6];
+	mlx_texture_t	*textures[5];
+	xpm_t			*xpms[5];
 	int				fd;
 	bool			end_map_parse;
 	t_node			*tmp_map;
@@ -146,8 +117,6 @@ typedef struct s_param
 	mlx_t			*mlx;
 	mlx_image_t		*reality;
 	mlx_image_t		*background;
-	t_window		window;
-	t_shapes		*shapes;
 }					t_param;
 
 #endif

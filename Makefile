@@ -9,7 +9,7 @@ INCLUDES := -I libft -I MLX42 -I includes
 
 # Compiler and Flags
 CC := cc
-CFLAGS := -g -Wall -Wextra -Werror -fsanitize=address
+CFLAGS := -g -Wall -Wextra -Werror #-fsanitize=address
 
 ifeq ($(shell uname), Linux)
 	MLX_FLAGS := -ldl -lglfw -pthread -lm

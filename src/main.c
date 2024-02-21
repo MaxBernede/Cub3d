@@ -6,7 +6,7 @@
 /*   By: maxb <maxb@student.42.fr>                    +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/07 13:43:17 by mbernede      #+#    #+#                 */
-/*   Updated: 2024/02/21 17:02:38 by mbernede      ########   odam.nl         */
+/*   Updated: 2024/02/21 17:33:18 by mbernede      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	init_null(t_param *p)
 	int	i;
 
 	i = 0;
-	while (i < 6)
+	while (i < 5)
 		p->textures[i++] = NULL;
 	p->ceiling.r = -1;
 	p->ceiling.g = -1;
@@ -26,15 +26,15 @@ int	init_null(t_param *p)
 	p->floor.r = -1;
 	p->floor.g = -1;
 	p->floor.b = -1;
-	p->shapes = NULL;
 	p->end_map_parse = false;
 	p->map.length = -1;
 	p->map.height = 0;
 	p->map.map = NULL;
 	p->map.flood = NULL;
 	p->tmp_map = NULL;
-	p->window.height = HEIGHT;
-	p->window.width = WIDTH;
+	p->reality = NULL;
+	p->background = NULL;
+	p->map.minimap = NULL;
 	return (OK);
 }
 
