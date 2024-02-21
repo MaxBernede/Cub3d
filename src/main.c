@@ -6,7 +6,7 @@
 /*   By: maxb <maxb@student.42.fr>                    +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/07 13:43:17 by mbernede      #+#    #+#                 */
-/*   Updated: 2024/02/16 17:57:28 by mbernede      ########   odam.nl         */
+/*   Updated: 2024/02/21 17:02:38 by mbernede      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,6 @@ int	main(int argc, char **argv)
 	if (parse_file(argv[1], &param))
 		return (clean_everything(&param), ERROR);
 	if (!search_in_map(&param, "D") && !param.textures[S_DOOR])
-		return (clean_everything(&param), printf(ERR_NOTEXT), ERROR);
-	if (!search_in_map(&param, "K") && !param.textures[S_KEY])
 		return (clean_everything(&param), printf(ERR_NOTEXT), ERROR);
 	if (start(&param))
 		return (0);

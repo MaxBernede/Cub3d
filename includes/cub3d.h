@@ -6,7 +6,7 @@
 /*   By: mbernede <mbernede@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/16 18:47:10 by mbernede      #+#    #+#                 */
-/*   Updated: 2024/02/16 18:55:33 by mbernede      ########   odam.nl         */
+/*   Updated: 2024/02/21 17:10:46 by mbernede      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,43 +16,30 @@
 # define OK 0
 # define ERROR 1
 
-# define ERR_START_POS "Position not found\n"
-# define ERR_CHARACTER "Character not found or more than 1 time in the file\n"
-# define ERR_ARG "Error: Not enough arguments\nShould be ./cub3d 'file.cub'\n"
-# define ERR_FILE "Error: File given doesn't exist or no rights to access it\n"
-# define ERR_NOCUB "Error: File doesn't end with .cub, cannot be accepted\n"
-# define ERR_FILE_DATA "Error: File datas are not correct, exit\n"
-# define ERR_EMPTY_MAP "Error\nMap is empty\n"
-# define ERR_NO_MAP "Error\nNo map in\n"
-# define ERR_IMG_CREA "Error\nWhile creating MLX images\n"
+# define ERR_START_POS "Cub3d: Position not found\n"
+# define ERR_CHARACTER "Cub3d: Character not found or more than 1 time in the file\n"
+# define ERR_ARG "Cub3d: Not enough arguments\nShould be ./cub3d 'file.cub'\n"
+# define ERR_FILE "Cub3d: File given doesn't exist or no rights to access it\n"
+# define ERR_NOCUB "Cub3d: File doesn't end with .cub, cannot be accepted\n"
+# define ERR_FILE_DATA "Cub3d: File datas are not correct, exit\n"
+# define ERR_EMPTY_MAP "Cub3d: Map is empty\n"
+# define ERR_NO_MAP "Cub3d: No map in the file\n"
+# define ERR_IMG_CREA "Cub3d: While creating MLX images\n"
 
-# define ERR_MLC "Error: Malloc Failed\n"
+# define ERR_MLC "Cub3d: Malloc Failed\n"
 
-# define ERR_FILL_COLORS "Error\n Error fill colors\n"
-# define ERR_FILL_MAP "Error\nMap fill error\n"
-# define ERR_OPEN_TEXTURES "Error\nCannot open textures\n"
-# define ERR_TEXTURES "Error\nTextures values error\n"
-# define ERR_FLOOR_CEILING "Error\nFloor and ceiling error\n"
-# define ERR_TYPE "Error\nParsing type data incorrect\n"
-# define ERR_NOTEXT "Error\ndoor or key but no texture\n"
-
-# define ERR_NO "Error\nError North\n"
-# define ERR_SO "Error\nError South\n"
-# define ERR_EA "Error\nError East\n"
-# define ERR_WE "Error\nError West\n"
-# define ERR_DOOR "Error\nError Door\n"
-# define ERR_KEY "Error\nError Key\n"
+# define ERR_FILL_COLORS "Cub3d: Error in fill colors\n"
+# define ERR_FILL_MAP "Cub3d: Error in map fill\n"
+# define ERR_OPEN_TEXTURES "Cub3d: Cannot open textures\n"
+# define ERR_TEXTURES "Cub3d: Textures values error\n"
+# define ERR_FLOOR_CEILING "Cub3d: Floor and ceiling error\n"
+# define ERR_TYPE "Cub3d: Parsing type data incorrect\n"
+# define ERR_NOTEXT "Cub3d: door or key but no texture\n"
 
 # define WALL_COL 0xFFFFFF5A
 # define RAY_COL 0xFFFF00FF
 # define PLAYER_COL 0x00FF00FF
 # define DOOR_COL 0xd1001F5A
-# define KEY_COL 0x8B9A465F
-
-# define SILVER 0xC0C0C0FF
-# define BLUE 0x00FFFFFF
-# define GREEN 0x008000FF
-# define PURPLE 0x800080FF
 
 # define WIDTH 1024
 # define HEIGHT 512
@@ -69,7 +56,6 @@
 # define HALF_PI 1.57079632679f
 # define TWO_PI 6.28318530718f
 # define THIRD_PI 4.71238898038f
-# define ONE_DEGREE 0.0174532925f
 
 # define FLOOR 2
 # define CEILING 3
@@ -78,7 +64,6 @@
 # define EAST 6
 # define WEST 7
 # define DOOR 8
-# define KEY 9
 
 # include "../MLX42/include/MLX42/MLX42.h"
 # include "../libft/libft.h"

@@ -6,7 +6,7 @@
 /*   By: maxb <maxb@student.42.fr>                    +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/07 13:40:11 by mbernede      #+#    #+#                 */
-/*   Updated: 2024/02/16 16:20:55 by mbernede      ########   odam.nl         */
+/*   Updated: 2024/02/21 17:11:41 by mbernede      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	side_textures(int type, char *arg, t_param *p)
 		return (printf(ERR_OPEN_TEXTURES), ERROR);
 	close(fd);
 	if (fill_texture(type, p, arg))
-		return (printf("Error filling textures"), ERROR);
+		return (printf("Cub3d: Error filling textures\n"), ERROR);
 	return (OK);
 }
 

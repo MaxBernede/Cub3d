@@ -6,7 +6,7 @@
 /*   By: mbernede <mbernede@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/07 13:32:59 by mbernede      #+#    #+#                 */
-/*   Updated: 2024/02/16 17:58:07 by mbernede      ########   odam.nl         */
+/*   Updated: 2024/02/21 17:17:03 by mbernede      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	cursor_hook(double xpos, double ypos, void *param)
 	if (!active)
 	{
 		active = true;
-		ypos = ypos;
+		(void)ypos ;
 		mlx_set_cursor_mode(p->mlx, MLX_MOUSE_HIDDEN);
 	}
 }

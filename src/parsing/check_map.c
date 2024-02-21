@@ -6,7 +6,7 @@
 /*   By: maxb <maxb@student.42.fr>                    +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/27 17:52:04 by maxb          #+#    #+#                 */
-/*   Updated: 2024/02/16 15:24:53 by mbernede      ########   odam.nl         */
+/*   Updated: 2024/02/21 17:03:49 by mbernede      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	check_datas(t_map map)
 		x = 0;
 		while (x < map.length)
 		{
-			if (!ft_strchr("NSEW10 DK", map.map[y][x]))
+			if (!ft_strchr("NSEW10 D", map.map[y][x]))
 				return (ERROR);
 			++x;
 		}

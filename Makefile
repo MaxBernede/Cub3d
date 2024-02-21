@@ -8,7 +8,7 @@ LIBSA	:= ./libft/libft.a $(MLX42)libmlx42.a
 INCLUDES := -I libft -I MLX42 -I includes
 
 # Compiler and Flags
-CC := gcc
+CC := cc
 CFLAGS := -g -Wall -Wextra -Werror -fsanitize=address
 
 ifeq ($(shell uname), Linux)
